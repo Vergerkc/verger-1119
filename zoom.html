@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ja">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zoomで自分の画面を見せるやり方（かんたん説明書）</title>
+<style>
+:root{--ink:#1f2a24;--mute:#5f6b63;--line:#ddd5c3;--paper:#fbf8f1;--green:#1f8a3b;--red:#c0392b;--blue:#2d6cdf;--orange:#d9661f;--yellow:#fff4c9}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;font-size:20px;line-height:1.9}
+.wrap{max-width:900px;margin:0 auto;padding:28px 22px 60px}
+h1{font-size:34px;line-height:1.4;margin:0}
+h2{font-size:26px;margin:48px 0 10px;padding:8px 14px;background:#fff;border-left:10px solid var(--orange);border-radius:6px}
+.sub{color:var(--mute);margin-top:8px}
+.big{font-size:24px;font-weight:700}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.tabs a{display:inline-block;padding:12px 20px;border-radius:999px;background:#fff;border:2px solid var(--line);color:var(--ink);text-decoration:none;font-weight:700}
+.step{display:grid;grid-template-columns:64px 1fr;gap:16px;background:#fff;border:2px solid var(--line);border-radius:14px;padding:18px;margin-top:14px}
+.n{width:56px;height:56px;border-radius:50%;background:var(--orange);color:#fff;font-size:30px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.step p{margin:0}
+.btn{display:inline-block;padding:2px 12px;border-radius:8px;font-weight:700;color:#fff;white-space:nowrap}
+.g{background:var(--green)} .r{background:var(--red)} .b{background:var(--blue)}
+.box{display:inline-block;padding:0 10px;border:2px solid var(--ink);border-radius:6px;font-weight:700;background:#fff;white-space:nowrap}
+.check{display:inline-block;width:22px;height:22px;border:3px solid var(--blue);border-radius:4px;vertical-align:-3px;background:var(--blue);position:relative}
+.check::after{content:"✓";color:#fff;position:absolute;left:2px;top:-8px;font-size:18px}
+.tip{background:var(--yellow);border:2px solid #e8cf6b;border-radius:12px;padding:14px 18px;margin-top:14px}
+.ng{background:#fde8e5;border:2px solid #f0b1a8;border-radius:12px;padding:14px 18px;margin-top:14px}
+/* 画面の絵 */
+.mock{background:#232323;border-radius:12px;padding:14px;margin-top:12px;color:#ddd;font-size:15px}
+.mock .screen{height:110px;border-radius:8px;background:#3b3b3b;display:flex;align-items:center;justify-content:center;color:#aaa}
+.mock .bar{display:flex;justify-content:center;gap:18px;margin-top:10px;flex-wrap:wrap}
+.mock .bar span{padding:4px 8px;border-radius:6px}
+.mock .bar .hot{background:var(--green);color:#fff;font-weight:700;outline:4px solid #ffd54a}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;margin-top:12px}
+th,td{border:1px solid var(--line);padding:12px;text-align:left;vertical-align:top}
+th{background:#f3eee2}
+.note{font-size:16px;color:var(--mute);margin-top:30px}
+@media print{body{font-size:15px;background:#fff}.tabs{display:none}h2{break-after:avoid}.step{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>📺 Zoomで「自分の画面」を<br>みんなに見せるやり方</h1>
+  <p class="sub">これを「画面共有（がめんきょうゆう）」と言います。ボタンを3回押すだけです（音も見せるときは、印を1つ足します）。</p>
+
+  <div class="tabs">
+    <a href="#pc">💻 パソコン（Windows・Mac）</a>
+    <a href="#ipad">📱 iPad・iPhone</a>
+    <a href="#stop">🛑 やめかた</a>
+    <a href="#komatta">😵 こまったとき</a>
+  </div>
+
+  <div class="tip"><span class="big">はじめる前に、見せたいものを開いておこう！</span><br>
+  資料（PDF・エクセル・パワーポイント・ホームページなど）を、先にパソコンで開いておきます。そのあとでZoomにもどります。</div>
+
+  <!-- パソコン -->
+  <h2 id="pc">💻 パソコンのやり方</h2>
+
+  <div class="step"><div class="n">1</div><div>
+    <p>Zoomの画面のいちばん下を見ます。<br>みどり色の <span class="btn g">共有</span> ボタンを押します。</p>
+    <div class="mock"><div class="screen">（会議の画面）</div>
+      <div class="bar"><span>マイク</span><span>ビデオ</span><span>参加者</span><span>チャット</span><span class="hot">共有</span><span>…</span></div></div>
+    <p class="sub" style="font-size:16px">※ Zoomの古いものは <span class="btn g">画面を共有</span> と書いてあります。どちらも同じボタンです。<br>※ ボタンが見えないときは、Zoomの画面の上でマウスを少し動かすと出てきます。</p>
+  </div></div>
+
+  <div class="step"><div class="n">2</div><div>
+    <p>「どれを見せますか？」という小さい画面が出ます。<br><b>見せたい資料の絵</b>を1回押して、えらびます（青いわくがつきます）。</p>
+    <div class="tip" style="margin-top:10px">💡 <b>おすすめ：資料の絵をえらぶ</b><br>「画面」（デスクトップ全体）をえらぶと、メールやLINEの通知まで全部みんなに見えてしまいます。資料だけを見せるほうが安心です。</div>
+  </div></div>
+
+  <div class="step"><div class="n">3</div><div>
+    <p><b>音や動画も見せるとき</b>だけ、同じ小さい画面の「共有オプション」にある<br><span class="check"></span> <span class="box">サウンドを共有</span> に印をつけます。<br>
+    <span class="sub" style="font-size:16px">（Zoomによっては「音声を共有」「コンピューターの音声を共有」と書いてあります。場所も少しちがうことがあります）</span></p>
+  </div></div>
+
+  <div class="step"><div class="n">4</div><div>
+    <p>右下の青い <span class="btn b">共有</span> ボタンを押します。</p>
+    <p style="margin-top:8px">✅ <b>画面のまわりが みどり色のわく</b> になったら、みんなに見えています！</p>
+  </div></div>
+
+  <!-- iPad -->
+  <h2 id="ipad">📱 iPad・iPhoneのやり方</h2>
+
+  <div class="step"><div class="n">1</div><div><p>Zoomの画面の下にある <span class="btn g">共有</span>（または <span class="box">コンテンツを共有</span>）を押します。</p>
+  <p class="sub" style="font-size:16px">※ 下に見えないときは <span class="box">…詳細</span> を押すと出てきます。</p></div></div>
+
+  <div class="step"><div class="n">2</div><div><p>出てきた一覧から <span class="box">画面</span> を押します。</p>
+  <p class="sub" style="font-size:16px">※ 写真や資料（ファイル）を1つだけ見せたいときは、「写真」や「ファイル」をえらんでもOKです。</p></div></div>
+
+  <div class="step"><div class="n">3</div><div><p><span class="btn r">ブロードキャストを開始</span>（または「配信を開始」）を押します。<br>「3・2・1」と数えたら、はじまりです。</p></div></div>
+
+  <div class="step"><div class="n">4</div><div><p>ホームボタン（または画面の下から上へ指をすべらせる）でZoomの外に出て、<b>見せたいアプリ</b>を開きます。</p>
+  <p style="margin-top:8px">✅ 画面の上（時計のところ）が <b>赤くなっていれば</b>、みんなに見えています。</p>
+  <p style="margin-top:8px">🔊 <b>動画の音も聞かせたいとき</b>：いちどZoomにもどり、<span class="box">デバイスオーディオを共有する</span> をオンにします。</p></div></div>
+
+  <div class="ng">⚠️ iPad・iPhoneの画面共有は、<b>画面に出ているものが全部見えます。</b>LINEやメールの通知も見えてしまうので、はじめる前に「集中モード（おやすみモード）」をオンにしておくと安心です。</div>
+
+  <!-- 止める -->
+  <h2 id="stop">🛑 見せるのをやめるとき</h2>
+  <div class="step"><div class="n">💻</div><div><p><b>パソコン</b>：画面のいちばん上にある 赤い <span class="btn r">共有の停止</span> を押します。<br>
+  <span class="sub" style="font-size:16px">（見えないときは、画面の上のはしにマウスを持っていくと出てきます）</span></p></div></div>
+  <div class="step"><div class="n">📱</div><div><p><b>iPad・iPhone</b>：Zoomにもどって <span class="btn r">共有の停止</span>（または「共有を停止」）を押します。<br>または、画面の上の赤いところを押して「停止」。</p></div></div>
+  <div class="tip">💡 <b>次の人に代わるとき</b>は、かならず自分の共有をやめてから「どうぞ」と言いましょう。</div>
+
+  <!-- 困った -->
+  <h2 id="komatta">😵 こまったときは</h2>
+  <table>
+    <tr><th style="width:38%">こんなとき</th><th>こうしてね</th></tr>
+    <tr><td><span class="btn g">共有</span> ボタンが<b>うすい色で押せない</b>／「ホストが共有を無効にしました」と出る</td>
+        <td>会議を開いた人（ホスト）か、そのお手伝いの人（共同ホスト）が直せます。チャットで「共有させてください」と伝えてください。<br>
+        <span style="font-size:16px;color:var(--mute)">ホストの方へ：<span class="box">共有</span> の横の「＾」→ <span class="box">共有用のホストツール</span> →「誰が共有できますか？」で <b>参加者全員</b> をえらぶ。（同時に共有できる人数は1人のままでOK）</span></td></tr>
+    <tr><td><b>Mac</b>で、みんなの画面が<b>まっ黒</b>／壁紙だけ見える</td>
+        <td>Macの許可が必要です。<br>①画面の左上のりんごマーク →「システム設定」<br>②「プライバシーとセキュリティ」<br>③「画面収録」（新しいMacでは「画面収録とシステムオーディオ録音」）<br>④ <b>zoom.us をオン</b> にする → Zoomをいちど終わらせて、もう一度入る</td></tr>
+    <tr><td>動画の<b>音がみんなに聞こえない</b></td>
+        <td><b>パソコン</b>：いちど共有をやめて、もう一度 <span class="btn g">共有</span> から。こんどは <span class="check"></span> <span class="box">サウンドを共有</span> に印をつけてね。<br><b>iPad・iPhone</b>：Zoomにもどって <span class="box">デバイスオーディオを共有する</span> をオンにしてね。</td></tr>
+    <tr><td>みんなから「<b>ちがう画面が見えてる</b>」と言われた</td>
+        <td>画面のいちばん上の <span class="box">新しい共有</span> を押して、正しい資料をえらびなおします（共有をやめなくても切りかえられます）。</td></tr>
+    <tr><td>みんなの顔やチャットが<b>見えなくなった</b></td>
+        <td>共有中は、顔の画面が小さくなっています。画面の上の <span class="box">参加者</span>・<span class="box">チャット</span> を押すと出てきます。</td></tr>
+    <tr><td>どうしてもうまくいかない</td>
+        <td>あわてなくて大丈夫！ 資料をチャットにファイルで送るか、ほかの人に共有をお願いしましょう。</td></tr>
+  </table>
+
+  <h2>✅ 本番前の3つのチェック</h2>
+  <div class="step"><div class="n">1</div><div><p>見せたい資料を、<b>先に開いておいた</b>？</p></div></div>
+  <div class="step"><div class="n">2</div><div><p>見せたくない画面（メール・LINE・ほかのファイル）は<b>閉じた</b>？</p></div></div>
+  <div class="step"><div class="n">3</div><div><p>動画を見せるなら、<span class="box">サウンドを共有</span> に<b>印をつける</b>のを覚えた？</p></div></div>
+
+</div>
+</body>
+</html>

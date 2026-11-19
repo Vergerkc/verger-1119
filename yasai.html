@@ -1,0 +1,853 @@
+<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex,nofollow">
+<title>野菜がお店に届くまで（共有版）</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap">
+<style>
+/* レイアウト：上から「トマトの旅」→「お金の旅」→「お店の毎日」の順に1本の道で読む */
+:root{
+  --bg:#f6f8f1; --paper:#ffffff; --ink:#24301f; --soft:#5d6b55; --line:#d9e2cf;
+  --leaf:#3f8f3a; --leaf-2:#d7ecd0; --carrot:#e8792b; --carrot-2:#fde3cf;
+  --sky:#2f7fb8; --sky-2:#d9ebf7; --berry:#c2415b; --berry-2:#f7dbe1; --sun:#c99a12; --sun-2:#fbefc7;
+  --plum:#7a5aa6; --plum-2:#e9e1f4; --road:#8a8f86; --soil:#8b5e34;
+  --display:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans",sans-serif;
+  --body:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN","Hiragino Sans",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#161c14; --paper:#1f271c; --ink:#eef3e8; --soft:#aebba5; --line:#34412f;
+  --leaf:#7cc874; --leaf-2:#27401f; --carrot:#f2a064; --carrot-2:#4a2f1c;
+  --sky:#7fbbe6; --sky-2:#1d3445; --berry:#ec8098; --berry-2:#46222b; --sun:#f0cd62; --sun-2:#443a19;
+  --plum:#b9a0e0; --plum-2:#33284a; --road:#6f756b; --soil:#a87a4e; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#161c14; --paper:#1f271c; --ink:#eef3e8; --soft:#aebba5; --line:#34412f;
+  --leaf:#7cc874; --leaf-2:#27401f; --carrot:#f2a064; --carrot-2:#4a2f1c;
+  --sky:#7fbbe6; --sky-2:#1d3445; --berry:#ec8098; --berry-2:#46222b; --sun:#f0cd62; --sun-2:#443a19;
+  --plum:#b9a0e0; --plum-2:#33284a; --road:#6f756b; --soil:#a87a4e; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.8;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 64px}
+.wrap{max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:64px}
+h1,h2,h3{font-family:var(--display);line-height:1.35;text-wrap:balance;margin:0}
+h1{font-size:clamp(30px,6vw,52px);font-weight:900}
+h2{font-size:clamp(22px,4vw,31px);font-weight:900;display:flex;align-items:center;gap:12px}
+h2 .step{flex:none;width:40px;height:40px;border-radius:50%;background:var(--leaf);color:var(--paper);display:grid;place-items:center;font-size:19px}
+h3{font-size:19px;font-weight:700}
+p{margin:0}
+.lead{color:var(--soft);max-width:42em}
+section{display:flex;flex-direction:column;gap:20px}
+rt{font-size:.55em;color:var(--soft);font-family:var(--body)}
+.note{font-size:14px;color:var(--soft)}
+.box{background:var(--paper);border:2px solid var(--line);border-radius:20px;padding:20px;min-width:0}
+.part{font-family:var(--display);font-weight:900;font-size:15px;letter-spacing:.12em;color:var(--carrot);border-top:3px dashed var(--line);padding-top:20px}
+.num{font-variant-numeric:tabular-nums}
+.real{display:inline-block;font-size:12px;font-weight:700;padding:1px 8px;border-radius:99px;background:var(--leaf-2);color:var(--leaf);vertical-align:2px}
+.est{display:inline-block;font-size:12px;font-weight:700;padding:1px 8px;border-radius:99px;background:var(--sun-2);color:var(--sun);vertical-align:2px}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.btn{font:inherit;font-weight:700;cursor:pointer;border:none;border-radius:99px;padding:10px 22px;background:var(--carrot);color:#fff;align-self:flex-start}
+button:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+
+/* ヒーロー */
+.hero{display:flex;flex-direction:column;gap:16px}
+.road-wrap{overflow-x:auto;border-radius:24px;background:var(--sky-2);border:2px solid var(--line)}
+.road{display:block;width:100%;min-width:720px;height:auto}
+.truck{animation:drive 14s linear infinite}
+@keyframes drive{0%{transform:translateX(0)}8%{transform:translateX(0)}22%{transform:translateX(160px)}30%{transform:translateX(160px)}44%{transform:translateX(320px)}52%{transform:translateX(320px)}66%{transform:translateX(480px)}74%{transform:translateX(480px)}88%{transform:translateX(620px)}100%{transform:translateX(620px)}}
+.cloud{animation:float 9s ease-in-out infinite alternate}
+@keyframes float{to{transform:translateX(30px)}}
+.wheel{transform-box:fill-box;transform-origin:center;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.fact{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:12px 14px;display:flex;flex-direction:column}
+.fact b{font-family:var(--display);font-size:26px;font-weight:900;color:var(--leaf)}
+.fact span{font-size:13px;color:var(--soft);line-height:1.5}
+
+/* 駅 */
+.stations{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.st{font:inherit;color:inherit;text-align:center;cursor:pointer;background:var(--paper);border:3px solid var(--line);border-radius:18px;padding:10px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;transition:transform .15s}
+.st:hover{transform:translateY(-3px)}
+.st[aria-pressed="true"]{border-color:var(--carrot);background:var(--carrot-2)}
+.st svg{width:50px;height:50px}
+.st b{font-family:var(--display);font-size:16px}
+.st small{font-size:11px;color:var(--soft);line-height:1.4}
+.detail{display:grid;grid-template-columns:150px minmax(0,1fr);gap:20px;align-items:start}
+.detail svg{width:100%;height:auto}
+.detail .who{font-size:13px;font-weight:700;color:var(--carrot);letter-spacing:.08em}
+.detail ul{margin:8px 0 0;padding-left:1.2em}
+.tag{display:inline-block;padding:2px 10px;border-radius:99px;background:var(--leaf-2);color:var(--leaf);font-weight:700;font-size:14px;margin-top:8px}
+
+/* 量 */
+.amount{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.amt{background:var(--paper);border:2px solid var(--line);border-radius:18px;padding:14px;text-align:center;display:flex;flex-direction:column;gap:4px;align-items:center}
+.amt svg{width:100%;max-width:150px;height:76px}
+.amt b{font-family:var(--display);font-size:17px}
+
+/* ねだんのリレー */
+.relay{display:flex;flex-direction:column;gap:12px}
+.bar-row{display:grid;grid-template-columns:120px minmax(0,1fr) 64px;gap:10px;align-items:center}
+.bar-row span{font-weight:700;font-size:15px;line-height:1.3}
+.track{position:relative;height:34px;border-radius:10px;background:var(--line);overflow:hidden;display:flex}
+.track::after{content:'';position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(to right,transparent 0 calc(15.0376% - 1px),rgba(255,255,255,.7) calc(15.0376% - 1px) 15.0376%)}
+.scale{position:relative;height:22px;border-top:2px solid var(--ink)}
+.scale i{position:absolute;top:-2px;width:2px;height:7px;background:var(--ink);transform:translateX(-1px)}
+.scale b{position:absolute;top:6px;transform:translateX(-50%);font-size:12px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.seg{height:100%;width:0;transition:width .9s ease}
+.c1{background:var(--leaf)} .c2{background:var(--soil)} .c3{background:var(--sky)} .c4{background:var(--sun)} .c5{background:var(--carrot)} .c6{background:var(--plum)} .c7{background:var(--berry)}
+.yen{font-family:var(--display);font-weight:900;font-size:19px;text-align:right;font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:14px}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:4px}
+
+/* グラフ */
+.chart{width:100%;height:auto;display:block}
+.chart text{font-family:var(--body);fill:var(--ink)}
+.chart .ax{stroke:var(--line);stroke-width:1}
+.chart .lbl{fill:var(--soft);font-size:12px}
+.scroll{overflow-x:auto}
+
+/* 表 */
+table{border-collapse:collapse;width:100%;min-width:560px;font-variant-numeric:tabular-nums}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;font-size:15px}
+th:first-child,td:first-child{text-align:left}
+th{font-size:13px;color:var(--soft);font-weight:700}
+.mini{display:inline-block;height:10px;border-radius:5px;background:var(--leaf);vertical-align:middle}
+
+/* お店 */
+.shop-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px;align-items:start}
+.shop-grid svg{width:100%;height:auto}
+.stores{display:flex;flex-direction:column;gap:10px}
+.pref{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pref b{width:66px;flex:none}
+.chip{padding:3px 12px;border-radius:99px;background:var(--leaf-2);color:var(--ink);font-size:15px}
+.chip.cafe{background:var(--berry-2)}
+.hist{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.hist div{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:2px}
+.hist b{font-family:var(--display);font-size:20px;color:var(--sky)}
+
+/* タイムライン */
+.timeline{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.tl{background:var(--paper);border:2px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:4px}
+.tl .time{font-family:var(--display);font-weight:900;font-size:18px;color:var(--sky)}
+.tl svg{width:42px;height:42px}
+.week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.day{background:var(--paper);border:2px solid var(--line);border-radius:14px;padding:8px 6px;text-align:center;display:flex;flex-direction:column;gap:4px;min-width:0}
+.day b{font-family:var(--display);font-size:18px}
+.day .ev{font-size:12px;line-height:1.4;border-radius:8px;padding:3px 4px}
+.ev.v{background:var(--leaf-2)} .ev.f{background:var(--carrot-2)} .ev.k{background:var(--sky-2)} .ev.n{color:var(--soft)}
+
+/* ロス */
+.loss{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.loss .box{display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center}
+.loss svg{width:84px;height:84px}
+
+/* カード */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+.flip{font:inherit;color:inherit;cursor:pointer;border:none;background:none;padding:0;perspective:800px;height:180px}
+.inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flip[aria-pressed="true"] .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:12px;text-align:center;border:2px solid var(--line)}
+.front{background:var(--paper)}
+.front b{font-family:var(--display);font-size:24px}
+.front small{color:var(--soft);font-size:12px}
+.back{background:var(--sun-2);transform:rotateY(180deg);font-size:14px;line-height:1.6}
+.cat{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--carrot)}
+
+/* クイズ */
+.quiz{display:flex;flex-direction:column;gap:18px}
+.q{display:flex;flex-direction:column;gap:8px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{font:inherit;cursor:pointer;border:2px solid var(--line);background:var(--paper);color:var(--ink);border-radius:14px;padding:8px 16px}
+.opt.ok{background:var(--leaf-2);border-color:var(--leaf);font-weight:700}
+.opt.ng{background:var(--berry-2);border-color:var(--berry)}
+.res{font-weight:700;min-height:1.8em}
+.score{font-family:var(--display);font-weight:900;font-size:20px}
+.src{font-size:13px;color:var(--soft);line-height:1.7}
+.net-wrap{display:flex;flex-direction:column;gap:12px}
+.net-tools{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.net-tools .sp{flex:1}
+.chipbtn{font:inherit;font-size:14px;font-weight:700;cursor:pointer;border:2px solid var(--line);background:var(--paper);color:var(--ink);border-radius:99px;padding:4px 14px}
+.chipbtn[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.net-stage{position:relative;border-radius:24px;overflow:hidden;border:2px solid var(--line);background:radial-gradient(ellipse at 50% 40%,var(--paper),var(--bg))}
+#net{display:block;width:100%;height:600px;touch-action:none;cursor:grab}
+#net:active{cursor:grabbing}
+.net-hint{position:absolute;left:12px;bottom:10px;font-size:12px;color:var(--soft);background:var(--paper);border-radius:99px;padding:2px 10px;opacity:.9}
+.net-info{display:flex;flex-direction:column;gap:4px}
+.net-info .kind{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--carrot)}
+.net-info .big{font-family:var(--display);font-weight:900;font-size:22px}
+.net-legend i{border-radius:50%}
+@media (max-width:760px){#net{height:480px}}
+.supbar{display:flex;height:30px;border-radius:10px;overflow:hidden;margin:10px 0}
+.supbar div{height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden}
+#supq{font:inherit;width:100%;padding:8px 14px;border:2px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);margin:8px 0}
+.suptable{max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:12px}
+.suptable table{min-width:760px}
+.suptable th{position:sticky;top:0;background:var(--paper);cursor:pointer;z-index:1}
+.suptable td:nth-child(5),.suptable td:nth-child(6){text-align:left;font-size:13px;color:var(--soft)}
+.gdot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:0}
+.org-top{display:grid;grid-template-columns:1.3fr 1.3fr 1fr;gap:10px;margin-top:10px}
+.org-top div{background:var(--plum-2,var(--paper));border:2px solid var(--plum);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:4px}
+.org-top b{font-family:var(--display);font-size:17px}
+.org-top .role,.org-dept .role{font-size:12px;font-weight:700;color:var(--plum);letter-spacing:.06em}
+.org-arrow{text-align:center;font-size:22px;color:var(--soft);line-height:1;margin:6px 0}
+@media (max-width:760px){.org-top{grid-template-columns:1fr}}
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;align-items:stretch}
+.flow div{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:4px;position:relative}
+.flow b{font-family:var(--display);font-size:17px}
+.flow .role{font-size:12px;font-weight:700;color:var(--carrot);letter-spacing:.06em}
+@media (max-width:760px){.flow{grid-template-columns:1fr}}
+.home{display:flex;flex-direction:column;gap:14px;border-color:var(--sky)}
+.home-head{display:grid;grid-template-columns:220px minmax(0,1fr);gap:20px;align-items:center}
+.home-head svg{width:100%;height:auto}
+.home-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.home-facts div{background:var(--sky-2);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:2px}
+.home-facts b{font-family:var(--display);font-size:20px;font-weight:900;color:var(--sky)}
+.home-facts span{font-size:13px;line-height:1.5}
+@media (max-width:760px){.home-head{grid-template-columns:1fr}.home-head svg{max-width:220px}.home-facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tabs{display:flex;flex-wrap:wrap;gap:8px}
+.tab{font:inherit;font-weight:700;font-size:15px;cursor:pointer;border:2px solid var(--line);background:var(--paper);color:var(--ink);border-radius:99px;padding:6px 16px}
+.tab[aria-selected="true"]{background:var(--leaf);border-color:var(--leaf);color:var(--paper)}
+.vs{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px;align-items:stretch}
+.vs .mid{align-self:center;font-family:var(--display);font-weight:900;font-size:22px;color:var(--soft)}
+.side{background:var(--paper);border:2px solid var(--line);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.side h3{display:flex;align-items:center;gap:10px}
+.side svg{width:44px;height:44px;flex:none}
+.side ul{margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.side li{padding-left:28px;position:relative;font-size:15px;line-height:1.6}
+.side li::before{position:absolute;left:0;top:0;font-weight:900;font-family:var(--display)}
+.side li.g::before{content:"◎";color:var(--leaf)}
+.side li.b::before{content:"△";color:var(--berry)}
+.side .sub{font-size:13px;font-weight:700;color:var(--soft);letter-spacing:.06em}
+.verdict{margin-top:12px;background:var(--sun-2);border-radius:16px;padding:14px 18px}
+@media (max-width:760px){.vs{grid-template-columns:1fr}.vs .mid{justify-self:center}}
+.src li{margin-bottom:2px}
+
+@media (max-width:760px){
+  .stations{grid-template-columns:repeat(6,minmax(92px,1fr));overflow-x:auto;padding-bottom:6px}
+  .detail{grid-template-columns:1fr}
+  .detail svg{max-width:140px;margin:0 auto}
+  .amount,.facts,.hist{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid2,.shop-grid,.timeline,.loss{grid-template-columns:1fr}
+  .bar-row{grid-template-columns:84px minmax(0,1fr) 56px}
+  .week{grid-template-columns:repeat(7,minmax(64px,1fr));overflow-x:auto;padding-bottom:6px}
+}
+@media (prefers-reduced-motion:reduce){.truck,.cloud,.wheel{animation:none}.seg,.inner,.st{transition:none}}
+</style>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="note">ヴェルジェのお店の仕組み ／ 高校生向け ／ 社内の資料と実際の数字でつくりました</p>
+  <h1>トマトがお店に届くまでの旅</h1>
+  <p class="lead">畑で収穫されたトマトは、いくつもの市場や会社を経由して店頭に並びます。生産者から消費者までのこの流れを「流通」と呼びます。途中で誰が何をし、その費用が値段にどう上乗せされていくのか。ヴェルジェの実際の数字でたどります。</p>
+  <div class="road-wrap">
+  <svg class="road" viewBox="0 0 760 230" role="img" aria-label="畑から卸、仲卸、ヴェルジェのお店、家へトラックが走る絵">
+    <g class="cloud" fill="var(--paper)" opacity=".9"><ellipse cx="120" cy="40" rx="40" ry="14"/><ellipse cx="145" cy="32" rx="26" ry="14"/><ellipse cx="520" cy="34" rx="36" ry="12"/><ellipse cx="542" cy="27" rx="22" ry="12"/></g>
+    <circle cx="700" cy="40" r="20" fill="var(--sun)"/>
+    <rect x="0" y="175" width="760" height="55" fill="var(--leaf-2)"/>
+    <rect x="0" y="172" width="760" height="22" fill="var(--road)"/>
+    <g stroke="var(--paper)" stroke-width="3" stroke-dasharray="14 12"><line x1="0" y1="183" x2="760" y2="183"/></g>
+    <g transform="translate(18,95)"><rect x="0" y="40" width="100" height="36" rx="6" fill="var(--soil)"/><g fill="#e0483a"><circle cx="18" cy="40" r="11"/><circle cx="42" cy="40" r="11"/><circle cx="66" cy="40" r="11"/><circle cx="90" cy="40" r="11"/></g><g fill="var(--leaf)"><circle cx="18" cy="31" r="4"/><circle cx="42" cy="31" r="4"/><circle cx="66" cy="31" r="4"/><circle cx="90" cy="31" r="4"/></g><text x="50" y="-4" text-anchor="middle" font-family="var(--display)" font-weight="900" font-size="17" fill="var(--ink)">①畑</text></g>
+    <g transform="translate(180,78)"><rect x="0" y="20" width="110" height="74" fill="var(--sky)"/><polygon points="-6,22 55,-6 116,22" fill="#245f8a"/><rect x="35" y="50" width="40" height="44" fill="var(--paper)"/><text x="55" y="-14" text-anchor="middle" font-family="var(--display)" font-weight="900" font-size="17" fill="var(--ink)">②卸</text></g>
+    <g transform="translate(345,92)"><rect x="0" y="22" width="96" height="58" fill="var(--sun)"/><path d="M-4 22 L100 22 L92 4 L4 4 Z" fill="var(--carrot)"/><g fill="var(--soil)"><rect x="10" y="50" width="22" height="18"/><rect x="38" y="50" width="22" height="18"/><rect x="66" y="50" width="22" height="18"/></g><text x="48" y="-10" text-anchor="middle" font-family="var(--display)" font-weight="900" font-size="17" fill="var(--ink)">③仲卸</text></g>
+    <g transform="translate(500,80)"><rect x="0" y="22" width="112" height="72" fill="var(--paper)" stroke="var(--leaf)" stroke-width="4"/><path d="M-4 22 h120 v14 h-120z" fill="var(--leaf)"/><path d="M8 22 h12 v14 h-12z M32 22 h12 v14 h-12z M56 22 h12 v14 h-12z M80 22 h12 v14 h-12z" fill="var(--paper)"/><circle cx="30" cy="62" r="10" fill="var(--carrot)"/><circle cx="56" cy="64" r="11" fill="var(--leaf)"/><circle cx="82" cy="62" r="10" fill="var(--berry)"/><text x="56" y="-8" text-anchor="middle" font-family="var(--display)" font-weight="900" font-size="17" fill="var(--ink)">④ヴェルジェ</text></g>
+    <g transform="translate(660,96)"><rect x="0" y="30" width="70" height="48" fill="var(--carrot-2)" stroke="var(--carrot)" stroke-width="3"/><polygon points="-8,32 35,0 78,32" fill="var(--berry)"/><rect x="26" y="50" width="18" height="28" fill="var(--carrot)"/><text x="35" y="-10" text-anchor="middle" font-family="var(--display)" font-weight="900" font-size="17" fill="var(--ink)">⑤家</text></g>
+    <g class="truck"><g transform="translate(20,140)"><rect x="0" y="0" width="62" height="34" rx="5" fill="var(--carrot)"/><rect x="62" y="12" width="26" height="22" rx="4" fill="var(--sky)"/><rect x="68" y="16" width="14" height="9" rx="2" fill="var(--paper)"/><circle cx="16" cy="12" r="7" fill="#e0483a"/><circle cx="32" cy="14" r="7" fill="#e0483a"/><circle cx="48" cy="12" r="7" fill="#e0483a"/><circle class="wheel" cx="18" cy="38" r="8" fill="#333" stroke="#999" stroke-width="3" stroke-dasharray="4 4"/><circle class="wheel" cx="72" cy="38" r="8" fill="#333" stroke="#999" stroke-width="3" stroke-dasharray="4 4"/></g></g>
+  </svg>
+  </div>
+  <div class="facts">
+    <div class="fact"><b class="num">約34億円</b><span>1年間の売上<br>（第51期：2025年8月〜2026年7月）</span></div>
+    <div class="fact"><b class="num">8店＋1</b><span>野菜・果物のお店8つと、カフェ1つ</span></div>
+    <div class="fact"><b class="num">約289万人</b><span>1年間の来店客数（前からある6店の合計）</span></div>
+    <div class="fact"><b class="num">1,154円</b><span>お客さん1人が1回に使う金額（平均）</span></div>
+  </div>
+</header>
+
+<section aria-labelledby="s0">
+  <h2 id="s0"><span class="step">★</span>ヴェルジェのつながり相関図</h2>
+  <p class="lead">まず全体像です。ドラッグで回転し、丸をタップすると各社・各店の役割が表示されます。線の太さは取引の多さの目安です。</p>
+  <div class="net-wrap">
+    <div class="net-tools" role="group" aria-label="表示の切り替え">
+      <button class="chipbtn" data-f="all" aria-pressed="true">すべて</button>
+      <button class="chipbtn" data-f="market" aria-pressed="false">市場の会社</button>
+      <button class="chipbtn" data-f="farm" aria-pressed="false">産直</button>
+      <button class="chipbtn" data-f="food" aria-pressed="false">食品・資材</button>
+      <button class="chipbtn" data-f="shop" aria-pressed="false">お店・お客さん</button>
+      <button class="chipbtn" data-f="help" aria-pressed="false">本社・支える人</button><button class="chipbtn" data-f="partner" aria-pressed="false">店づくり・仕組みの会社</button><button class="chipbtn" data-f="staff" aria-pressed="false">社員</button>
+      <span class="sp"></span>
+      <button class="chipbtn" id="flowbtn" aria-pressed="false">お金の流れにする</button>
+      <button class="chipbtn" id="spinbtn" aria-pressed="true">自動で回す</button>
+    </div>
+    <div class="net-stage"><canvas id="net" aria-label="取引先・市場・ヴェルジェ・お店・お客さんの立体の相関図"></canvas>
+      <div class="net-hint" id="nethint">ドラッグで回す ／ タップで説明</div>
+    </div>
+    <div class="net-info box" id="netinfo" aria-live="polite"></div>
+    <div class="legend net-legend">
+      <span><i style="background:var(--soil)"></i>全国の産地</span><span><i class="c3"></i>市場の会社</span><span><i class="c1"></i>産直</span><span><i style="background:var(--sun)"></i>食品の会社</span><span><i class="c7"></i>資材</span><span><i class="c6"></i>ヴェルジェ本社</span><span><i style="background:var(--soft)"></i>店づくり・仕組みの会社</span><span><i class="c5"></i>お店</span><span><i style="background:var(--sky-2);border:1px solid var(--sky)"></i>角上魚類（館）</span><span><i style="background:var(--ink)"></i>社員</span>
+    </div>
+    <p class="note">線の太さは取引の多さの目安です。動いている粒は、品物（お金の流れにするとお金）の動きです。黒い小さな丸は社員です（2026年10月22日更新の組織図の名簿どおり。パート・アルバイトは入れていません）。</p>
+  </div>
+</section>
+
+<p class="part">第1部　トマトの旅</p>
+
+<section aria-labelledby="s1">
+  <h2 id="s1"><span class="step">1</span>6つの場所をタップしてみましょう</h2>
+  <p class="lead">流通の各段階には、それぞれ決まった役割があります。ヴェルジェの場合は、その途中に本社の「商品部」という仕入れ専門の部署が入ります。各段階をタップして、仕事の中身を確かめてください。</p>
+  <div class="stations" role="group" aria-label="6つの場所">
+    <button class="st" data-k="0" aria-pressed="true"><svg viewBox="0 0 60 60"><rect x="4" y="34" width="52" height="18" rx="4" fill="var(--soil)"/><circle cx="16" cy="34" r="9" fill="#e0483a"/><circle cx="30" cy="34" r="9" fill="#e0483a"/><circle cx="44" cy="34" r="9" fill="#e0483a"/><circle cx="48" cy="12" r="7" fill="var(--sun)"/></svg><b>畑</b><small>作る人</small></button>
+    <button class="st" data-k="1" aria-pressed="false"><svg viewBox="0 0 60 60"><rect x="8" y="22" width="44" height="32" fill="var(--sky)"/><polygon points="4,24 30,8 56,24" fill="#245f8a"/><rect x="22" y="36" width="16" height="18" fill="var(--paper)"/></svg><b><ruby>卸<rt>おろし</rt></ruby></b><small>集める人</small></button>
+    <button class="st" data-k="2" aria-pressed="false"><svg viewBox="0 0 60 60"><rect x="8" y="24" width="44" height="28" fill="var(--sun)"/><path d="M4 24 L56 24 L52 12 L8 12Z" fill="var(--carrot)"/><rect x="14" y="38" width="12" height="10" fill="var(--soil)"/><rect x="34" y="38" width="12" height="10" fill="var(--soil)"/></svg><b><ruby>仲卸<rt>なかおろし</rt></ruby></b><small>分ける人</small></button>
+    <button class="st" data-k="3" aria-pressed="false"><svg viewBox="0 0 60 60"><rect x="10" y="12" width="40" height="42" rx="4" fill="var(--plum-2)" stroke="var(--plum)" stroke-width="3"/><g fill="var(--plum)"><rect x="17" y="20" width="8" height="8"/><rect x="35" y="20" width="8" height="8"/><rect x="17" y="34" width="8" height="8"/><rect x="35" y="34" width="8" height="8"/></g></svg><b><ruby>商品部<rt>しょうひんぶ</rt></ruby></b><small>まとめて買う担当</small></button>
+    <button class="st" data-k="4" aria-pressed="false"><svg viewBox="0 0 60 60"><rect x="6" y="20" width="48" height="34" fill="var(--paper)" stroke="var(--leaf)" stroke-width="3"/><rect x="4" y="14" width="52" height="9" fill="var(--leaf)"/><circle cx="20" cy="40" r="6" fill="var(--carrot)"/><circle cx="31" cy="41" r="6" fill="var(--leaf)"/><circle cx="42" cy="40" r="6" fill="var(--berry)"/></svg><b><ruby>小売<rt>こうり</rt></ruby></b><small>売る人（ヴェルジェ）</small></button>
+    <button class="st" data-k="5" aria-pressed="false"><svg viewBox="0 0 60 60"><rect x="12" y="26" width="36" height="28" fill="var(--carrot-2)" stroke="var(--carrot)" stroke-width="3"/><polygon points="6,28 30,8 54,28" fill="var(--berry)"/><rect x="25" y="38" width="10" height="16" fill="var(--carrot)"/></svg><b>お客さん</b><small>食べる人</small></button>
+  </div>
+  <div class="box detail" id="detail" aria-live="polite"></div>
+    <div class="box">
+    <h3>近道「<ruby>産直<rt>さんちょく</rt></ruby>」もある</h3>
+    <p style="margin-top:6px">市場を通さず、生産者から直接仕入れる方法もあります。中間の業者を通らない分、流通のルートが短くなります。ヴェルジェは仕入れの <b class="num">約23%</b>（第51期・約5億円）が産直です。野菜では <b class="num">約32%</b>、果物では <b class="num">約29%</b>。取引のある産直の生産者・産地は82か所です。たとえば千葉の「房総食料センター」とは2008年から、群馬の「農園星ノ環」のレタスや「れんこん三兄弟」のれんこんも産直です。</p>
+  </div>
+</section>
+
+<section aria-labelledby="s2">
+  <h2 id="s2"><span class="step">2</span>だんだん小さく分けていく</h2>
+  <p class="lead">流通は「集めて、分ける」の繰り返しです。産地ではトラック単位だった量が、店に近づくほど小さな単位に分けられていきます。ヴェルジェのお店に届くトマト（Sサイズ）は、ふつう「28玉入りの箱（4kg）」です。</p>
+  <div class="amount">
+    <div class="amt"><svg viewBox="0 0 150 76"><rect x="4" y="10" width="110" height="50" rx="6" fill="var(--carrot)"/><rect x="114" y="26" width="32" height="34" rx="5" fill="var(--sky)"/><g fill="#e0483a"><circle cx="20" cy="24" r="8"/><circle cx="38" cy="24" r="8"/><circle cx="56" cy="24" r="8"/><circle cx="74" cy="24" r="8"/><circle cx="92" cy="24" r="8"/><circle cx="29" cy="40" r="8"/><circle cx="47" cy="40" r="8"/><circle cx="65" cy="40" r="8"/><circle cx="83" cy="40" r="8"/></g><circle cx="26" cy="66" r="8" fill="#333"/><circle cx="126" cy="66" r="8" fill="#333"/></svg><b>はたけ → 卸</b><span>トラックまるごと</span></div>
+    <div class="amt"><svg viewBox="0 0 150 76"><g fill="var(--soil)"><rect x="10" y="40" width="40" height="30"/><rect x="55" y="40" width="40" height="30"/><rect x="100" y="40" width="40" height="30"/><rect x="32" y="8" width="40" height="30"/><rect x="77" y="8" width="40" height="30"/></g></svg><b>卸 → 仲卸</b><span>たくさんの箱</span></div>
+    <div class="amt"><svg viewBox="0 0 150 76"><rect x="45" y="24" width="60" height="46" fill="var(--soil)"/><g fill="#e0483a"><circle cx="58" cy="24" r="8"/><circle cx="70" cy="22" r="8"/><circle cx="82" cy="22" r="8"/><circle cx="94" cy="24" r="8"/></g><text x="75" y="54" text-anchor="middle" font-size="15" font-weight="900" fill="#fff">28玉</text></svg><b>仲卸 → お店</b><span>28玉入りの箱</span></div>
+    <div class="amt"><svg viewBox="0 0 150 76"><circle cx="75" cy="42" r="28" fill="#e0483a"/><path d="M63 16 L75 22 L87 16 L81 26 L69 26 Z" fill="var(--leaf)"/></svg><b>お店 → お客さん</b><span>1玉ずつ</span></div>
+  </div>
+  <div class="box">
+    <p>9月1日から11月7日までに、ヴェルジェの8つのお店に届いた「28玉入りトマト（Sサイズ）」は <b class="num">1,364箱</b>。トマトにすると <b class="num">約3万8千玉</b> です。<span class="real">実際の数字</span></p>
+    <p class="note" style="margin-top:6px">整理すると、事業者にまとめて売るのが <ruby>卸売<rt>おろしうり</rt></ruby>、最終的な消費者に少量ずつ売るのが <ruby>小売<rt>こうり</rt></ruby>。ヴェルジェは小売業です。</p>
+  </div>
+</section>
+
+<p class="part">第2部　お金の旅</p>
+
+<section aria-labelledby="s3">
+  <h2 id="s3"><span class="step">3</span>トマト1玉の値段のリレー</h2>
+  <p class="lead">2026年10月のヴェルジェの伝票では、トマト28玉の箱を <b class="num">2,600円</b> で買い、お店では1玉 <b class="num">133円</b> で売る予定でした。店頭価格の133円が、流通の各段階でどう積み上がったのかを分解します。各段階で上乗せされる手数料や利益を「中間マージン」と呼びます。</p>
+  <div class="box relay">
+    <div class="legend">
+      <span><i class="c1"></i>農家さんの手取り</span><span><i class="c2"></i>箱・トラック・農協</span><span><i class="c3"></i>卸</span><span><i class="c4"></i>仲卸</span><span><i class="c5"></i>ヴェルジェ</span>
+    </div>
+    <div class="bar-row"><span>畑を出る</span><div class="track"><div class="seg c1" data-w="42.1"></div></div><div class="yen" data-v="56">56円</div></div>
+    <div class="bar-row"><span>市場に着く</span><div class="track"><div class="seg c1" data-w="42.1"></div><div class="seg c2" data-w="15.8"></div></div><div class="yen" data-v="77">77円</div></div>
+    <div class="bar-row"><span>卸で値段が決まる</span><div class="track"><div class="seg c1" data-w="42.1"></div><div class="seg c2" data-w="15.8"></div><div class="seg c3" data-w="5.3"></div></div><div class="yen" data-v="84">84円</div></div>
+    <div class="bar-row"><span>仲卸からヴェルジェへ</span><div class="track"><div class="seg c1" data-w="42.1"></div><div class="seg c2" data-w="15.8"></div><div class="seg c3" data-w="5.3"></div><div class="seg c4" data-w="6.8"></div></div><div class="yen" data-v="93">93円</div></div>
+    <div class="bar-row"><span>お店の値札</span><div class="track"><div class="seg c1" data-w="42.1"></div><div class="seg c2" data-w="15.8"></div><div class="seg c3" data-w="5.3"></div><div class="seg c4" data-w="6.8"></div><div class="seg c5" data-w="30.0"></div></div><div class="yen" data-v="133">133円</div></div>
+    <div class="bar-row" aria-hidden="true"><span></span><div class="scale"><i style="left:0.000%"></i><b style="left:0.000%">0</b><i style="left:15.038%"></i><b style="left:15.038%">20</b><i style="left:30.075%"></i><b style="left:30.075%">40</b><i style="left:45.113%"></i><b style="left:45.113%">60</b><i style="left:60.150%"></i><b style="left:60.150%">80</b><i style="left:75.188%"></i><b style="left:75.188%">100</b><i style="left:90.226%"></i><b style="left:90.226%">120円</b></div><div></div></div>
+    <button class="btn" id="play">バーを伸ばし直す</button>
+    <p class="note"><span class="real">実際の数字</span> 93円（2,600円÷28玉）と133円は、ヴェルジェの伝票（2026年10月の中央値）。<span class="est">目安</span> その前の56円・77円・84円は、ヴェルジェの資料にないので、市場でよく使われる割合から逆算した目安です（卸の手数料：野菜は売れた値段の8.5%前後、仲卸の上乗せ：1割前後、箱・運賃・農協の手数料：農家さんに入るお金の3割前後）。産地や日によって大きく変わります。</p>
+  </div>
+  <div class="grid2">
+    <div class="box">
+      <h3>ヴェルジェの40円は何に使う？</h3>
+      <p style="margin-top:6px">オレンジの40円（売値の約30%）が、そのまま利益になるわけではありません。家賃・光熱費・人件費といった店の運営費も、売れ残りを値下げした分の損失も、すべてここから支払います。詳しくは「お店の100円の行方」で見ます。</p>
+    </div>
+    <div class="box">
+      <h3>産直ならどうなる？</h3>
+      <p style="margin-top:6px">卸と仲卸を通らないので、青と黄色の中間マージン（このトマトなら約16円）はかかりません。ただし、その段階が担っていた仕事（価格の交渉、物流の手配、品質の確認）は、ヴェルジェや生産者が自分たちで引き受けます。コストが消えるというより、担い手が変わると考えるのが正確です。</p>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="s4">
+  <h2 id="s4"><span class="step">4</span>トマトの値段は季節で変わる（<ruby>相場<rt>そうば</rt></ruby>）</h2>
+  <p class="lead">市場価格は需要と供給のバランスで決まります。旬で収穫量が多い時期は下がり、天候不順や産地が切り替わる時期（端境期）には上がります。ヴェルジェが買ったトマト1玉の値段を、月ごとに1年分並べました。<span class="real">実際の数字</span></p>
+  <div class="box">
+    <div class="legend"><span><i class="c3"></i>買った値段（1玉）</span><span><i class="c5"></i>お店で売る予定の値段（1玉）</span></div>
+    <div class="scroll"><svg class="chart" id="soba" viewBox="0 0 640 300" role="img" aria-label="トマト1玉の仕入れ値と売価の月ごとの変化"></svg></div>
+    <p class="note">ヴェルジェの伝票（トマトSサイズ・28玉入りの4kg箱・8つのお店に届いた分・月ごとの中央値）を28で割ったもの。2025年11月〜2026年10月。お店で売る予定の値段は伝票に書かれた予定の値で、税込か税抜かはまだ確かめていません。</p>
+  </div>
+  <div class="grid2">
+    <div class="box">
+      <h3>夏に何が起きた？</h3>
+      <p style="margin-top:6px">3〜6月は千葉産の旬で出荷量が多く、1玉 <b class="num">50円</b> で買えました。7〜8月は買う値段が <b class="num">71円</b> まで上がりましたが、売値は99円に据え置き。値入率（売値に占める利益の割合）は <b class="num">33%</b> から <b class="num">28%</b> に減りました。</p>
+    </div>
+    <div class="box">
+      <h3>どうして値段をすぐ上げないの？</h3>
+      <p style="margin-top:6px">トマトは購入頻度が高く、お客さんが値段をよく覚えている品です。仕入れ値に合わせて売値を細かく動かすと「高くなった」という印象が残り、客離れにつながります。そこで売値は段階的にしか変えず、仕入れが高い時期は利益を削り、安い時期に取り戻します。1年を通して利益をならす考え方です。1月は買う値段が <b class="num">68円</b> に下がっても売る値段は133円のままにして、利益の割合は <b class="num">49%</b> まで戻りました。</p>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="s5">
+  <h2 id="s5"><span class="step">5</span>ほかの野菜・果物は？</h2>
+  <p class="lead">2026年9月〜11月はじめのヴェルジェの伝票から、1個（1袋・1房）あたりに直しました。「利益の割合」は<ruby>値入率<rt>ねいれりつ</rt></ruby>で、（売値－仕入れ値）÷売値 で計算します。<span class="real">実際の数字</span></p>
+  <div class="box scroll">
+    <table>
+      <thead><tr><th>品物</th><th>産地 ／ 主な取引先</th><th>買う値段</th><th>売る予定の値段</th><th>利益の割合</th></tr></thead>
+      <tbody id="items"></tbody>
+    </table>
+  </div>
+  <p class="note">みかんは10kgの箱、ほかは1個あたり。果物は利益の割合が小さめのものが多く、バナナは約28%です。ヴェルジェ全体では約36%（第51期の値入率36.47%）でした。</p>
+</section>
+
+<section aria-labelledby="s6">
+  <h2 id="s6"><span class="step">6</span>お店の100円の行方</h2>
+  <p class="lead">お客さんが払った100円は、何に使われているのか。第51期の決算書（損益計算書）の数字を、売上100円あたりに換算しました。<span class="real">実際の数字</span></p>
+  <div class="box relay">
+    <div class="bar-row"><span>100円</span><div class="track" style="height:48px"><div class="seg c3" data-w="65.86"></div><div class="seg c5" data-w="19.54"></div><div class="seg c6" data-w="13.99"></div><div class="seg c1" data-w="0.6" style="min-width:4px"></div></div><div class="yen">100円</div></div>
+    <div class="legend">
+      <span><i class="c3"></i>品物を買ったお金 <b class="num">65.9円</b></span>
+      <span><i class="c5"></i>働く人の給料 <b class="num">19.5円</b></span>
+      <span><i class="c6"></i>家賃・電気・配送など <b class="num">14.0円</b></span>
+      <span><i class="c1"></i>残った利益 <b class="num">0.6円</b></span>
+    </div>
+  </div>
+  </section>
+
+<p class="part">第3部　ヴェルジェのお店</p>
+
+<section aria-labelledby="s7">
+  <h2 id="s7"><span class="step">7</span>ヴェルジェのお店はどこにある？</h2>
+  <p class="lead">野菜・果物の8店はすべて、鮮魚専門店「角上魚類（かくじょうぎょるい）」の建物の中に出店しています。角上さんは建物を用意して場所を貸す「館（やかた）」の立場で、ヴェルジェはその中のテナントです。鮮魚と青果を1か所でそろえることで、互いの集客を補い合っています。</p>
+    <div class="box org">
+    <h3>お店を後ろで支える「本社」（会社の頭脳）</h3>
+    <p style="margin-top:6px">本社は北新宿。店が販売に専念できるよう、仕入れ・経理・人事・広報といった仕事を本社の各部署が担っています。</p>
+    <div class="org-top">
+      <div><span class="role">会社のかじ取り</span><b>社長・取締役</b><span>宏之社長。厚司常務（商品部の担当）、石森取締役（統括本部長）（営業部の担当）。会社の重要事項を決めます。</span></div>
+      <div><span class="role">相談役</span><b>顧問・アドバイザー</b><span><b style="font-size:inherit">中尾先生</b>（社長アドバイザー）<br><b style="font-size:inherit">水野顧問</b>（営業部の担当）<br><b style="font-size:inherit">海老原顧問</b>（商品部の担当。元房総食料センターの理事）<br><b style="font-size:inherit">中村顧問</b><br>長い経験を生かして、社長や部署に助言します。</span></div>
+    </div>
+    <div class="org-arrow" aria-hidden="true">▼</div>
+    <div class="flow org-dept">
+      <div><span class="role">仕入れる</span><b>商品部</b><span>部長佐藤直（執行役員）。市場や農家さんからまとめて仕入れ、お店へ回します。野菜・果物はほぼ全部ここを通ります。</span></div>
+      <div><span class="role">うる</span><b>営業部</b><span>部長菊間聡史。8つのお店を5つのエリアに分けて動かす、店長さんたちのまとめ役です。</span></div>
+      <div><span class="role">作る</span><b>フードサービス部</b><span>部長久野智哉（執行役員）。お店で作るサラダやお弁当、新しい商品づくり（商品開発）を受け持ちます。</span></div>
+      <div><span class="role">支える</span><b>サポート部</b><span>部長鈴木健一（執行役員）。お金の計算（経理課）、会社の事務（総務課）、パソコンやシステム、人の採用と人事を受け持ちます。</span></div>
+      <div><span class="role">伝える</span><b>デジタルマーケティング部</b><span>DM部。インスタやLINE、ホームページ、チラシやPOPのデザイン、ネットショップ、広告で、お店の良さを伝えます。</span></div>
+    </div>
+    <div class="box" style="margin-top:14px"><h3>品物以外でお店を支える会社</h3><p style="margin-top:6px">仕入伝票に出てくるのは「品物」の取引先だけです。店を建てる、仕組みを動かす、人を集める、といった仕事は、別の会社が支えています（相関図のグレーの丸）。</p><div class="org-top" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div><span class="role">店づくり</span><span><b style="font-size:inherit">ひらた店装</b>（工事）<br><b style="font-size:inherit">ラックランド</b>（工事）<br><b style="font-size:inherit">オカムラ</b>（什器）<br><b style="font-size:inherit">デザインメモラブル</b>（デザイン）<br><b style="font-size:inherit">ちばプロデュース</b>（デザイン）</span></div><div><span class="role">店の仕組み</span><span><b style="font-size:inherit">アール</b>（システム）<br><b style="font-size:inherit">NETDOOR</b>（システム）<br><b style="font-size:inherit">スマレジ</b>（システム）<br><b style="font-size:inherit">サードアイズ</b>（カメラ）<br><b style="font-size:inherit">FISソリューションズ</b>（通信）<br><b style="font-size:inherit">キヤノンMJ・富士フイルム</b>（複合機）</span></div><div><span class="role">販促</span><span><b style="font-size:inherit">ソニック</b>（印刷）<br><b style="font-size:inherit">POPKIT</b>（POP）<br><b style="font-size:inherit">ラッピングの森</b>（包装資材）</span></div><div><span class="role">人</span><span><b style="font-size:inherit">SGフィルダー</b>（派遣）<br><b style="font-size:inherit">タイミー</b>（スキマバイト）<br><b style="font-size:inherit">求人サイト</b>（採用）<br><b style="font-size:inherit">Awelic</b>（支援機関）<br><b style="font-size:inherit">高田社労士事務所</b>（適性検査）</span></div><div><span class="role">届ける</span><span><b style="font-size:inherit">ヤマト運輸</b>（宅配）<br><b style="font-size:inherit">STORES</b>（ネット）</span></div><div><span class="role">伝える</span><span><b style="font-size:inherit">LINEヤフー</b>（広告）</span></div><div><span class="role">お金</span><span><b style="font-size:inherit">取引銀行</b>（銀行）</span></div></div></div>
+    <p class="note">会社の外の先生にも手伝ってもらっています：ポラリス（会計・税金）、CPS（毎月の数字のまとめ）。組織は2026年10月22日に更新した組織図をもとにしています。</p>
+  </div>
+  <div class="shop-grid">
+    <div class="box">
+      <svg viewBox="0 0 400 240" role="img" aria-label="角上生鮮市場の中に魚売り場とヴェルジェの売り場が並ぶ図">
+        <text x="200" y="22" text-anchor="middle" font-family="var(--body)" font-size="13" fill="var(--soft)">開く時間・休みの日も角上さんと同じ</text>
+        <rect x="10" y="34" width="380" height="196" rx="12" fill="var(--paper)" stroke="var(--ink)" stroke-width="3"/>
+        <rect x="10" y="34" width="380" height="34" rx="12" fill="var(--sky)"/>
+        <text x="200" y="58" text-anchor="middle" font-family="var(--display)" font-weight="900" font-size="18" fill="#fff">角上生鮮市場（たてもの）</text>
+        <rect x="26" y="84" width="166" height="128" rx="10" fill="var(--sky-2)" stroke="var(--sky)" stroke-width="3"/>
+        <text x="109" y="108" text-anchor="middle" font-family="var(--display)" font-weight="700" font-size="16" fill="var(--ink)">さかな（角上魚類）</text>
+        <g fill="var(--sky)"><ellipse cx="75" cy="156" rx="28" ry="12"/><polygon points="100,156 116,144 116,168"/><ellipse cx="145" cy="180" rx="24" ry="10"/><polygon points="166,180 180,170 180,190"/></g>
+        <rect x="208" y="84" width="166" height="128" rx="10" fill="var(--leaf-2)" stroke="var(--leaf)" stroke-width="3"/>
+        <text x="291" y="108" text-anchor="middle" font-family="var(--display)" font-weight="700" font-size="16" fill="var(--ink)">野菜・果物</text>
+        <text x="291" y="128" text-anchor="middle" font-family="var(--display)" font-weight="900" font-size="15" fill="var(--leaf)">ヴェルジェ</text>
+        <circle cx="236" cy="160" r="13" fill="var(--leaf)"/><circle cx="270" cy="164" r="12" fill="var(--carrot)"/><circle cx="304" cy="160" r="13" fill="var(--berry)"/><circle cx="338" cy="164" r="11" fill="var(--sun)"/>
+        <rect x="222" y="184" width="138" height="20" rx="6" fill="var(--paper)"/>
+        <text x="291" y="199" text-anchor="middle" font-family="var(--body)" font-size="12" fill="var(--ink)">カフェ・サラダ・カットフルーツも</text>
+      </svg>
+    </div>
+    <div class="box stores">
+      <h3>お店8つ＋カフェ1つ</h3>
+      <div class="pref"><b>東京</b><span class="chip">小平</span><span class="chip cafe">アリオ葛西のカフェ</span></div>
+      <div class="pref"><b>埼玉</b><span class="chip">大宮</span><span class="chip">越谷</span><span class="chip">鶴ヶ島</span><span class="chip">狭山</span></div>
+      <div class="pref"><b>神奈川</b><span class="chip">相模原</span></div>
+      <div class="pref"><b>群馬</b><span class="chip">高崎</span><span class="chip">前橋</span></div>
+      <p class="note">開く時間はだいたい平日10時、土日・祝日9時から、夜7時か7時半まで。ピンクのカフェ（Verger 果樹園珈琲）だけは、ショッピングモールの中にある別のお店です。狭山店は今は土日・祝日だけで、12月3日から毎日開きます。小平・越谷・相模原・前橋にはお店の中にカフェもあります。</p>
+    </div>
+  </div>
+  </section>
+
+<section aria-labelledby="s8">
+  <h2 id="s8"><span class="step">8</span>ヴェルジェの歩み</h2>
+  <div class="hist">
+    <div><b class="num">1976年</b><span>名前のない小さな漬物屋さんから始まる。会社ができる</span></div>
+    <div><b class="num">1993年</b><span>会社の名前が「マルヨネ」に</span></div>
+    <div><b class="num">1995年9月19日</b><span>埼玉県の志木に「ヴェルジェ」1号店。毎月19日は「ヴェルジェの日」</span></div>
+    <div><b class="num">1997年</b><span>会社の名前も「ヴェルジェ」に</span></div>
+    <div><b class="num">2025年1月</b><span>月曜の「お野菜市」を全店で始める</span></div>
+    <div><b class="num">2026年8月</b><span>鶴ヶ島店ができる</span></div>
+    <div><b class="num">2026年10月1日</b><span>越谷店が大きく作り直して新しく開く</span></div>
+    <div><b class="num">2026年12月3日</b><span>狭山店が毎日開くお店に</span></div>
+  </div>
+</section>
+
+<section aria-labelledby="s9">
+  <h2 id="s9"><span class="step">9</span>何がどれくらい売れている？</h2>
+  <div class="grid2">
+    <div class="box">
+      <h3>売り場ごとの売上 <span class="real">実際の数字</span></h3>
+      <div class="scroll"><svg class="chart" id="dept" viewBox="0 0 320 250" role="img" aria-label="部門別の売上構成比"></svg></div>
+      <p class="note">第51期の全社。野菜と果物で約6割。</p>
+    </div>
+  </div>
+  <div class="box">
+    <h3>お客さま1人の買い物 <span class="real">実際の数字</span></h3>
+    <p style="margin-top:6px">1回に買う商品は <b class="num">約4個</b>、1個あたり <b class="num">約270円</b>。合わせて <b class="num">約1,150円</b>。越谷店は1人約5個・1,423円と、最もたくさん買ってもらえる店です。売上は「客数×客単価」、客単価は「買上点数×1点単価」に分解できます。点数が4個から5個になれば、客数が同じでも売上は約25%増える計算です。</p>
+    <p class="note" style="margin-top:4px">第51期・前からある6店の平均。</p>
+  </div>
+</section>
+
+<p class="part">第4部　お店の毎日</p>
+
+<section aria-labelledby="s10">
+  <h2 id="s10"><span class="step">10</span>店の1日（仕入れの流れ）</h2>
+  <p class="lead">ヴェルジェは「V受発注システム」という、取引先とオンラインでつながった受発注システム（EDI）で注文します。</p>
+  <div class="timeline">
+    <div class="tl"><svg viewBox="0 0 44 44"><rect x="8" y="4" width="28" height="36" rx="4" fill="var(--plum-2)" stroke="var(--plum)" stroke-width="2"/><g stroke="var(--plum)" stroke-width="2"><line x1="13" y1="14" x2="31" y2="14"/><line x1="13" y1="21" x2="31" y2="21"/></g></svg><span class="time">朝 9時まで</span><b>今日のおすすめ</b><span class="note">取引先や商品部が「この商品をこの値段で出せます」と提示する</span></div>
+    <div class="tl"><svg viewBox="0 0 44 44"><rect x="8" y="4" width="28" height="36" rx="4" fill="var(--sky-2)" stroke="var(--sky)" stroke-width="2"/><g stroke="var(--sky)" stroke-width="2"><line x1="13" y1="14" x2="31" y2="14"/><line x1="13" y1="21" x2="31" y2="21"/><line x1="13" y1="28" x2="25" y2="28"/></g></svg><span class="time">昼〜夕方</span><b>明日の分を注文</b><span class="note">果物 14時まで<br>野菜 16時まで<br>店の小型端末で</span></div>
+    <div class="tl"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="16" fill="var(--ink)"/><circle cx="28" cy="18" r="13" fill="var(--paper)"/></svg><span class="time">よる</span><b>取引先が準備</b><span class="note">何箱出すか入力して、箱に詰める</span></div>
+    <div class="tl"><svg viewBox="0 0 44 44"><rect x="2" y="14" width="26" height="16" rx="3" fill="var(--carrot)"/><rect x="28" y="19" width="12" height="11" rx="2" fill="var(--sky)"/><circle cx="10" cy="33" r="4" fill="#333"/><circle cx="33" cy="33" r="4" fill="#333"/></svg><span class="time">翌日の朝</span><b>届く・確かめる</b><span class="note">注文どおりか数を数える（検収）</span></div>
+    <div class="tl"><svg viewBox="0 0 44 44"><rect x="6" y="10" width="32" height="24" rx="4" fill="var(--sun-2)" stroke="var(--sun)" stroke-width="2"/><text x="22" y="27" text-anchor="middle" font-size="12" font-weight="900" fill="var(--ink)">¥258</text></svg><span class="time">開店前〜</span><b>並べて売る</b><span class="note">値札・POPをつけ、試食や声かけで売る</span></div>
+  </div>
+  <div class="box">
+    <h3>「感動ライブ販売」とは？</h3>
+    <p style="margin-top:6px">ヴェルジェの売り方の名前です。売り場を舞台、働く人を役者と考え、試食をすすめたり、産地や農家さんの思いを話したり、おいしい食べ方を教えたりします。昔ながらの八百屋さんのように、お客さまと話しながら売るのがヴェルジェらしさです。</p>
+  </div>
+</section>
+
+<section aria-labelledby="s11">
+  <h2 id="s11"><span class="step">11</span>1週間のリズム</h2>
+  <div class="week" id="week"></div>
+  <div class="box">
+    <h3>曜日ごとの売上（ふつうの日を100とすると）<span class="real">実際の数字</span></h3>
+    <div class="scroll"><svg class="chart" id="dow" viewBox="0 0 640 250" role="img" aria-label="曜日ごとの売上の高さ"></svg></div>
+    <p class="note">前からある6店・2025年10月〜2026年9月。土日はふつうの日の約1.4倍。1年で最も売れるのは大みそかで、12月31日1日だけで6店で約4,930万円（ふつうの平日の4〜6倍）。</p>
+  </div>
+</section>
+
+<section aria-labelledby="s12">
+  <h2 id="s12"><span class="step">12</span>売れ残ったらどうなる？（ロス）</h2>
+  <div class="loss">
+    <div class="box"><svg viewBox="0 0 90 90"><circle cx="45" cy="50" r="30" fill="var(--leaf)"/><rect x="18" y="8" width="54" height="26" rx="6" fill="var(--sun)"/><text x="45" y="27" text-anchor="middle" font-size="14" font-weight="900" fill="var(--ink)">値引き</text></svg><b>値引き・値下げ</b><span>傷む前に安くして売り切る。ロスのほとんどはこれ</span></div>
+    <div class="box"><svg viewBox="0 0 90 90"><rect x="24" y="30" width="42" height="50" rx="5" fill="var(--soft)"/><rect x="18" y="22" width="54" height="10" rx="3" fill="var(--ink)"/><circle cx="45" cy="16" r="9" fill="#8a6d3b"/></svg><b>廃棄</b><span>どうしても売れずに捨てる。実はとても少ない</span></div>
+    <div class="box"><svg viewBox="0 0 90 90"><circle cx="45" cy="45" r="34" fill="var(--berry-2)" stroke="var(--berry)" stroke-width="4"/><text x="45" y="54" text-anchor="middle" font-size="26" font-weight="900" fill="var(--berry)">ロス</text></svg><b>まとめて「ロス」</b><span>値引き・廃棄などで減ったお金</span></div>
+  </div>
+  <div class="box">
+    <h3>1万円売ると、ロスはいくら？ <span class="real">実際の数字</span></h3>
+    <div class="scroll"><svg class="chart" id="loss" viewBox="0 0 640 230" role="img" aria-label="売上1万円あたりのロスの内訳"></svg></div>
+    <p class="note">第51期・前からある6店。1万円売ると372円がロス。そのうち廃棄した分は29円だけで、残りはほとんどが値引きです。つまりロスの大部分は「捨てた損」ではなく「安く売った損」です。発注量の精度と値下げのタイミングが、ロスを減らす鍵になります。</p>
+  </div>
+</section>
+
+<section aria-labelledby="s13">
+  <h2 id="s13"><span class="step">13</span>店の用語カード</h2>
+  <p class="lead">カードをタップすると裏返って、意味が表示されます。</p>
+  <div class="cards" id="cards"></div>
+</section>
+
+<p class="part">第5部　どちらがよいか？比べてみよう</p>
+
+<section aria-labelledby="s16">
+  <h2 id="s16"><span class="step">14</span>選び方には長所も、大変なところもある</h2>
+  <p class="lead">経営判断には、何かを得れば何かを手放す「トレードオフ」がつきものです。ボタンでテーマを選び、両方の長所と短所を比べてください。</p>
+  <div class="tabs" role="tablist" aria-label="比べること">
+    <button class="tab" role="tab" id="cmp0" aria-selected="true">産直と市場</button>
+    <button class="tab" role="tab" id="cmp1" aria-selected="false">まとめて買うのと店ごとに買うの</button>
+    <button class="tab" role="tab" id="cmp2" aria-selected="false">角上さんの中と単独の店</button>
+    <button class="tab" role="tab" id="cmp3" aria-selected="false">早めの値下げとぎりぎりまで</button>
+    <button class="tab" role="tab" id="cmp4" aria-selected="false">相場が高いとき</button>
+  </div>
+  <div id="cmpbody" role="tabpanel" aria-live="polite"></div>
+</section>
+
+<section aria-labelledby="s14">
+  <h2 id="s14"><span class="step">15</span>クイズで確かめよう</h2>
+  <div class="box quiz" id="quiz"></div>
+</section>
+
+<section aria-labelledby="s15">
+  <h3 id="s15">このページの数字の出どころ</h3>
+  <ul class="src">
+    <li>仕入れ値・売る予定の値段：V受発注システムの伝票明細（2026年9月1日〜11月7日納品）。伝票の売価は予定の値で、店頭の実際の値段・税込かどうかは未確認。</li>
+    <li>1年の売上・100円のゆくえ：第51期決算報告書（2025年8月〜2026年7月）。給料は決算書の人件費。</li>
+        <li>客数・客単価・点数・売り場の構成・ロス：第52期事業計画書の第51期実績（商品部ロス管理表ほか）。曜日・大みそか：RWC 1年分の分析。</li>
+    <li>産直の割合：第52期事業計画書（第51期実績）。卸・仲卸・農協の取り分：ヴェルジェの資料にないため、市場で一般的な割合で計算した目安。</li>
+    <li>店・歩み・仕入れの流れ・販促：会社概要、V受発注システムのまとめ、年間販促日程表（LINE WORKS実績から）。</li>
+  </ul>
+  <p class="note">作成：Claude Code（2026年11月11日）。共有版（取引先ごとの金額・打ち合わせの内容・店ごとの売上・利益の金額は載せていません）。</p>
+</section>
+</div>
+
+<script>
+(function(){
+  function el(t,a,txt){var e=document.createElementNS('http://www.w3.org/2000/svg',t);for(var k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;return e}
+
+  // 駅
+  var data=[
+    {who:'作る人', t:'畑（農家さん・産地）', d:['野菜や果物を育てて、収穫する。','収穫したものを箱に詰め、トラックで市場へ送る。農協（JA）がまとめて送ることも多い。','ヴェルジェのトマトは、9〜10月は福島（南郷）、11月から7月ごろまでは千葉（長生）から来ていました。','直接取引のある農家さん・産地もあります：房総食料センター（千葉）、れんこん三兄弟、農園星ノ環（群馬）、ゆうゆう農場、月夜野きのこ園、あいさいファーム嬬恋、JA甘楽富岡など。'], tag:'役割：生産'},
+    {who:'集める人', t:'<ruby>卸<rt>おろし</rt></ruby>（卸売業者）', d:['全国の産地から大量に集荷する、市場の中心となる会社。','「せり」や相対取引（1対1の交渉）で価格を決め、仲卸や小売に販売する。','売れた値段の中から手数料をもらう（野菜は8.5%前後が目安）。','ヴェルジェのホームの市場「淀橋市場」（新宿）では、東京新宿ベジフルが卸の会社です。','ヴェルジェはこの東京新宿ベジフルから、仲卸を通さずに直接買っています。一番大きな取引先です。'], tag:'役割：集荷と値決め'},
+    {who:'分ける人', t:'<ruby>仲卸<rt>なかおろし</rt></ruby>（仲卸業者）', d:['市場の中に店を構える業者。','卸から大口で買い、小売店が必要な量に小分けして届ける（分荷）。','よい品を見分ける「目利き」のプロ。','ヴェルジェはホームの淀橋市場では卸から直接買うので、仲卸を通らない品が多いです。','東京新宿ベジフル以外の市場の取引先：TOKYOフレッシュ、TOKYOフレッシュ大田、マルケイ商店、中川屋、妙義産業（淀橋便）、群馬の大栄高崎卸売青果（群馬便）、バナナのファーマインドなど（どこが卸でどこが仲卸かは社内の資料に書かれていません）。'], tag:'役割：小分けと目利き'},
+    {who:'まとめて買う担当', t:'ヴェルジェ本社の <ruby>商品部<rt>しょうひんぶ</rt></ruby>', d:['市場や産地からまとめて買っておき、各店へ回す。','店の注文画面では「前繰（まえくり）」という名前の取引先として出てくる。','店に届く金額の約半分（48%）が、この商品部経由です。'], tag:'役割：まとめ買い'},
+    {who:'売る人', t:'<ruby>小売<rt>こうり</rt></ruby>（ヴェルジェの店）', d:['取引先や商品部から買って、売り場に並べる。','値札やPOPをつけて、お客さまに1つずつ売る。','試食をすすめたり、おいしい食べ方を話したりする「感動ライブ販売」がヴェルジェの売り方。'], tag:'役割：販売'},
+    {who:'食べる人', t:'お客さん', d:['1回に約4個、約1,150円の買い物をする（平均）。','6店だけで1年に約289万人が来てくれる。','繰り返し来てくれるお客さん（リピーター）を増やすことが、売上の土台になる。'], tag:'旅のゴール'}
+  ];
+  var icons=[].map.call(document.querySelectorAll('.st svg'),function(s){return s.outerHTML});
+  var detail=document.getElementById('detail'),btns=document.querySelectorAll('.st');
+  function show(k){var x=data[k];detail.innerHTML=icons[k].replace('<svg','<svg aria-hidden="true"')+'<div><div class="who">'+x.who+'</div><h3>'+x.t+'</h3><ul>'+x.d.map(function(s){return '<li>'+s+'</li>'}).join('')+'</ul><span class="tag">'+x.tag+'</span></div>';btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.k==k?'true':'false')})}
+  btns.forEach(function(b){b.addEventListener('click',function(){show(+b.dataset.k)})});show(0);
+
+  // バー（はじめから完成形を表示）
+  document.querySelectorAll('.seg').forEach(function(s){s.style.width=s.dataset.w+'%'});
+  document.getElementById('play').addEventListener('click',function(){
+    var rows=document.querySelectorAll('#s3 ~ .box .bar-row, #play');
+    var rr=Array.prototype.filter.call(document.getElementById('play').parentNode.querySelectorAll('.bar-row'),function(r){return r.querySelector('.yen')});
+    rr.forEach(function(r){r.querySelectorAll('.seg').forEach(function(s){s.style.width='0'});r.querySelector('.yen').textContent='0円'});
+    rr.forEach(function(r,i){setTimeout(function(){r.querySelectorAll('.seg').forEach(function(s){s.style.width=s.dataset.w+'%'});var y=r.querySelector('.yen'),v=+y.dataset.v,n=0,t=setInterval(function(){n=Math.min(v,n+Math.ceil(v/20));y.textContent=n+'円';if(n>=v)clearInterval(t)},35)},i*700)});
+  });
+
+  // 相場グラフ
+  (function(){
+    var s=document.getElementById('soba'),pts=[['11月',114,166],['12月',89,133],['1月',68,133],['2月',64,99],['3月',50,75],['4月',50,75],['5月',50,75],['6月',50,75],['7月',68,99],['8月',71,99],['9月',89,133],['10月',93,133]];
+    var L=56,R=620,T=24,B=250,max=200,sx=function(i){return L+30+i*((R-L-60)/(pts.length-1))},sy=function(v){return B-(v/max)*(B-T)};
+    [0,50,100,150,200].forEach(function(v){s.appendChild(el('line',{x1:L,x2:R,y1:sy(v),y2:sy(v),class:'ax'}));s.appendChild(el('text',{x:L-8,y:sy(v)+4,'text-anchor':'end',class:'lbl'},v+'円'))});
+    pts.forEach(function(p,i){s.appendChild(el('text',{x:sx(i),y:B+22,'text-anchor':'middle',class:'lbl'},p[0]))});
+    [[1,'var(--sky)'],[2,'var(--carrot)']].forEach(function(c){
+      var d=pts.map(function(p,i){return (i?'L':'M')+sx(i)+' '+sy(p[c[0]])}).join(' ');
+      s.appendChild(el('path',{d:d,fill:'none',stroke:c[1],'stroke-width':4,'stroke-linejoin':'round'}));
+      pts.forEach(function(p,i){s.appendChild(el('circle',{cx:sx(i),cy:sy(p[c[0]]),r:6,fill:c[1]}));s.appendChild(el('text',{x:sx(i),y:sy(p[c[0]])+(c[0]==1?22:-12),'text-anchor':'middle','font-size':12,'font-weight':700},p[c[0]]+'円'))});
+    });
+  })();
+
+  // 品目表
+  var items=[
+    ['トマト（Sサイズ1玉）','福島・千葉 ／ 東京新宿ベジフル（2部A課）',93,133],
+    ['キャベツ（1玉）','群馬・岩手など ／ 東京新宿ベジフル（3部A課）、TOKYOフレッシュ',150,258],
+    ['レタス（1玉）','群馬 ／ 東京新宿ベジフル（3部A課）、TOKYOフレッシュ、農園星ノ環（産直）',100,158],
+    ['にんじん（3本入り1袋）','北海道 ／ 商品部、TOKYOフレッシュ',135,198],
+    ['玉ねぎ（1袋）','／ 大栄高崎卸売青果（群馬便）',120,198],
+    ['だいこん（1本）','／ TOKYOフレッシュ、東京新宿ベジフル（3部A課）',188,298],
+    ['はくさい（1玉）','長野 ／ TOKYOフレッシュ、東京新宿ベジフル（3部A課）',550,792],
+    ['ブロッコリー（1個）','／ 東京新宿ベジフル（3部A課）、TOKYOフレッシュ',180,298],
+    ['バナナ（1房）','フィリピン ／ 大栄高崎卸売青果、西源、TOKYOフレッシュ',121,168],
+    ['りんご秋映（1個）','長野 ／ 商品部、東京新宿ベジフル（果実1部A課）',110,150],
+    ['シャインマスカット（1房）','／ 商品部、TOKYOフレッシュ',813,1380],
+    ['西海みかん 2L（10kg箱）','長崎 ／ 商品部、TOKYOフレッシュ大田',2800,4485]
+  ];
+  var tb=document.getElementById('items');
+  items.forEach(function(r){var m=Math.round((r[3]-r[2])/r[3]*100);var tr=document.createElement('tr');tr.innerHTML='<td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2].toLocaleString()+'円</td><td>'+r[3].toLocaleString()+'円</td><td>'+m+'% <span class="mini" style="width:'+(m*1.6)+'px"></span></td>';tb.appendChild(tr)});
+
+  // 立体の相関図
+  (function(){
+    var cv=document.getElementById('net');if(!cv||!cv.getContext)return;
+    var ctx=cv.getContext('2d'),R=Math.PI/180;
+    var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function pol(a,r,y){return [Math.cos(a*R)*r,y,Math.sin(a*R)*r]}
+    var N=[],E=[];
+    function node(id,label,g,pos,size,col,info){N.push({id:id,label:label,g:g,p:pos,size:size,col:col,info:info});return id}
+    function edge(a,b,w,kind){E.push({a:a,b:b,w:w,kind:kind||'goods',ph:Math.random()})}
+    function yen(v){return v>=10000?(Math.round(v/1000)/10)+'億円':v.toLocaleString()+'万円'}
+    node('V','ヴェルジェ本社・商品部','core',[0,0,0],34,'plum',{k:'中心',t:'ヴェルジェ本社（北新宿）・商品部（部長佐藤直）',d:'市場の会社・農家さん・食品の会社など多くの取引先から仕入れ、8つの店とカフェに届けます。商品部はまとめて買って各店へ回す係。'});
+    node('SANCHI','全国の産地・農協','origin',[0,-310,0],26,'soil',{k:'始まり',t:'全国の農家さん・産地・農協（JA）',d:'野菜や果物を育てて、市場に出荷します。トマトなら9〜10月は福島（南郷）、11月から7月ごろまでは千葉（長生）から。'});
+    node('YODO','淀橋市場（新宿）','place',pol(345,340,-240),20,'sky',{k:'ホームの市場',t:'淀橋市場（新宿）',d:'東京新宿ベジフルが卸をしている市場です。'});
+    var M=[['VF','東京新宿ベジフルグループ',0,20,'淀橋市場の卸。各課、本社、グループ会社ベジフルフードなど。一番大きな取引先。'],
+      ['TF','TOKYOフレッシュ',35,20,'TOKYOフレッシュとTOKYOフレッシュ大田。キャベツ・だいこん・ブロッコリーなどの主な仕入れ先。'],
+      ['MK','マルケイ商店',65,2.5,''],['DE','大栄高崎卸売青果（群馬便）',85,2.5,'群馬の店（高崎・前橋）向けの便。玉ねぎはここから。'],
+      ['FM','ファーマインド',105,2.5,'バナナなどの取引先。'],['NK','中川屋',122,2.5,''],['GO','五味商店',138,1,''],
+      ['MY','妙義産業（淀橋便）',328,1,'伝票の名前に「淀橋便」とある取引先。']];
+    M.forEach(function(m){node(m[0],m[1],'market',pol(m[2],270,-150),8+Math.sqrt(m[3])*3.2,'sky',{k:'市場の会社',t:m[1],d:(m[4]?m[4]+' ':'')+''});edge(m[0],'V',m[3]);edge('SANCHI',m[0],Math.max(1,m[3]/2),'origin')});
+    edge('YODO','VF',6,'place');edge('YODO','MY',2,'place');
+    var S=[['BO','房総食料センター',162,6,'千葉の産直の取引先。2008年から。産直では飛び抜けて大きい取引先。'],['RE','れんこん三兄弟',182,1,'れんこんはほぼ全部ここから（産直）。'],['JA','JA甘楽富岡',198,1,'群馬の農協。'],['YU','ゆうゆう農場',213,1,''],['HO','農園星ノ環',228,1,'群馬のレタスなど（産直）。']];
+    S.forEach(function(m){node(m[0],m[1],'farm',pol(m[2],280,-110),8+Math.sqrt(m[3])*3.2,'leaf',{k:'産直（農家さん・産地）',t:m[1],d:(m[4]?m[4]+' ':'')+''});edge(m[0],'V',m[3])});
+    var F=[['PP','プラスパーフ',252,6],['TK','高瀬物産',268,2.5],['YK','横浜鶏卵',297,2.5],['IB','アイ.ビー.エス',310,2.5],['KA','柏木商事',322,1]];
+    node('OR','オリヤス','food',pol(225,200,-30),8+Math.sqrt(2.5)*3.2,'berry',{k:'売り場の資材',t:'オリヤス',d:'エコバッグなど食べ物ではない品が中心の資材の取引先（取引先番号4000番台）。'});edge('OR','V',2.5);
+    node('HM','ハピマルシェ','market',pol(148,270,-150),8+Math.sqrt(1)*3.2,'sky',{k:'市場の会社',t:'ハピマルシェ',d:'いちご・さつま芋・ドライフルーツなどの取引先。'});edge('HM','V',1);edge('SANCHI','HM',1,'origin');
+    node('OTA','大田市場','place',pol(70,345,-240),18,'sky',{k:'市場',t:'大田市場（東京都中央卸売市場）',d:'東京で一番大きな青果市場。TOKYOフレッシュ大田がある。'});edge('OTA','TF',3,'place');
+    F.forEach(function(m){node(m[0],m[1],'food',pol(m[2],285,-60),8+Math.sqrt(m[3])*3.2,'sun',{k:'食品の会社',t:m[1],d:'店が直接仕入れる食品の取引先。'});edge(m[0],'V',m[3])});
+    node('FJ','藤井商店','food',pol(240,215,-30),8+Math.sqrt(1)*3.2,'berry',{k:'売り場の資材',t:'藤井商店',d:'仕入れた品はすべて税率10%で食べ物ではない品。エコバッグやPOPスタンドなど、売り場で使う品の取引先と考えられます。一番多いのは小平店。'});edge('FJ','V',1);
+    var ST=[['越谷',1],['相模原',1],['大宮',1],['高崎',1],['小平',1],['前橋',1],['鶴ヶ島',1],['狭山',0],['果樹園珈琲（アリオ葛西）',0]];
+    node('KK','角上魚類（館）','place',[0,165,0],24,'sky2',{k:'お隣さん',t:'角上魚類（館）・角上生鮮市場',d:'8つの店はすべて角上さんの建物の中。魚を買いに来たお客さまが野菜も買ってくれる。営業時間・休みも角上さんと同じ。'});
+    node('C','お客さま','shop',[0,330,0],28,'berry',{k:'旅のゴール',t:'お客さま',d:'前からある6店だけで1年に約289万人。1回に約4個、約1,154円の買い物。土日は平日の約1.4倍来てくれます。'});
+    ST.forEach(function(s,i){var a=i*(360/ST.length)+20,id='S'+i,cafe=i===8;node(id,s[0]+(cafe?'':'店'),'shop',pol(a,215,165),cafe?10:(s[1]?9+Math.sqrt(s[1]/100)*2.4:9),cafe?'berry':'carrot',{k:cafe?'カフェ':'お店',t:cafe?'Verger 果樹園珈琲（アリオ葛西）':'ヴェルジェ '+s[0]+'店',d:s[1]?'角上さんの建物の中の店。':(cafe?'ショッピングモールの中のカフェ。角上さんの建物ではありません。':'今は土日・祝日だけ。12月3日から毎日営業します。')});edge('V',id,s[1]?s[1]/900:.8);edge(id,'C',s[1]?s[1]/1500:.5);if(!cafe)edge('KK',id,1,'place')});
+    node('ARIO','アリオ葛西','shop',pol(340,305,235),14,'sky2',{k:'店の建物',t:'アリオ葛西（ショッピングモール）',d:'果樹園珈琲が入っているショッピングモール。運営はセブン&アイ・クリエイトリンク。角上さんと同じように、店の場所を借りている相手（大家さん）です。'});edge('ARIO','S8',2,'place');
+    node('HT',"ひらた店装",'partner',pol(8.0,370,20),10,'soft',{k:"店づくり（工事）",t:"ひらた店装",d:"鶴ヶ島店（新店）と越谷店（改装）の店舗設備工事を受け持った会社。冷蔵設備・厨房器具・照明・内装・看板まで一式。"});edge('HT','S6',1.5,'place');edge('HT','S0',1.5,'place');
+    node('LL',"ラックランド",'partner',pol(23.7,370,20),10,'soft',{k:"店づくり（工事）",t:"ラックランド",d:"店舗の設計と、電気・空調・換気・看板などの設備工事の会社。これまでの店の設備にも多く関わっています（固定資産台帳）。"});edge('LL','V',1.5,'place');
+    node('OK',"オカムラ",'partner',pol(39.3,370,20),10,'soft',{k:"店づくり（什器）",t:"オカムラ",d:"商品を並べる棚や台（什器）の会社。"});edge('OK','V',1.5,'place');
+    node('MM',"デザインメモラブル",'partner',pol(55.0,370,20),10,'soft',{k:"店づくり（デザイン）",t:"デザインメモラブル",d:"鶴ヶ島店の空間デザイン（売り場の見え方・雰囲気づくり）を手伝ったデザイン事務所。"});edge('MM','S6',1.5,'place');
+    node('CB',"ちばプロデュース",'partner',pol(70.6,370,20),10,'soft',{k:"店づくり（デザイン）",t:"ちばプロデュース",d:"越谷店リニューアルの全体のプロデュースを手伝った会社。"});edge('CB','S0',1.5,'place');
+    node('AR',"アール",'partner',pol(86.3,370,20),10,'soft',{k:"店の仕組み（システム）",t:"アール",d:"受発注システム（V受発注・EDI）と店舗管理システム（RWC）の保守をしている会社。"});edge('AR','V',1.5,'place');
+    node('ND',"NETDOOR",'partner',pol(101.9,370,20),10,'soft',{k:"店の仕組み（システム）",t:"NETDOOR",d:"売上・客数・客単価を分析するシステム「netDoA」の会社。"});edge('ND','V',1.5,'place');
+    node('SM',"スマレジ",'partner',pol(117.6,370,20),10,'soft',{k:"店の仕組み（システム）",t:"スマレジ",d:"カフェ（Verger 果樹園珈琲）のレジのシステム。"});edge('SM','S8',1.5,'place');
+    node('TE',"サードアイズ",'partner',pol(133.2,370,20),10,'soft',{k:"店の仕組み（カメラ）",t:"サードアイズ",d:"店舗カメラ「Livenet」を設置する会社。客入りや売り場の様子を本社から確認できます。"});edge('TE','V',1.5,'place');
+    node('FI',"FISソリューションズ",'partner',pol(148.9,370,20),10,'soft',{k:"店の仕組み（通信）",t:"FISソリューションズ",d:"店のネットワーク（回線や機器）の会社。"});edge('FI','V',1.5,'place');
+    node('CO',"キヤノンMJ・富士フイルム",'partner',pol(164.5,370,20),10,'soft',{k:"店の仕組み（複合機）",t:"キヤノンMJ・富士フイルム",d:"本社や店の複合機（コピー・FAX・スキャン）。"});edge('CO','V',1.5,'place');
+    node('SO',"ソニック",'partner',pol(180.2,370,20),10,'soft',{k:"販促（印刷）",t:"ソニック",d:"チラシの印刷会社。角上さんとの合同の折込チラシも担当。"});edge('SO','V',1.5,'place');
+    node('PK',"POPKIT",'partner',pol(195.8,370,20),10,'soft',{k:"販促（POP）",t:"POPKIT",d:"売り場のPOPを作るサービス。"});edge('PK','V',1.5,'place');
+    node('WR',"ラッピングの森",'partner',pol(211.5,370,20),10,'soft',{k:"販促（包装資材）",t:"ラッピングの森",d:"贈り物などの包装資材の取引先。"});edge('WR','V',1.5,'place');
+    node('SG',"SGフィルダー",'partner',pol(227.1,370,20),10,'soft',{k:"人（派遣）",t:"SGフィルダー",d:"派遣会社。夜の物流（仕分け）で働く人を派遣してもらっています。"});edge('SG','V',1.5,'place');
+    node('TM',"タイミー",'partner',pol(242.8,370,20),10,'soft',{k:"人（スキマバイト）",t:"タイミー",d:"空いた時間に働きたい人と、人手が欲しい日をつなぐサービス。"});edge('TM','V',1.5,'place');
+    node('RC',"求人サイト",'partner',pol(258.4,370,20),10,'soft',{k:"人（採用）",t:"求人サイト",d:"Indeed・Airワーク・トルーなど、アルバイトや社員を募集するサイト。"});edge('RC','V',1.5,'place');
+    node('AW',"Awelic",'partner',pol(274.1,370,20),10,'soft',{k:"人（支援機関）",t:"Awelic",d:"特定技能で来日するインドネシアの4名の生活や手続きを支える登録支援機関。"});edge('AW','V',1.5,'place');
+    node('TS',"高田社労士事務所",'partner',pol(289.7,370,20),10,'soft',{k:"人（適性検査）",t:"高田社労士事務所",d:"採用のときの適性検査を見てくれる社会保険労務士の事務所。"});edge('TS','V',1.5,'place');
+    node('YM',"ヤマト運輸",'partner',pol(305.4,370,20),10,'soft',{k:"届ける（宅配）",t:"ヤマト運輸",d:"ネットショップや贈り物の品をお客さんに届ける宅配便。"});edge('YM','V',1.5,'place');
+    node('SR',"STORES",'partner',pol(321.0,370,20),10,'soft',{k:"届ける（ネット）",t:"STORES",d:"ヴェルジェのネットショップと予約のシステム。"});edge('SR','V',1.5,'place');
+    node('LY',"LINEヤフー",'partner',pol(336.7,370,20),10,'soft',{k:"伝える（広告）",t:"LINEヤフー",d:"公式LINEの配信や、ネット広告。"});edge('LY','V',1.5,'place');
+    node('BK',"取引銀行",'partner',pol(352.3,370,20),10,'soft',{k:"お金（銀行）",t:"取引銀行",d:"りそな銀行・みずほ銀行・群馬銀行など。お金の出し入れや借り入れの相手。"});edge('BK','V',1.5,'place');
+    node('PO','ポラリス','help',pol(105,340,40),13,'plum',{k:'会社を支える人',t:'ポラリス（会計・税務の先生）',d:'阿部先生・島本先生。決算や税金の相談、会社の手続きの手伝いをしてくれます。'});edge('PO','V',2,'place');
+    node('CPS','CPS（杉山さん）','help',pol(145,340,40),13,'plum',{k:'会社を支える人',t:'CPS（杉山さん）',d:'毎月の数字（店ごとの予算と実績など）をまとめて届けてくれる会社です。'});edge('CPS','V',2,'place');
+    [['HD','社長・取締役',90,'会社のかじ取り','宏之社長、厚司常務（商品部担当）、石森取締役（統括本部長）（営業部担当）。'],['EG','営業部',150,'本社の部','部長菊間聡史。8つの店を5つのエリアに分けて運営する。'],['FS','フードサービス部',210,'本社の部','部長久野智哉。店で作るサラダやお弁当、商品開発。'],['SP','サポート部',270,'本社の部','部長鈴木健一。経理・総務・システム・採用と人事。'],['DM','DM部',330,'本社の部','デジタルマーケティング部。SNS・ホームページ・チラシやPOPのデザイン・ネットショップ・広告。']].forEach(function(m){node(m[0],m[1],'help',pol(m[2],120,75),11,'plum',{k:m[3],t:m[1],d:m[4]});edge(m[0],'V',2,'place')});
+    [['KM1','中尾先生',160,'社長アドバイザー','社長の相談にのるアドバイザーです。'],['KM2','水野顧問',175,'顧問（営業部担当）','営業部に長い経験から助言する顧問です。'],['KM3','海老原顧問',190,'顧問（商品部担当）','商品部に助言する顧問です。元房総食料センターの理事。'],['KM4','中村顧問',205,'顧問','長い経験を生かして会社に助言する顧問です。']].forEach(function(m){node(m[0],m[1],'help',pol(m[2],340,40),12,'plum',{k:m[3],t:m[1],d:m[4]});edge(m[0],'HD',2,'place')});
+    node('P0','小林和弘','staff',pol(9.5,272,157),6,'ink',{k:'社員',t:'小林和弘',d:'越谷店　店長。'});edge('P0','S0',1,'place');node('P1','永井沙和子','staff',pol(16.5,300,183),6,'ink',{k:'社員',t:'永井沙和子',d:'越谷店　ライブパフォーマー課・契約社員。'});edge('P1','S0',1,'place');node('P2','田中世梨杏','staff',pol(23.5,272,157),6,'ink',{k:'社員',t:'田中世梨杏',d:'越谷店　社員（フード担当）。フードサービス部のリーダー。'});edge('P2','S0',1,'place');edge('P2','FS',1,'place');node('P3','紫垣賢太','staff',pol(30.5,300,183),6,'ink',{k:'社員',t:'紫垣賢太',d:'越谷店　社員。'});edge('P3','S0',1,'place');node('P4','川島達也','staff',pol(46.0,272,157),6,'ink',{k:'社員',t:'川島達也',d:'相模原店　店長補佐。'});edge('P4','S1',1,'place');node('P5','中丸裕哉','staff',pol(53.0,300,183),6,'ink',{k:'社員',t:'中丸裕哉',d:'相模原店　副店長。'});edge('P5','S1',1,'place');node('P6','石川美奈恵','staff',pol(60.0,272,157),6,'ink',{k:'社員',t:'石川美奈恵',d:'相模原店　社員（フード担当）。フードサービス部のリーダー。'});edge('P6','S1',1,'place');edge('P6','FS',1,'place');node('P7','田中典代','staff',pol(67.0,300,183),6,'ink',{k:'社員',t:'田中典代',d:'相模原店　社員（フード担当）。'});edge('P7','S1',1,'place');edge('P7','FS',1,'place');node('P8','栗原崇堯','staff',pol(74.0,272,157),6,'ink',{k:'社員',t:'栗原崇堯',d:'相模原店　社員（フード担当）。'});edge('P8','S1',1,'place');edge('P8','FS',1,'place');node('P9','藤宮弘幸','staff',pol(89.5,272,157),6,'ink',{k:'社員',t:'藤宮弘幸',d:'大宮店　店長補佐。'});edge('P9','S2',1,'place');node('P10','池田博昭','staff',pol(96.5,300,183),6,'ink',{k:'社員',t:'池田博昭',d:'大宮店　副店長。'});edge('P10','S2',1,'place');node('P11','神馬小雪','staff',pol(103.5,272,157),6,'ink',{k:'社員',t:'神馬小雪',d:'大宮店　社員。'});edge('P11','S2',1,'place');node('P12','岸優希','staff',pol(110.5,300,183),6,'ink',{k:'社員',t:'岸優希',d:'大宮店　社員（フード担当）。'});edge('P12','S2',1,'place');edge('P12','FS',1,'place');node('P13','山内大地','staff',pol(129.5,272,157),6,'ink',{k:'社員',t:'山内大地',d:'高崎店　店長。'});edge('P13','S3',1,'place');node('P14','安藤智也','staff',pol(136.5,300,183),6,'ink',{k:'社員',t:'安藤智也',d:'高崎店　社員。'});edge('P14','S3',1,'place');node('P15','新井景蘭','staff',pol(143.5,272,157),6,'ink',{k:'社員',t:'新井景蘭',d:'高崎店　社員（フード担当）。'});edge('P15','S3',1,'place');edge('P15','FS',1,'place');node('P16','平林脩','staff',pol(150.5,300,183),6,'ink',{k:'社員',t:'平林脩',d:'高崎店　社員（フード担当）。'});edge('P16','S3',1,'place');edge('P16','FS',1,'place');node('P17','川島祐樹','staff',pol(173.0,272,157),6,'ink',{k:'社員',t:'川島祐樹',d:'小平店　店長補佐。'});edge('P17','S4',1,'place');node('P18','森島薫','staff',pol(180.0,300,183),6,'ink',{k:'社員',t:'森島薫',d:'小平店　副店長。'});edge('P18','S4',1,'place');node('P19','菊地さおり','staff',pol(187.0,272,157),6,'ink',{k:'社員',t:'菊地さおり',d:'小平店　社員（フード担当）。'});edge('P19','S4',1,'place');edge('P19','FS',1,'place');node('P20','石井直行','staff',pol(213.0,272,157),6,'ink',{k:'社員',t:'石井直行',d:'前橋店　店長。'});edge('P20','S5',1,'place');node('P21','青柳力也','staff',pol(220.0,300,183),6,'ink',{k:'社員',t:'青柳力也',d:'前橋店　店長補佐（フード担当）。'});edge('P21','S5',1,'place');edge('P21','FS',1,'place');node('P22','野澤夕華','staff',pol(227.0,272,157),6,'ink',{k:'社員',t:'野澤夕華',d:'前橋店　社員（フード担当）。'});edge('P22','S5',1,'place');edge('P22','FS',1,'place');node('P23','柴崎公寿','staff',pol(253.0,272,157),6,'ink',{k:'社員',t:'柴崎公寿',d:'鶴ヶ島店　店長。'});edge('P23','S6',1,'place');node('P24','中島敦子','staff',pol(260.0,300,183),6,'ink',{k:'社員',t:'中島敦子',d:'鶴ヶ島店　社員（フード担当）。フードサービス部のリーダー。'});edge('P24','S6',1,'place');edge('P24','FS',1,'place');node('P25','檜垣駿輔','staff',pol(267.0,272,157),6,'ink',{k:'社員',t:'檜垣駿輔',d:'鶴ヶ島店　社員。'});edge('P25','S6',1,'place');node('P26','大河原誠','staff',pol(296.5,272,157),6,'ink',{k:'社員',t:'大河原誠',d:'狭山店　ライブパフォーマー課。'});edge('P26','S7',1,'place');node('P27','堂野前聡','staff',pol(303.5,300,183),6,'ink',{k:'社員',t:'堂野前聡',d:'狭山店　社員。'});edge('P27','S7',1,'place');node('P28','須田(二瓶)光央','staff',pol(333.0,272,157),6,'ink',{k:'社員',t:'須田(二瓶)光央',d:'果樹園珈琲（アリオ葛西）　店長。'});edge('P28','S8',1,'place');node('P29','小柴尊','staff',pol(340.0,300,183),6,'ink',{k:'社員',t:'小柴尊',d:'果樹園珈琲（アリオ葛西）　社員。'});edge('P29','S8',1,'place');node('P30','轟一樹','staff',pol(347.0,272,157),6,'ink',{k:'社員',t:'轟一樹',d:'果樹園珈琲（アリオ葛西）　社員。'});edge('P30','S8',1,'place');node('P31','吉田健太','staff',pol(74,250,120),6,'ink',{k:'社員',t:'吉田健太',d:'小平・相模原エリア　マネージャー兼店長。'});edge('P31','S1',1,'place');edge('P31','S4',1,'place');edge('P31','EG',1,'place');node('P32','畑中和昌','staff',pol(114,250,120),6,'ink',{k:'社員',t:'畑中和昌',d:'大宮エリア　マネージャー兼店長。'});edge('P32','S2',1,'place');edge('P32','EG',1,'place');node('P33','白鳥将昭','staff',pol(250.0,168,40),6,'ink',{k:'社員',t:'白鳥将昭',d:'サポート部　経理課 課長。'});edge('P33','SP',1,'place');node('P34','大川量士','staff',pol(260.0,194,62),6,'ink',{k:'社員',t:'大川量士',d:'サポート部　経理課。'});edge('P34','SP',1,'place');node('P35','小川秀平','staff',pol(270.0,168,40),6,'ink',{k:'社員',t:'小川秀平',d:'サポート部　システム課 課長。'});edge('P35','SP',1,'place');node('P36','深井千秋','staff',pol(280.0,194,62),6,'ink',{k:'社員',t:'深井千秋',d:'サポート部　総務課 係長。'});edge('P36','SP',1,'place');node('P37','宮本若奈','staff',pol(290.0,168,40),6,'ink',{k:'社員',t:'宮本若奈',d:'サポート部　総務課。'});edge('P37','SP',1,'place');node('P38','知念広弥','staff',pol(320.0,168,40),6,'ink',{k:'社員',t:'知念広弥',d:'デジタルマーケティング部　係長（採用担当兼務）。'});edge('P38','DM',1,'place');node('P39','小堀梨乃亜','staff',pol(330.0,194,62),6,'ink',{k:'社員',t:'小堀梨乃亜',d:'デジタルマーケティング部　社員。'});edge('P39','DM',1,'place');node('P40','榎本有紗','staff',pol(340.0,168,40),6,'ink',{k:'社員',t:'榎本有紗',d:'デジタルマーケティング部　社員。'});edge('P40','DM',1,'place');node('P41','瀬川孝幸','staff',pol(195.0,168,40),6,'ink',{k:'社員',t:'瀬川孝幸',d:'フードサービス部　商品開発担当。'});edge('P41','FS',1,'place');node('P42','高橋典子','staff',[61,-85,35],6,'ink',{k:'社員',t:'高橋典子',d:'商品部　課長。'});edge('P42','V',1,'place');node('P43','山元侑','staff',[0,-85,70],6,'ink',{k:'社員',t:'山元侑',d:'商品部　課長。'});edge('P43','V',1,'place');node('P44','影山実','staff',[-61,-85,35],6,'ink',{k:'社員',t:'影山実',d:'商品部　夜勤。'});edge('P44','V',1,'place');node('P45','佐藤貴之','staff',[-61,-85,-35],6,'ink',{k:'社員',t:'佐藤貴之',d:'商品部　夜勤。'});edge('P45','V',1,'place');node('P46','内田礼','staff',[0,-85,-70],6,'ink',{k:'社員',t:'内田礼',d:'商品部　社員。'});edge('P46','V',1,'place');node('P47','越川麻紀','staff',[61,-85,-35],6,'ink',{k:'社員',t:'越川麻紀',d:'商品部　社員。'});edge('P47','V',1,'place');
+    var byId={};N.forEach(function(n){byId[n.id]=n});
+    var col={},th=0.6,ph=0.38,spin=!reduce,money=false,filt='all',sel=null,W=0,H=0,dpr=1,frame=0;
+    function readCol(){var cs=getComputedStyle(document.documentElement);['ink','soft','line','paper','leaf','carrot','sky','sky-2','berry','sun','plum','soil'].forEach(function(k){col[k.replace('-','')]=cs.getPropertyValue('--'+k).trim()})}
+    function size(){var r=cv.getBoundingClientRect();dpr=window.devicePixelRatio||1;W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
+    function proj(p){var x=p[0]*Math.cos(th)-p[2]*Math.sin(th),z=p[0]*Math.sin(th)+p[2]*Math.cos(th);var y=p[1]*Math.cos(ph)-z*Math.sin(ph),z2=p[1]*Math.sin(ph)+z*Math.cos(ph);var sc=Math.min(W,H*1.05)/820,f=900/(900+z2);return {x:W/2+x*f*sc,y:H/2+y*f*sc,z:z2,f:f*sc}}
+    function vis(n){if(filt==='staff')return n.g==='staff'||n.g==='core'||/^S\d$/.test(n.id)||['HD','EG','FS','SP','DM'].indexOf(n.id)>=0;return filt==='all'||n.g===filt||n.g==='core'||(filt==='market'&&(n.g==='origin'||n.id==='YODO'))||(filt==='shop'&&n.id==='KK')}
+    function rel(e){if(sel)return e.a===sel||e.b===sel;return vis(byId[e.a])&&vis(byId[e.b])}
+    function draw(){
+      if(frame++%40===0)readCol();
+      ctx.clearRect(0,0,W,H);
+      N.forEach(function(n){n.s=proj(n.p)});
+      var es=E.slice().sort(function(a,b){return (byId[b.a].s.z+byId[b.b].s.z)-(byId[a.a].s.z+byId[a.b].s.z)});
+      es.forEach(function(e){var A=byId[e.a].s,B=byId[e.b].s,on=rel(e);ctx.globalAlpha=on?(e.kind==='place'?.55:.38):.06;ctx.strokeStyle=e.kind==='origin'?col.soil:e.kind==='place'?col.sky:col.soft;ctx.lineWidth=Math.max(1,Math.sqrt(e.w)*1.6*(A.f+B.f)/2);ctx.setLineDash(e.kind==='place'?[5,5]:[]);ctx.beginPath();ctx.moveTo(A.x,A.y);ctx.lineTo(B.x,B.y);ctx.stroke();ctx.setLineDash([]);
+        if(on&&e.kind!=='place'){var k=Math.min(4,1+Math.round(Math.sqrt(e.w)/1.5));for(var i=0;i<k;i++){var t=(e.ph+i/k)%1;if(money)t=1-t;var x=A.x+(B.x-A.x)*t,y=A.y+(B.y-A.y)*t;ctx.globalAlpha=.9;ctx.fillStyle=money?col.sun:col.leaf;ctx.beginPath();ctx.arc(x,y,Math.max(2,2.6*(A.f+B.f)/2),0,7);ctx.fill()}}
+        if(!reduce)e.ph=(e.ph+0.0035+Math.sqrt(e.w)*0.0006)%1});
+      var ns=N.slice().sort(function(a,b){return b.s.z-a.s.z});
+      ns.forEach(function(n){var s=n.s,on=sel?(n.id===sel||E.some(function(e){return (e.a===sel&&e.b===n.id)||(e.b===sel&&e.a===n.id)})):vis(n),r=Math.max(4,n.size*s.f);ctx.globalAlpha=on?1:.15;
+        var c=n.col==='sky2'?col.sky2:col[n.col];ctx.fillStyle=c;ctx.beginPath();ctx.arc(s.x,s.y,r,0,7);ctx.fill();ctx.lineWidth=n.id===sel?4:2;ctx.strokeStyle=n.id===sel?col.ink:col.paper;ctx.stroke();
+        if(n.col==='sky2'){ctx.strokeStyle=col.sky;ctx.lineWidth=2;ctx.stroke()}
+        var fs=n.g==='staff'?Math.max(8.5,Math.min(11,10*s.f*1.15)):Math.max(10,Math.min(16,(n.g==='core'||n.id==='C'||n.id==='SANCHI'?15:12.5)*s.f*1.15));ctx.font='700 '+fs+'px "M PLUS Rounded 1c","Hiragino Maru Gothic ProN",sans-serif';ctx.textAlign='center';ctx.lineWidth=4;ctx.strokeStyle=col.paper;ctx.fillStyle=col.ink;var ty=s.y+r+fs+1;ctx.strokeText(n.label,s.x,ty);ctx.fillText(n.label,s.x,ty)});
+      ctx.globalAlpha=1;
+      if(spin&&!drag)th+=0.0028;
+      requestAnimationFrame(draw);
+    }
+    var info=document.getElementById('netinfo');
+    function showInfo(id){sel=id;var n=byId[id];if(!n){info.innerHTML='<div class="kind">使い方</div><div class="big">丸をタップしてみよう</div><p>ヴェルジェ（中心の紫）に、上から市場の会社・産直・食品の会社がつながり、下の店からお客さまへ品物が届きます。</p>';return}info.innerHTML='<div class="kind">'+n.info.k+'</div><div class="big">'+n.info.t+'</div><p>'+n.info.d+'</p>'}
+    var drag=false,sx0=0,sy0=0,th0=0,ph0=0,moved=0;
+    cv.addEventListener('pointerdown',function(e){drag=true;moved=0;sx0=e.clientX;sy0=e.clientY;th0=th;ph0=ph;cv.setPointerCapture(e.pointerId);document.getElementById('nethint').hidden=true});
+    cv.addEventListener('pointermove',function(e){if(!drag)return;var dx=e.clientX-sx0,dy=e.clientY-sy0;moved=Math.max(moved,Math.abs(dx)+Math.abs(dy));th=th0+dx*0.008;ph=Math.max(0.02,Math.min(1.1,ph0+dy*0.005))});
+    cv.addEventListener('pointerup',function(e){drag=false;if(moved<6){var r=cv.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,best=null,bd=1e9;N.forEach(function(n){var d=Math.hypot(n.s.x-x,n.s.y-y);if(d<Math.max(16,n.size*n.s.f+6)&&d<bd){bd=d;best=n.id}});showInfo(best===sel?null:best)}});
+    document.querySelectorAll('.chipbtn[data-f]').forEach(function(b){b.addEventListener('click',function(){filt=b.dataset.f;sel=null;showInfo(null);document.querySelectorAll('.chipbtn[data-f]').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')})})});
+    var fb=document.getElementById('flowbtn');fb.addEventListener('click',function(){money=!money;fb.setAttribute('aria-pressed',money?'true':'false');fb.textContent=money?'品物の流れに戻す':'お金の流れにする'});
+    var sb=document.getElementById('spinbtn');sb.setAttribute('aria-pressed',spin?'true':'false');sb.addEventListener('click',function(){spin=!spin;sb.setAttribute('aria-pressed',spin?'true':'false')});
+    readCol();size();showInfo(null);window.addEventListener('resize',size);
+    try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',readCol)}catch(e){}
+    requestAnimationFrame(draw);
+  })();
+
+
+  // くらべる
+  (function(){
+    var C=[
+      {a:'産直',ai:'<svg viewBox="0 0 44 44"><rect x="2" y="26" width="40" height="14" rx="3" fill="var(--soil)"/><circle cx="12" cy="26" r="7" fill="#e0483a"/><circle cx="24" cy="26" r="7" fill="#e0483a"/><circle cx="36" cy="26" r="7" fill="#e0483a"/></svg>',asub:'農家さん・産地から直接（ヴェルジェの仕入れの約23%）',
+       ag:['とれたてが早く届く。間に市場を挟まない分、新鮮','途中の手数料がかからない（10月のトマトなら卸と仲卸の分で1玉約16円）','農家さんの顔や思いをお客さんに話せる。感動ライブ販売の一番の種','他の店にない品を置ける（れんこん三兄弟のれんこん、農園星ノ環のレタスなど）','農家さんの手取りが増える。ヴェルジェが大事にしている「農家さんの所得を上げ、思いを伝える」につながる'],
+       ab:['天気次第で量がそろわない。来ない日も、どっと来る日もある','1軒ずつ値段・数・届け方を話し合う手間がかかる','たくさん届いたら、店が売り切る責任を持つ','品質のチェックや支払いも自分たちで行う'],
+       b:'市場から',bi:'<svg viewBox="0 0 44 44"><rect x="6" y="16" width="32" height="24" fill="var(--sky)"/><polygon points="2,18 22,6 42,18" fill="#245f8a"/><rect x="17" y="27" width="10" height="13" fill="var(--paper)"/></svg>',bsub:'TOKYOフレッシュ、東京新宿ベジフル、ベジフルフード、大栄高崎卸売青果など（約77%）',
+       bg:['日本中から何でもそろう。トマトなら9〜10月は福島、11月からは千葉と産地をリレーして1年中途切れない','欲しい分だけ買える（28玉の箱1つからでもOK）','仲卸さんの目利きで、いい品を選んでもらえる','毎日店まで届けてくれる（群馬便・淀橋便など）','支払いが会社ごとにまとまって楽'],
+       bb:['卸・仲卸の手数料が上乗せされる','相場で値段が毎日変わる（トマトは春の1玉50円から、秋〜冬は90円以上に）','どの農家さんのものか分かりにくく、お客さんに話しにくい','他のスーパーも同じ市場から買うので、品ぞろえが似やすい'],
+       v:'ヴェルジェは両方を使い分けています。毎日必ず要る量の多い品は市場から、他にない品・思いを伝えたい品は産直で。野菜は約32%、果物は約29%が産直です（第51期）。'},
+      {a:'商品部がまとめて買う',ai:'<svg viewBox="0 0 44 44"><rect x="8" y="6" width="28" height="34" rx="3" fill="var(--plum-2)" stroke="var(--plum)" stroke-width="2"/><g fill="var(--plum)"><rect x="13" y="12" width="6" height="6"/><rect x="25" y="12" width="6" height="6"/><rect x="13" y="24" width="6" height="6"/><rect x="25" y="24" width="6" height="6"/></g></svg>',asub:'本社の商品部が先に買って、店へ回す（前繰。届く金額の約半分）',
+       ag:['たくさんまとめて買うので、値段を交渉しやすい','産直の大きなまとまり（房総食料センターや長崎の西海みかんなど）を1回で受け止められる','いい品を先に押さえられる','店の発注の手間が減る'],
+       ab:['店が頼んでいない品が届くことがある（店の注文0で届いた分が約28%・1年分の分析）','売れないと店に在庫やロスが残る','店ごとの売れ方の違いに合わせにくい'],
+       b:'店ごとに買う',bi:'<svg viewBox="0 0 44 44"><rect x="4" y="14" width="36" height="26" fill="var(--paper)" stroke="var(--leaf)" stroke-width="3"/><rect x="2" y="9" width="40" height="7" fill="var(--leaf)"/></svg>',bsub:'店長がV受発注で取引先に直接注文',
+       bg:['その店で売れる分だけ頼める','お客さんの好みや天気に合わせて細かく変えられる'],
+       bb:['1店ずつだと量が少なく、値段で不利になりやすい','店長の手間が増え、腕の違いが出やすい'],
+       v:'ヴェルジェは商品部のまとめ買いと店の発注を組み合わせています。商品部から届いた分が売れ残らないように、店と商品部の話し合いが大事です。'},
+      {a:'角上さんの中に出す',ai:'<svg viewBox="0 0 44 44"><rect x="2" y="10" width="40" height="30" rx="4" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><rect x="5" y="16" width="16" height="20" fill="var(--sky-2)"/><rect x="23" y="16" width="16" height="20" fill="var(--leaf-2)"/></svg>',asub:'8店すべてが角上魚類さん（館）の建物の中',
+       ag:['魚を買いに来たお客さんが、そのまま野菜も買ってくれる','魚・野菜・果物・お惣菜が1か所でそろうので、遠くからも来てもらえる','チラシや「角上の日」など、一緒に盛り上げられる'],
+       ab:['開ける時間・休み・場所を自分で決められない','8店のうち7店が角上さんに頼っている（1つの会社に頼りすぎ）','レジが角上さんの仕組みの店もあり、自分で自由に変えにくい'],
+       b:'単独の店',bi:'<svg viewBox="0 0 44 44"><rect x="8" y="16" width="28" height="24" fill="var(--carrot-2)" stroke="var(--carrot)" stroke-width="2"/><polygon points="4,18 22,6 40,18" fill="var(--berry)"/></svg>',bsub:'自分だけで店を出す（たとえばアリオ葛西のカフェは別の場所）',
+       bg:['時間・休み・品ぞろえを自分で決められる'],
+       bb:['お客さんを自分の力だけで集めないといけない','家賃や設備のお金を全部自分で持つ'],
+       v:'角上さんと一緒にいることはヴェルジェの一番の強み。そのうえで、頼りすぎない力をつけるのがこれからの課題です（第52期事業計画書）。'},
+      {a:'早めに値下げ',ai:'<svg viewBox="0 0 44 44"><rect x="6" y="10" width="32" height="22" rx="5" fill="var(--sun)"/><text x="22" y="26" text-anchor="middle" font-size="11" font-weight="900" fill="var(--ink)">値引き</text></svg>',asub:'傷む前、夕方に少しずつ値下げ',
+       ag:['売り切れて、捨てる品が減る','売り場がいつも新しく見える'],
+       ab:['利益が減る。ヴェルジェのロスのほとんどはこの値引き（1万円で約300円）','早すぎると、定価で売れた分まで安くなる'],
+       b:'ぎりぎりまで定価',bi:'<svg viewBox="0 0 44 44"><rect x="6" y="10" width="32" height="22" rx="5" fill="var(--sun-2)" stroke="var(--sun)" stroke-width="2"/><text x="22" y="26" text-anchor="middle" font-size="11" font-weight="900" fill="var(--ink)">¥258</text></svg>',bsub:'閉店間際まで値段を変えない',
+       bg:['売れれば1個あたりの利益が大きい'],
+       bb:['売れ残ると捨てることになり、0円どころか赤字','傷みかけの品が並ぶと、店の信用が下がる'],
+       v:'答えは「注文の量を合わせる」こと。売れる分だけ仕入れれば、値下げも捨てるのも少なくて済みます。野菜は注文より多く届く日があり（1年で平均約8%多い）、ここを減らすのが課題です。'},
+      {a:'値段を上げる',ai:'<svg viewBox="0 0 44 44"><path d="M8 34 L22 12 L36 34Z" fill="var(--carrot)"/></svg>',asub:'仕入れが高くなった分、値段も上げる',
+       ag:['1個あたりの利益を守れる'],
+       ab:['お客さんが「高い」と買わなくなる','隣のスーパーにお客さんが行ってしまう'],
+       b:'利益を減らして我慢',bi:'<svg viewBox="0 0 44 44"><path d="M8 12 L22 34 L36 12Z" fill="var(--sky)"/></svg>',bsub:'値段は少しだけ上げ、利益の割合を下げる',
+       bg:['お客さんがいつも通り買ってくれる','「ヴェルジェは高い時も買いやすい」と信用される'],
+       bb:['その時期の利益が小さくなる（8月のトマトは33%→28%）'],
+       v:'ヴェルジェは7〜8月のトマトで「我慢」を選びました。その代わり、値段が下がった1月に利益を戻しています。品ごとに、高い時と安い時でならして考えます。'}
+    ];
+    var body=document.getElementById('cmpbody'),tabs=document.querySelectorAll('.tab');
+    function li(a,c){return a.map(function(t){return '<li class="'+c+'">'+t+'</li>'}).join('')}
+    function side(n,ic,sub,g,b){return '<div class="side"><h3>'+ic+n+'</h3><div class="sub">'+sub+'</div><ul>'+li(g,'g')+li(b,'b')+'</ul></div>'}
+    function show(i){var x=C[i];body.innerHTML='<div class="vs">'+side(x.a,x.ai,x.asub,x.ag,x.ab)+'<div class="mid">と</div>'+side(x.b,x.bi,x.bsub,x.bg,x.bb)+'</div><div class="verdict"><b>ヴェルジェでは…</b> '+x.v+'</div><p class="note" style="margin-top:6px">◎ いいところ　△ 大変なところ</p>';tabs.forEach(function(t,j){t.setAttribute('aria-selected',j===i?'true':'false')})}
+    tabs.forEach(function(t,j){t.addEventListener('click',function(){show(j)})});show(0);
+  })();
+
+  // 店別売上
+  
+
+  // 部門ドーナツ
+  (function(){
+    var s=document.getElementById('dept'),d=[['野菜',40.4,0,'var(--leaf)'],['食品（漬物・米など）',25.8,0,'var(--sun)'],['果物',18.9,0,'var(--carrot)'],['デリカ（サラダなど）',8.1,0,'var(--sky)'],['夢フル（カットフルーツ）',6.8,0,'var(--berry)']];
+    var cx=90,cy=110,r=72,w=30,a=-Math.PI/2;
+    d.forEach(function(x){var b=a+x[1]/100*Math.PI*2,lg=b-a>Math.PI?1:0;var p='M'+(cx+r*Math.cos(a))+' '+(cy+r*Math.sin(a))+' A'+r+' '+r+' 0 '+lg+' 1 '+(cx+r*Math.cos(b))+' '+(cy+r*Math.sin(b));s.appendChild(el('path',{d:p,fill:'none',stroke:x[3],'stroke-width':w}));a=b});
+    s.appendChild(el('text',{x:cx,y:cy+6,'text-anchor':'middle','font-size':15,'font-weight':900},'約34億円'));
+    d.forEach(function(x,i){var y=40+i*36;s.appendChild(el('rect',{x:190,y:y-12,width:14,height:14,rx:3,fill:x[3]}));s.appendChild(el('text',{x:210,y:y,'font-size':13},x[0].replace(/（.*/,'')));s.appendChild(el('text',{x:210,y:y+16,class:'lbl'},x[1]+'%'))});
+  })();
+
+  // 週
+  var wk=[['月',[['v','お野菜市（野菜の特売）'],['v','週末特売の最後']]],['火',[['n','普通の日']]],['水',[['k','月1回「お客様感謝デー」10%オフ（角上の日と同じ日）']]],['木',[['n','果物の1週間分を注文']]],['金',[['f','フルーツの日'],['n','店内チラシ始まる']]],['土',[['f','果物が入る'],['v','週末特売']]],['日',[['f','果物が入る'],['v','週末特売']]]];
+  var W=document.getElementById('week');wk.forEach(function(d){var e=document.createElement('div');e.className='day';e.innerHTML='<b>'+d[0]+'</b>'+d[1].map(function(x){return '<span class="ev '+x[0]+'">'+x[1]+'</span>'}).join('');W.appendChild(e)});
+  var ex=document.createElement('p');ex.className='note';ex.style.gridColumn='1/-1';ex.textContent='このほか毎月19日は「ヴェルジェの日」（1号店が開いた日にちなむ）。果物は普通土日に入り、月曜は野菜だけの日です。果物の1週間分の注文の締め切りは「木曜13時」と書かれた資料がありますが、正式な決まりはまだ確かめていません。';W.appendChild(ex);
+
+  // 曜日グラフ
+  (function(){
+    var s=document.getElementById('dow'),d=[['月',85],['火',85],['水',94],['木',76],['金',85],['土',139],['日',137]];
+    var L=50,R=620,T=20,B=210,max=150,bw=50,gap=(R-L)/d.length,sy=function(v){return B-(v/max)*(B-T)};
+    [0,50,100,150].forEach(function(v){s.appendChild(el('line',{x1:L,x2:R,y1:sy(v),y2:sy(v),class:'ax','stroke-dasharray':v===100?'6 4':''}));s.appendChild(el('text',{x:L-8,y:sy(v)+4,'text-anchor':'end',class:'lbl'},v))});
+    d.forEach(function(r,i){var x=L+i*gap+(gap-bw)/2;s.appendChild(el('rect',{x:x,y:sy(r[1]),width:bw,height:B-sy(r[1]),rx:6,fill:r[1]>100?'var(--carrot)':'var(--sky)'}));s.appendChild(el('text',{x:x+bw/2,y:sy(r[1])-6,'text-anchor':'middle','font-size':14,'font-weight':700},r[1]));s.appendChild(el('text',{x:x+bw/2,y:B+20,'text-anchor':'middle','font-size':15,'font-weight':700},r[0]))});
+  })();
+
+  // ロスグラフ
+  (function(){
+    var s=document.getElementById('loss'),d=[['値引き',208,'var(--carrot)'],['値段の変更（売変その他）',96,'var(--sun)'],['見切り（売変）',30,'var(--sky)'],['廃棄',29,'var(--berry)'],['店で使う（自家消費）',9,'var(--plum)']];
+    var L=200,R=560,T=10,h=38,max=250,sx=function(v){return L+(v/max)*(R-L)};
+    d.forEach(function(r,i){var y=T+i*h+6;s.appendChild(el('text',{x:L-10,y:y+18,'text-anchor':'end','font-size':14,'font-weight':700},r[0]));s.appendChild(el('rect',{x:L,y:y,width:sx(r[1])-L,height:24,rx:6,fill:r[2]}));s.appendChild(el('text',{x:sx(r[1])+8,y:y+18,'font-size':14,'font-weight':700},r[1]+'円'))});
+    s.appendChild(el('text',{x:L,y:T+5*h+28,'font-size':14,fill:'var(--soft)'},'全部で372円（1万円売ったとき）'));
+  })();
+
+  // カード
+  var cards=[
+    ['仕組み','卸','卸','産地からたくさん集めて、市場で売る大きな会社。トラック丸ごと扱う。'],
+    ['仕組み','仲卸','仲卸','卸から買って、店が欲しい分だけ箱に分けて届ける会社。目利きのプロ。'],
+    ['仕組み','小売','小売','お客さんに1個ずつ売る店。ヴェルジェはここ。'],
+    ['仕組み','産直','産直','市場を通さず、農家さんから直接買うこと。ヴェルジェの仕入れの約23%。'],
+    ['仕組み','せり','せり','市場で行う競り売り。最も高い値をつけた買い手が落札する。'],
+    ['仕組み','相場','相場','その日の市場の値段。トマトは季節で1玉50円から110円台まで変わります。'],
+    ['社内','商品部','商品部','本社の仕入れ係。まとめて買って各店へ回す。'],
+    ['社内','前繰','前繰','商品部が先に買っておいた品を店に回すときの、注文画面の取引先の名前。'],
+    ['社内','V受発注','V受発注','取引先とつながった注文の仕組み。野菜は16時、果物は14時が締め切り。'],
+    ['社内','検収','検収','届いた品物が注文通りか、数や中身を確かめること。'],
+    ['お金','値入','値入','買った値段に利益を乗せて、売る値段を決めること。ヴェルジェは約36%（第51期）。'],
+    ['お金','粗利','粗利','売れたお金から、買ったお金を引いた残り。ヴェルジェは売上の約34%。'],
+    ['お金','営業利益','営業利益','粗利から給料や家賃を払って、最後に残る利益。第51期は100円で0.6円。'],
+    ['お金','客単価','客単価','お客さん1人が1回に使うお金。ヴェルジェは約1,150円。'],
+    ['お金','買上点数','買い上げ点数','お客さん1人が1回に買う品物の数。ヴェルジェは約4個。'],
+    ['売り場','感動ライブ販売','感動ライブ販売','試食・会話・産地の話でお客さんを感動させる、ヴェルジェの売り方。'],
+    ['売り場','見切り','みきり','傷みそうなものを値下げして、売り切ること。'],
+    ['売り場','売変','売変','売る値段を途中で変えること。主に値下げ。'],
+    ['売り場','ロス','ろす','値引き・捨てるなどで減ったお金。ヴェルジェは売上の約3.7%。'],
+    ['売り場','欠品','欠品','売り場に品物がない状態。売れたはずの売上を逃す「機会損失」になる。'],
+    ['売り場','棚卸','棚卸','店に残っている品物を全部数えること。'],
+    ['売り場','POP','ポップ','価格やおすすめのポイントを書いた、売り場の掲示物。'],
+    ['販促','お野菜市','おやさいいち','毎週月曜の野菜の特売。2025年1月から全店で。'],
+    ['販促','フルーツの日','フルーツの日','毎週金曜の果物の特売。'],
+    ['販促','ヴェルジェの日','ヴェルジェのひ','毎月19日。1995年9月19日に1号店が開いたことにちなむ。'],
+    ['販促','お客様感謝デー','おきゃくさまかんしゃデー','月に1回、水曜に10%オフ。角上さんの「角上の日」と同じ日。']
+  ];
+  var C=document.getElementById('cards');
+  cards.forEach(function(c,i){var b=document.createElement('button');b.className='flip';b.id='card'+i;b.setAttribute('aria-pressed','false');b.innerHTML='<div class="inner"><div class="face front"><span class="cat">'+c[0]+'</span><b>'+c[1]+'</b><small>'+c[2]+'</small></div><div class="face back">'+c[3]+'</div></div>';b.addEventListener('click',function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='true'?'false':'true')});C.appendChild(b)});
+
+  // クイズ
+  var qs=[
+    {q:'Q1. ヴェルジェはどれ？', o:['卸','仲卸','小売'], a:2, e:'正解！お客さんに1個ずつ売る「小売」です。'},
+    {q:'Q2. 店が欲しい分だけ箱に分けて届けてくれるのは？', o:['卸','仲卸','農家さん'], a:1, e:'正解！市場の「仲卸」さんです。'},
+    {q:'Q3. ヴェルジェのトマト（Sサイズ）は普通何玉入りの箱で届く？', o:['8玉','28玉','50玉'], a:1, e:'正解！28玉入り（4kg）です。10月は1箱2,600円くらいでした。'},
+    {q:'Q4. 野菜の注文の締め切りは？', o:['14時','16時','次の日の朝'], a:1, e:'正解！野菜は16時。果物は14時です。'},
+    {q:'Q5. お客さんが100円使うと、最後に残る利益は？（第51期）', o:['約0.6円','約10円','約30円'], a:0, e:'正解！100円で0.6円。だから無駄を減らすのが大事です。'},
+    {q:'Q6. ロスで一番多いのは？', o:['捨てる','値引き','店で使う'], a:1, e:'正解！ほとんどが値引き。捨てる分は1万円で29円だけです。'},
+    {q:'Q7. 1週間で一番売れるのは？', o:['月曜','水曜','土曜'], a:2, e:'正解！土曜は普通の日の約1.4倍。日曜もほぼ同じです。'},
+    {q:'Q8. 千葉の房総食料センターから買うのはどっち？', o:['産直','市場'], a:0, e:'正解！2008年から付き合いのある産直の取引先です。'},
+    {q:'Q9. ヴェルジェのホームの市場はどこ？', o:['豊洲市場','淀橋市場','大田市場'], a:1, e:'正解！新宿の淀橋市場。卸の東京新宿ベジフルが一番大事な取引先です。'},
+    {q:'Q10. 市場から買う一番のいいところは？', o:['手数料がかからない','日本中から何でもそろう','農家さんの顔が見える'], a:1, e:'正解！産地をリレーして、1年中途切れずにそろいます。'},
+    {q:'Q11. 夏にトマトの仕入れ値が上がったとき、店は？', o:['すぐ値段を上げた','利益を減らして我慢した','売るのをやめた'], a:1, e:'正解！売値は99円に据え置き、値入率を33%→28%に下げて我慢しました。'}
+  ];
+  var quiz=document.getElementById('quiz'),got={},sc=document.createElement('div');sc.className='score';
+  function upd(){sc.textContent='正解 '+Object.keys(got).length+' ／ '+qs.length}
+  qs.forEach(function(x,qi){var d=document.createElement('div');d.className='q';d.innerHTML='<b>Q'+(qi+1)+'. '+x.q.replace(/^Q\d+\.\s*/,'')+'</b><div class="opts"></div><div class="res" aria-live="polite"></div>';var opts=d.querySelector('.opts'),res=d.querySelector('.res');
+    x.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.id='q'+qi+'o'+i;b.textContent=t;b.addEventListener('click',function(){opts.querySelectorAll('.opt').forEach(function(o){o.classList.remove('ok','ng')});if(i===x.a){b.classList.add('ok');res.textContent=x.e;got[qi]=1}else{b.classList.add('ng');res.textContent='残念、もう1回！'}upd()});opts.appendChild(b)});
+    quiz.appendChild(d)});
+  upd();quiz.appendChild(sc);
+})();
+</script>

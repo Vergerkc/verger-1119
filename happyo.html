@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="ja">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>知念枠｜第52期 ヴィジョナリーズ会議 2026年11月19日</title>
+<style>
+/* 朝の市場の明るい帳面。発表はAIが声で読み、画面は自動で進む。 */
+:root{
+  --paper:#fbf8f1; --paper-2:#f3eee2; --ink:#1f2a24; --mute:#5f6b63; --line:#ddd5c3;
+  --leaf:#3f7d3a; --leaf-soft:#e3efd9; --carrot:#d9661f; --carrot-soft:#fbe6d6;
+  --sky:#2f6f9c; --warn:#a8620a; --red:#b3402e;
+  --f-head:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
+  --f-body:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:18px;line-height:1.8;padding-bottom:40px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--f-head);margin:0;line-height:1.3;text-wrap:balance}
+h2{font-size:clamp(28px,4vw,44px)}
+h3{font-size:21px}
+p{margin:0}
+.num{font-variant-numeric:tabular-nums}
+.tag{display:inline-block;font-size:13px;letter-spacing:.12em;color:var(--carrot);font-weight:700}
+.lead{color:var(--mute);margin-top:12px;max-width:46em}
+section{padding:80px 0;border-top:1px solid var(--line);transition:background .6s}
+section.now{background:#fffdf8}
+section.now .wrap{box-shadow:inset 6px 0 0 var(--carrot)}
+section:first-of-type{border-top:none}
+
+/* 冒頭 */
+.hero{padding:64px 0 72px;display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(36px,5.6vw,68px)}
+.hero h1 em{font-style:normal;color:var(--carrot)}
+.meta{margin-top:18px;color:var(--mute);font-size:16px;display:flex;flex-wrap:wrap;gap:6px 18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px}
+.ai-face{display:flex;gap:16px;align-items:center}
+.orb{width:64px;height:64px;border-radius:50%;flex:none;background:radial-gradient(circle at 35% 35%,#ffd8b5,var(--carrot) 60%,#9b4210);box-shadow:0 0 0 0 rgba(217,102,31,.5)}
+.speaking .orb{animation:talk 1.1s infinite}
+@keyframes talk{0%{box-shadow:0 0 0 0 rgba(217,102,31,.45)}70%{box-shadow:0 0 0 18px rgba(217,102,31,0)}100%{box-shadow:0 0 0 0 rgba(217,102,31,0)}}
+.btn{font:inherit;font-weight:700;border:none;border-radius:999px;padding:14px 26px;cursor:pointer;background:var(--carrot);color:#fff;font-size:18px}
+.btn.sub{background:#fff;color:var(--ink);border:1px solid var(--line);font-weight:400;font-size:16px;padding:10px 18px}
+.btn:focus-visible{outline:3px solid var(--sky);outline-offset:3px}
+.agenda{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:8px}
+.agenda li{display:flex;gap:12px;align-items:baseline}
+.agenda b{color:var(--carrot);font-family:var(--f-head);font-size:22px;min-width:1.4em}
+
+/* 大きな数字 */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:10px;background:#fff;margin-top:34px}
+.stat{padding:22px 20px;border-left:1px solid var(--line)}
+.stat:first-child{border-left:none}
+.stat b{display:block;font-size:clamp(30px,3.8vw,46px);line-height:1.15;font-variant-numeric:tabular-nums}
+.stat span{color:var(--mute);font-size:15px}
+.plus{color:var(--leaf)} .minus{color:var(--red)}
+
+/* 棒グラフ */
+.bars{margin-top:34px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px 24px 14px}
+.bars h3{font-size:18px;font-family:var(--f-body)}
+.bar-row{display:grid;grid-template-columns:7em 1fr 6.5em;gap:12px;align-items:center;margin:10px 0}
+.bar-row .name{font-weight:700}
+.track{position:relative;height:26px;background:var(--paper-2);border-radius:4px}
+.fill{position:absolute;top:0;bottom:0;border-radius:4px;background:var(--leaf);width:0;transition:width 1.2s ease}
+.fill.neg{background:var(--red)}
+.goal{position:absolute;top:-6px;bottom:-6px;border-left:2px dashed var(--carrot)}
+.zero{position:absolute;top:-4px;bottom:-4px;border-left:1px solid var(--mute)}
+.bar-row .v{text-align:right;font-variant-numeric:tabular-nums}
+.legend{font-size:14px;color:var(--mute);margin-top:8px}
+.legend i{display:inline-block;width:18px;border-top:2px dashed var(--carrot);vertical-align:middle;margin-right:6px}
+
+/* 表 */
+table{border-collapse:collapse;width:100%;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:28px;font-size:17px}
+th,td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:left}
+thead th{background:var(--paper-2);font-weight:700;font-size:15px}
+tr.hl td{background:var(--leaf-soft)}
+td.best{color:var(--leaf);font-weight:700}
+td.low{color:var(--red);font-weight:700}
+
+/* 仕事カード */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:30px}
+.job{background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px}
+.job .when{font-size:14px;color:var(--leaf);font-weight:700}
+.job h3{margin:6px 0 8px}
+.job p{color:var(--mute);font-size:16px}
+.job .big{font-size:34px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.2;margin-top:10px}
+.job .big small{font-size:15px;color:var(--mute);font-weight:400;margin-left:4px}
+.job.warn{border-color:#e6c48c;background:#fffaf0}
+.job.warn .when{color:var(--warn)}
+
+/* 流れ図 */
+.flow{display:flex;gap:10px;align-items:stretch;margin-top:30px;flex-wrap:wrap}
+.flow div{flex:1 1 180px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px}
+.flow b{display:block;color:var(--carrot);font-size:14px}
+.flow .arrow{flex:0 0 auto;border:none;background:none;align-self:center;font-size:26px;color:var(--mute);padding:0}
+
+.note{font-size:14px;color:var(--mute);margin-top:14px}
+.quote{font-family:var(--f-head);font-size:clamp(24px,3.4vw,38px);line-height:1.5;margin-top:24px}
+.quote em{font-style:normal;color:var(--carrot)}
+footer{padding:40px 0;color:var(--mute);font-size:14px;border-top:1px solid var(--line)}
+
+/* 字幕と操作盤 */
+.dock{position:fixed;left:0;right:0;bottom:0;background:rgba(31,42,36,.96);color:#fff;z-index:10}
+.dock .wrap{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding-top:14px;padding-bottom:14px}
+.caption{font-size:20px;line-height:1.6;min-height:3.2em}
+.caption .who{color:#ffb98a;font-size:14px;display:block}
+.ctrl{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.ctrl button{font:inherit;font-size:15px;border-radius:999px;border:1px solid #6b7a70;background:transparent;color:#fff;padding:8px 14px;cursor:pointer}
+.ctrl button.main{background:var(--carrot);border-color:var(--carrot);font-weight:700}
+.ctrl .time{font-variant-numeric:tabular-nums;color:#cfd8d2;font-size:15px;min-width:7.5em;text-align:right}
+.progress{height:4px;background:#3a4a40}
+.progress i{display:block;height:100%;width:0;background:var(--carrot);transition:width .4s}
+
+@media (max-width:860px){
+  .hero,.grid3,.grid2{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(3){border-left:none}
+  .stat:nth-child(n+3){border-top:1px solid var(--line)}
+  .dock .wrap{grid-template-columns:1fr}
+  .ctrl{justify-content:flex-start}
+  table{font-size:15px} th,td{padding:10px 8px}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap hero" id="s0">
+  <div>
+    <span class="tag">第52期 ヴィジョナリーズ会議｜0から1を生み出す組織へ</span>
+    <div class="meta"><span>2026年11月19日（木）15:30〜</span><span>コメント：社長・小林店長</span></div>
+    <ul class="agenda">
+      <li><b>①</b><span>AIが毎日見ている、全店の状況</span></li>
+      <li><b>②</b><span>AIを導入してから（7月28日〜）、AIがやったこと</span></li>
+      <li><b>③</b><span>相模原・越谷の成功を、全店に広める方法</span></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+<!-- ① 状況 -->
+<section id="s1">
+  <div class="wrap">
+    <span class="tag">① 全店の状況（10月確定）</span>
+    <h2 style="margin-top:10px">10月、全社は黒字に戻りました。<br>既存6店は、そろって増益です。</h2>
+    <div class="stats">
+      <div class="stat"><b class="plus">+544<small style="font-size:.45em">万円</small></b><span>全社の営業利益（前年 −120万円）</span></div>
+      <div class="stat"><b>3億3,591<small style="font-size:.45em">万円</small></b><span>売上（前年比 +26.6%）</span></div>
+      <div class="stat"><b class="plus">6<small style="font-size:.45em">店中 6店</small></b><span>既存店が前年より増益</span></div>
+      <div class="stat"><b class="plus">+1,191<small style="font-size:.45em">万円</small></b><span>既存6店の利益の増え方（合計）</span></div>
+    </div>
+    <p class="note">出どころ：令和8年10月度 決算分析・店舗別営業実績対比（本社会議資料・千円単位を万円に丸め）。</p>
+  </div>
+</section>
+
+<section id="s2">
+  <div class="wrap">
+    <span class="tag">① 全店の状況（10月確定）</span>
+    <h2 style="margin-top:10px">営業利益率で10%を超えたのは、<br>相模原と越谷の2店だけ。</h2>
+    <p class="lead">社長の目標「店舗の利益率10%以上」に対して、10月の営業利益率（営業利益÷売上）を並べました。</p>
+    <div class="bars" id="bars" role="img" aria-label="10月の店別営業利益率。相模原15.5%、越谷12.5%、小平7.5%、大宮7.5%、高崎7.5%、前橋0.6%、鶴ヶ島マイナス11.7%。目標は10%。"></div>
+    <p class="legend"><i></i>目標 10%　／　小平・大宮・高崎は小数第2位で順を付けています。</p>
+    <p class="note">営業利益率は帳票の営業利益と売上から計算（例：相模原 982万円÷6,346万円＝15.5%）。社長の指標は「店舗経常利益率」で、利息を店に割り振る前の営業利益率とは少し違います。</p>
+  </div>
+</section>
+
+<section id="s3">
+  <div class="wrap">
+    <span class="tag">① 全店の状況（10月確定）</span>
+    <h2 style="margin-top:10px">大宮と前橋は、角上様の売上の伸びに<br>2か月続けて届いていません。</h2>
+    <table>
+      <thead><tr><th>店舗（10月・前年比）</th><th>角上魚類様</th><th>ヴェルジェ</th><th>差</th></tr></thead>
+      <tbody>
+        <tr><td>小平</td><td>+8.3%</td><td>+10.5%</td><td class="best">+2.2</td></tr>
+        <tr><td>相模原</td><td>+5.1%</td><td>+7.3%</td><td class="best">+2.2</td></tr>
+        <tr><td>高崎</td><td>+8.4%</td><td>+9.6%</td><td class="best">+1.2</td></tr>
+        <tr><td>越谷</td><td>+48.9%</td><td>+47.9%</td><td>−1.0</td></tr>
+        <tr><td>前橋</td><td>+9.3%</td><td>+3.1%</td><td class="low">−6.2</td></tr>
+        <tr><td>大宮</td><td>+10.6%</td><td>+1.7%</td><td class="low">−8.9</td></tr>
+      </tbody>
+    </table>
+    <p class="note">出どころ：角上生鮮市場 店舗別売上高（10月）。9月の差は 大宮 −11.2、前橋 −8.6。</p>
+  </div>
+</section>
+
+<!-- ② AI活用 -->
+<section id="s5">
+  <div class="wrap">
+    <span class="tag">② AI活用の実践報告｜7月28日の導入から約4か月</span>
+    <h2 style="margin-top:10px">人が気づく前に、<br>AIが先に用意しておく仕事。</h2>
+    <div class="grid2">
+      <div class="job">
+        <span class="when">10/27 作成</span>
+        <h3>年間の販促日程表</h3>
+        <p>LINE WORKSの3年分（2023年10月〜）の実績から作りました。来年はこれを追って、催事の準備漏れを減らします。日程は産地などからの連絡に合わせて更新します。</p>
+        <div class="big num">480<small>件の実績から</small></div>
+      </div>
+      <div class="job">
+        <span class="when">毎朝・1日3件まで</span>
+        <h3>「これ、やらなくて大丈夫ですか？」</h3>
+        <p>前年にやった催事で、今年まだ準備の形跡がないものを2〜3週間前に知らせます。店や外部へは送りません。</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="job">
+        <span class="when">チラシ掲載品の予測（野菜・2026年）</span>
+        <h3>2年続けて載った品に絞ると</h3>
+        <div class="big num">46%<small>が実際に特売指定</small></div>
+        <p>よく出る品を並べただけの場合は 21%。答え合わせは商品部の特売指定で行い、ChatGPT（Codex）が別に検算しました。</p>
+      </div>
+      <div class="job">
+        <span class="when">毎朝 9:47</span>
+        <h3>抜け漏れ点検</h3>
+        <p>返信漏れ・決定待ち・期限切れを、LINE WORKS・メール・タスク台帳から毎朝洗い出します。読むだけで、勝手に返事はしません。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="s5b">
+  <div class="wrap">
+    <span class="tag">② AI活用の実践報告</span>
+    <h2 style="margin-top:10px">外注なら数十万円・何週間もかかる仕事を、<br>AIは3つ合わせて約1時間で。</h2>
+    <div class="grid3">
+      <div class="job">
+        <span class="when">今朝、急遽作りました｜約20分</span>
+        <h3>Verger 果樹園珈琲 ホームページ（試作）</h3>
+        <p>コンセプト、メニュー、くだもの飴、季節のご予約商品のこれまでの例、店舗情報までを1ページにまとめました。</p>
+        <p><a href="hp.html" target="_blank" rel="noopener">見る →</a></p>
+      </div>
+      <div class="job">
+        <span class="when">高校生向け｜約30分</span>
+        <h3>野菜がお店に届くまで</h3>
+        <p>トマト1玉を題材に、畑からお店までの流れと値段の仕組みを学ぶ教材です。ヴェルジェの実際の伝票の数字も使い、取引先とお店のつながりは指で回せる相関図にしました。</p>
+        <p><a href="yasai.html" target="_blank" rel="noopener">見る →</a></p>
+      </div>
+      <div class="job">
+        <span class="when">中学生でも分かる｜約5分</span>
+        <h3>DM部 インターンの本</h3>
+        <p>任せる仕事と守る約束を、絵と小さなゲームで覚える本です。写真のOK・NG、チラシのまちがい探し、税込の計算をその場で練習できます。</p>
+        <p><a href="intern.html" target="_blank" rel="noopener">見る →</a></p>
+      </div>
+    </div>
+    <table style="margin-top:26px">
+      <thead><tr><th>作ったもの</th><th>外注した場合の費用（参考）</th><th>人の作業日数（参考）</th><th>AIが形にするまで</th></tr></thead>
+      <tbody>
+        <tr><td>果樹園珈琲 ホームページ</td><td>約5万〜30万円</td><td>約3〜5日</td><td class="best">約20分</td></tr>
+        <tr><td>野菜がお店に届くまで</td><td>約30万〜100万円</td><td>約10〜19日</td><td class="best">約30分</td></tr>
+        <tr><td>DM部 インターンの本</td><td>約20万〜50万円</td><td>約5〜10日</td><td class="best">約5分</td></tr>
+        <tr class="hl"><td>合計</td><td>約55万〜180万円</td><td>約18〜34日</td><td class="best">約1時間</td></tr>
+      </tbody>
+    </table>
+    <p class="note">AIが形にするまでの時間は、頼んでから最初の版ができるまでの時間（記録の時刻から計算。その後の手直しは別）。外注の費用と人の作業日数（1日8時間で計算）は、公開されている相場（小規模なホームページ5万〜30万円、資料づくりは企画5万〜30万円＋原稿1ページ6千〜2万円＋図1点2千〜1万円）をもとにした参考の試算で、見積もりではありません。</p>
+  </div>
+</section>
+
+<section id="s6">
+  <div class="wrap">
+    <span class="tag">② AI活用の実践報告</span>
+    <h2 style="margin-top:10px">判断するのは人。手を動かすのはAI。<br>確かめるのも、別のAI。</h2>
+    <div class="flow">
+      <div><b>1. AIが作る</b>数字の分析・資料・下書き・予測</div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div><b>2. 別のAIが確かめる</b>ChatGPT（Codex）が数字と表現を独立に検算</div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div><b>3. 人が決める</b>送信・投稿・購入は、知念さんが中身を見て承認</div>
+    </div>
+    <div class="grid2">
+      <div class="job">
+        <span class="when">個人情報の扱い</span>
+        <h3>機密は分けて置く</h3>
+        <p>応募者の検査結果などは、Macの中の専用の場所だけに置きます。この発表にも、個人の給与・検査結果・借入の数字は載せていません。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ③ 成功事例を広める -->
+<section id="s7">
+  <div class="wrap">
+    <span class="tag">③ 相模原・越谷の成功を全店へ</span>
+    <h2 style="margin-top:10px">相模原は「お客様が多い店」。<br>越谷は「1人がたくさん買う店」。</h2>
+    <p class="lead">売上＝客数×1人あたり点数×1点の単価。この3つのどこが強いかで、2店のお手本の中身が違います。</p>
+    <table>
+      <thead><tr><th>店舗（11/10〜11/17・8日間）</th><th>1日の客数</th><th>1人あたり点数</th><th>客単価</th><th>10月の粗利率</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>相模原</td><td class="best">1,637人</td><td>4.02点</td><td>1,118円</td><td class="best">35.1%</td></tr>
+        <tr class="hl"><td>越谷</td><td>1,362人</td><td class="best">4.73点</td><td class="best">1,278円</td><td>32.1%</td></tr>
+        <tr><td>大宮</td><td>1,253人</td><td>4.25点</td><td>1,077円</td><td>32.6%</td></tr>
+        <tr><td>高崎</td><td>1,101人</td><td>3.87点</td><td>1,030円</td><td>32.4%</td></tr>
+        <tr><td>小平</td><td>997人</td><td>4.03点</td><td>1,096円</td><td>33.6%</td></tr>
+        <tr><td>前橋</td><td>928人</td><td class="low">3.52点</td><td class="low">982円</td><td>33.9%</td></tr>
+        <tr><td>鶴ヶ島</td><td>818人</td><td>3.76点</td><td>986円</td><td class="low">29.6%</td></tr>
+      </tbody>
+    </table>
+    <p class="note">出どころ：netDoA 日別（11/10〜11/17 の8日分を合計して計算）、粗利率は10月度 店舗別営業実績対比。狭山はポップアップのため除いています。</p>
+  </div>
+</section>
+
+<section id="s8">
+  <div class="wrap">
+    <span class="tag">③ 相模原・越谷の成功を全店へ</span>
+    <h2 style="margin-top:10px">広め方の提案は3つ。</h2>
+    <div class="grid3">
+      <div class="job">
+        <span class="when">提案1｜数字で見える化</span>
+        <h3>毎週、2店と並べて差を届ける</h3>
+        <p>毎週月曜、各店の客数・点数・客単価を相模原・越谷と並べ、差の大きい売場（分類）を店長へ。作るのはAI、使い方は店長会議で決めていただきます。</p>
+      </div>
+      <div class="job">
+        <span class="when">提案2｜型を写真と動画で残す</span>
+        <h3>LINE WORKS掲示板に「成功の型」</h3>
+        <p>相模原の感動ライブ販売、越谷の売場づくりを写真・動画で残し、誰でも見返せる場所に置きます。写真を集める流れはインターンがすでに回しています。</p>
+      </div>
+      <div class="job">
+        <span class="when">提案3｜順番を決める</span>
+        <h3>大宮・前橋から始める</h3>
+        <p>角上様の売上の伸びに2か月続けて届いていない2店から。前橋の1人あたり点数が相模原並み（3.52→4.02点）になると…</p>
+        <div class="big num">約13万円<small>／日（単純試算）</small></div>
+      </div>
+    </div>
+    <p class="note">試算：前橋の8日間の客数 7,426人 × 増える点数 0.50点 × 前橋の1点の単価 279円 ÷ 8日 ＝ 約12.9万円。お客様の数や買い方が変わらない前提の単純な掛け算で、見込みを約束するものではありません。提案はAIの案で、実施するかは社長・店長会議のご判断です。</p>
+  </div>
+</section>
+
+<section id="s9">
+  <div class="wrap">
+    <span class="tag">まとめ</span>
+    <p class="quote">売場に立つのは、皆さん。<br><em>AIは、皆さんが売場に立つ時間を増やします。</em></p>
+    <div class="grid2">
+      <div class="job">
+        <span class="when">お願い</span>
+        <h3>AIに任せたい仕事を、知念さんへ</h3>
+        <p>資料づくり、数字の集計、前年の確認、書類の下書き。「毎回同じことをしている」と感じる仕事があれば、一言お声がけください。</p>
+      </div>
+      <div class="job">
+        <span class="when">このあと</span>
+        <h3>コメント：社長・小林店長</h3>
+        <p>次は田中世梨杏さん（15:40〜）です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="wrap">
+  <p>作成：クロードコード（知念さんのAI）／数字の確認：ChatGPT（Codex）。数字はすべて社内の帳票（10月度決算分析・店舗別営業実績対比・角上生鮮市場店舗別売上高）と netDoA から計算しています。社外秘。</p>
+</footer>
+
+<script>
+// 棒グラフ（10月の営業利益率）
+(function(){
+  var data=[["相模原",15.48],["越谷",12.52],["小平",7.55],["大宮",7.52],["高崎",7.50],["前橋",0.61],["鶴ヶ島",-11.71]];
+  var min=-12, max=16, span=max-min, pos=function(v){return (v-min)/span*100};
+  var box=document.getElementById("bars");
+  var h='<h3>10月の営業利益率（営業利益÷売上）</h3>';
+  data.forEach(function(d){
+    var v=d[1], left=v<0?pos(v):pos(0), w=Math.abs(pos(v)-pos(0));
+    h+='<div class="bar-row"><span class="name">'+d[0]+'</span><div class="track">'+
+      '<div class="fill'+(v<0?' neg':'')+'" data-w="'+w.toFixed(2)+'" style="left:'+left.toFixed(2)+'%"></div>'+
+      '<div class="zero" style="left:'+pos(0).toFixed(2)+'%"></div><div class="goal" style="left:'+pos(10).toFixed(2)+'%"></div></div>'+
+      '<span class="v">'+(v>0?'':'')+v.toFixed(1)+'%</span></div>';
+  });
+  box.innerHTML=h;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){box.querySelectorAll(".fill").forEach(function(f){f.style.width=f.dataset.w+"%"});io.disconnect();}})},{threshold:.3});
+  io.observe(box);
+})();
+
+</script>
+</body>
+</html>

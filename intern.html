@@ -1,0 +1,615 @@
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<title>ヴェルジェDM部 インターンの本</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=M+PLUS+2:wght@400;500;700;800&display=swap">
+<style>
+/* 八百屋の店先：日よけの縞・木箱・値札。章ごとに「やさいの色」で色分けする */
+:root{
+  --bg:#F5F8F1; --paper:#FFFFFF; --ink:#1E2A1D; --sub:#566352; --line:#D9E2D2;
+  --leaf:#2E8B4F; --leaf-soft:#E2F2E6; --carrot:#EE8424; --carrot-soft:#FDEBD8;
+  --tomato:#DC4636; --tomato-soft:#FBE3DF; --sky:#2F7EC4; --sky-soft:#E1EEF9;
+  --corn:#F2C230; --wood:#B98552; --wood-dark:#8A5C33; --skin:#F4C9A1;
+  --display:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans",sans-serif;
+  --body:"M PLUS 2","Hiragino Sans","Noto Sans JP",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141A13; --paper:#1D251C; --ink:#EEF3EA; --sub:#A9B6A4; --line:#33402F;
+  --leaf:#5CC27F; --leaf-soft:#1F3525; --carrot:#F5A04F; --carrot-soft:#3A2814;
+  --tomato:#F07264; --tomato-soft:#3D1F1B; --sky:#6AAEEA; --sky-soft:#17293A;
+  --corn:#F2C94C; --wood:#A97A4B; --wood-dark:#7A5230; --skin:#E8BC94; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141A13; --paper:#1D251C; --ink:#EEF3EA; --sub:#A9B6A4; --line:#33402F;
+  --leaf:#5CC27F; --leaf-soft:#1F3525; --carrot:#F5A04F; --carrot-soft:#3A2814;
+  --tomato:#F07264; --tomato-soft:#3D1F1B; --sky:#6AAEEA; --sky-soft:#17293A;
+  --corn:#F2C94C; --wood:#A97A4B; --wood-dark:#7A5230; --skin:#E8BC94; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.85;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+.wrap{max-width:880px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.35;margin:0}
+p{margin:0}
+rt{font-size:.55em;color:var(--sub)}
+.muted{color:var(--sub)}
+button{font:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+
+/* 日よけ（ページ上の縞） */
+.awning{height:30px;margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)));
+  background:repeating-linear-gradient(90deg,var(--leaf) 0 44px,var(--paper) 44px 88px);
+  -webkit-mask:radial-gradient(22px 14px at 22px 30px,transparent 98%,#000) 0 0/44px 100% repeat-x;
+          mask:radial-gradient(22px 14px at 22px 30px,transparent 98%,#000) 0 0/44px 100% repeat-x}
+
+/* ヒーロー */
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;align-items:center;padding-block:28px 12px}
+.hero .kicker{display:inline-block;font-weight:700;font-size:13px;letter-spacing:.12em;color:var(--leaf);background:var(--leaf-soft);padding:4px 12px;border-radius:999px}
+.hero h1{font-size:clamp(30px,6vw,48px);font-weight:900;margin-top:12px}
+.hero h1 em{font-style:normal;color:var(--carrot)}
+.hero p{margin-top:12px;color:var(--sub)}
+.hero svg{width:100%;height:auto}
+@media (max-width:640px){.hero{grid-template-columns:1fr}}
+
+/* 目次チップ */
+.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);
+  display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.toc a{flex:none;text-decoration:none;color:var(--ink);font-size:14px;font-weight:700;background:var(--paper);border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+.toc a:hover{border-color:var(--leaf)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+
+/* 章 */
+section{padding-block:40px 8px;scroll-margin-top:64px}
+.ch-head{display:flex;gap:14px;align-items:center;margin-bottom:18px}
+.crate{flex:none;width:58px;height:58px;border-radius:10px;display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:24px;color:#fff;
+  background:var(--c,var(--leaf));box-shadow:inset 0 -6px 0 rgba(0,0,0,.15)}
+.ch-head h2{font-size:clamp(22px,4.2vw,30px);font-weight:900}
+.ch-head p{font-size:14px;color:var(--sub)}
+.lead{max-width:65ch;margin-bottom:18px}
+
+/* カード列 */
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0}
+.card h3{font-size:18px;font-weight:700;margin:8px 0 4px}
+.card p{font-size:15px}
+.card svg.icon{width:64px;height:64px}
+
+/* 流れ図（畑→お客様） */
+.flow{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:12px;overflow-x:auto}
+.flow svg{min-width:640px;width:100%;height:auto;display:block}
+.dash{stroke-dasharray:8 8;animation:march 1.2s linear infinite}
+@keyframes march{to{stroke-dashoffset:-16}}
+
+/* 押さないボタン */
+.btns{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.nobtn{position:relative;border:none;border-radius:14px;padding:16px 14px 16px 54px;text-align:left;color:#fff;font-weight:800;background:var(--tomato);
+  box-shadow:0 6px 0 rgba(0,0,0,.18);transition:transform .1s}
+.nobtn:active{transform:translateY(3px);box-shadow:0 3px 0 rgba(0,0,0,.18)}
+.nobtn svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:28px;height:28px}
+.nobtn small{display:block;font-weight:500;font-size:12px;opacity:.92}
+.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.say{margin-top:14px;min-height:56px;display:flex;gap:12px;align-items:center;background:var(--tomato-soft);border-radius:12px;padding:10px 14px;font-weight:700}
+.say svg{flex:none;width:44px;height:44px}
+
+/* 1週間 */
+.week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.day{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 8px;min-width:0}
+.day b{display:block;font-family:var(--display);font-size:20px;text-align:center}
+.day .tag{display:block;font-size:12px;font-weight:700;margin-top:6px;padding:3px 6px;border-radius:6px;line-height:1.4}
+.day.today{border:2px solid var(--carrot)}
+.day.today b::after{content:"今日";display:block;font-size:11px;color:var(--carrot)}
+.t-veg{background:var(--leaf-soft);color:var(--leaf)} .t-fly{background:var(--carrot-soft);color:var(--carrot)}
+.t-sns{background:var(--sky-soft);color:var(--sky)} .t-fruit{background:var(--tomato-soft);color:var(--tomato)}
+@media (max-width:640px){.week{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* 手順 */
+.steps{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));counter-reset:s}
+.step{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px;position:relative;min-width:0}
+.step::before{counter-increment:s;content:counter(s);position:absolute;top:-12px;left:12px;width:28px;height:28px;border-radius:50%;
+  background:var(--c,var(--leaf));color:#fff;font-weight:800;display:grid;place-items:center;font-size:14px}
+.step svg{width:100%;height:90px;margin-block:6px}
+.step h3{font-size:16px}
+.step p{font-size:14px;color:var(--sub)}
+
+/* 写真クイズ */
+.quiz{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.photo{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;min-width:0}
+.photo .pic{position:relative;background:var(--line)}
+.photo .pic svg{display:block;width:100%;height:auto}
+.stamp{position:absolute;right:10px;top:10px;font-family:var(--display);font-weight:900;font-size:22px;padding:2px 12px;border:4px solid;border-radius:10px;transform:rotate(-10deg) scale(.4);opacity:0;transition:.25s cubic-bezier(.3,1.6,.5,1);background:var(--paper)}
+.photo.done .stamp{opacity:1;transform:rotate(-10deg) scale(1)}
+.stamp.ok{color:var(--leaf)} .stamp.ng{color:var(--tomato)}
+.photo .q{padding:12px}
+.photo .q p{font-size:14px;font-weight:700}
+.choice{display:flex;gap:8px;margin-top:8px}
+.choice button{flex:1;white-space:nowrap;border:2px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:6px;font-weight:800}
+.choice button.ok:hover{border-color:var(--leaf)} .choice button.ng:hover{border-color:var(--tomato)}
+.ans{font-size:13px;margin-top:8px;line-height:1.6}
+.score{margin-top:14px;font-weight:800;font-family:var(--display);font-size:18px}
+
+/* 税込計算 */
+.calc{display:grid;grid-template-columns:1fr 1.2fr;gap:18px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px}
+@media (max-width:640px){.calc{grid-template-columns:1fr}}
+.calc label{font-weight:800;font-size:14px}
+.calc input{width:100%;font:inherit;font-size:28px;font-weight:800;padding:6px 10px;border:2px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font-variant-numeric:tabular-nums}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chips button{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:2px 12px;font-weight:700}
+.machine{font-variant-numeric:tabular-nums}
+.machine .row{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;padding:6px 0;border-bottom:1px dashed var(--line)}
+.machine .big{font-size:26px;font-weight:800}
+.machine .cut{color:var(--tomato);text-decoration:line-through;text-decoration-thickness:3px}
+.pricetag{margin-top:12px;display:inline-flex;flex-direction:column;align-items:flex-start;background:var(--corn);color:#1E2A1D;border-radius:8px 18px 18px 8px;padding:8px 22px 8px 16px;position:relative}
+.pricetag::before{content:"";position:absolute;right:8px;top:50%;width:8px;height:8px;border-radius:50%;background:var(--paper);transform:translateY(-50%)}
+.pricetag .hon{font-family:var(--display);font-weight:900;font-size:40px;line-height:1}
+.pricetag .hon small{font-size:16px}
+.pricetag .zei{font-size:13px;font-weight:700}
+
+/* まちがい探しチラシ */
+.flyer{background:#FFFDF6;color:#1E2A1D;border:3px solid var(--carrot);border-radius:14px;padding:12px;max-width:560px}
+.flyer .fh{display:flex;justify-content:space-between;gap:8px;align-items:center;background:var(--carrot);color:#fff;border-radius:8px;padding:6px 12px;font-family:var(--display);font-weight:900}
+.flyer .items{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+.hot{position:relative;border:2px dashed transparent;border-radius:8px;background:none;color:inherit;padding:4px;text-align:center}
+.hot:hover{border-color:#C9B98F}
+.hot.found{border:3px solid #DC4636;border-radius:50%}
+.hot.fine{border:3px solid #2E8B4F}
+.item svg{width:100%;height:70px}
+.item .org{font-size:11px}
+.item .nm{font-family:var(--display);font-weight:900;font-size:18px}
+.item .pr{font-family:var(--display);font-weight:900;font-size:26px;line-height:1;color:#DC4636}
+.item .pr small{font-size:12px}
+.item .tx{font-size:11px}
+.hint{margin-top:12px;font-weight:700}
+
+/* 4:5 と 1:1 */
+.crop{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}
+@media (max-width:640px){.crop{grid-template-columns:1fr}}
+.frame{position:relative;width:220px;max-width:100%;aspect-ratio:4/5;border-radius:6px;overflow:hidden;background:var(--paper);border:1px solid var(--line)}
+.frame svg{width:100%;height:100%;display:block}
+.mask{position:absolute;left:0;right:0;background:rgba(220,70,54,.82);height:0;transition:height .6s ease;display:grid;place-items:center;color:#fff;font-weight:800;font-size:12px;overflow:hidden}
+.mask.top{top:0} .mask.bot{bottom:0}
+.frame.sq .mask{height:10%}
+.toggle{display:inline-flex;border:2px solid var(--line);border-radius:999px;overflow:hidden;margin-top:10px}
+.toggle button{border:none;background:var(--paper);color:var(--ink);padding:6px 16px;font-weight:800}
+.toggle button[aria-pressed="true"]{background:var(--sky);color:#fff}
+
+/* 言葉クイズ */
+.words{display:grid;gap:10px}
+.word{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.word .w{font-family:var(--display);font-weight:900;font-size:20px}
+.word .why{grid-column:1/-1;font-size:14px;color:var(--sub)}
+.word.right{border-color:var(--leaf);background:var(--leaf-soft)}
+.word.wrong{border-color:var(--tomato);background:var(--tomato-soft)}
+
+/* フローチャート */
+.chart{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:12px;overflow-x:auto}
+.chart svg{min-width:620px;width:100%;height:auto;display:block}
+
+/* 辞典 */
+dl.dict{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;margin:0}
+dl.dict div{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px}
+dl.dict dt{font-family:var(--display);font-weight:900;font-size:18px}
+dl.dict dd{margin:2px 0 0;font-size:14px;color:var(--sub)}
+
+footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--sub)}
+
+/* 動き */
+.bob{animation:bob 2.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.bob2{animation:bob 2.6s ease-in-out .5s infinite;transform-box:fill-box;transform-origin:center}
+.bob3{animation:bob 2.6s ease-in-out 1s infinite;transform-box:fill-box;transform-origin:center}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.flash{animation:flash 3.2s ease-in-out infinite}
+@keyframes flash{0%,82%,100%{opacity:0}86%{opacity:.9}}
+.wave{animation:wave 1.8s ease-in-out infinite;transform-box:fill-box;transform-origin:20% 90%}
+@keyframes wave{50%{transform:rotate(-14deg)}}
+.pop{animation:pop .5s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes pop{from{transform:scale(.6);opacity:.3}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+
+<div class="awning" aria-hidden="true"></div>
+<div class="wrap">
+
+<header class="hero">
+  <div>
+    <span class="kicker">株式会社ヴェルジェ　デジタルマーケティング部</span>
+    <h1>ようこそ、<em>DM部</em>へ。<br>インターンの本</h1>
+    <p>やさいと果物のお店「ヴェルジェ」の、チラシ・POP・写真・SNSを作る部署です。この本では、きみに任せる仕事と、ぜったい守る約束を、絵と小さなゲームで覚えます。</p>
+    <p style="margin-top:8px;font-size:14px">読むのにかかる時間：およそ20分</p>
+  </div>
+  <!-- お店の絵 -->
+  <svg viewBox="0 0 360 280" role="img" aria-label="野菜が並ぶお店の店先と、スマホで写真を撮るインターン">
+    <rect x="20" y="40" width="320" height="200" rx="10" fill="var(--paper)" stroke="var(--line)"/>
+    <g>
+      <path d="M10 40h340v34H10z" fill="var(--leaf)"/>
+      <path d="M10 74q20 18 40 0q20 18 40 0q20 18 40 0q20 18 40 0q20 18 40 0q20 18 40 0q20 18 40 0q20 18 40 0q20 18 40 0" fill="var(--leaf)"/>
+      <rect x="50" y="40" width="40" height="34" fill="var(--paper)"/><rect x="130" y="40" width="40" height="34" fill="var(--paper)"/>
+      <rect x="210" y="40" width="40" height="34" fill="var(--paper)"/><rect x="290" y="40" width="40" height="34" fill="var(--paper)"/>
+    </g>
+    <text x="180" y="30" text-anchor="middle" font-family="Zen Maru Gothic, sans-serif" font-weight="900" font-size="20" fill="var(--leaf)">Verger</text>
+    <!-- 木箱 -->
+    <g>
+      <rect x="40" y="170" width="90" height="50" rx="4" fill="var(--wood)"/><rect x="40" y="186" width="90" height="4" fill="var(--wood-dark)"/>
+      <g class="bob"><circle cx="58" cy="164" r="14" fill="var(--tomato)"/><circle cx="85" cy="160" r="15" fill="var(--tomato)"/><circle cx="112" cy="164" r="14" fill="var(--tomato)"/>
+      <path d="M58 150l-4-5m4 5l4-5M85 145l-4-5m4 5l4-5M112 150l-4-5m4 5l4-5" stroke="var(--leaf)" stroke-width="3" stroke-linecap="round"/></g>
+      <rect x="140" y="170" width="90" height="50" rx="4" fill="var(--wood)"/><rect x="140" y="186" width="90" height="4" fill="var(--wood-dark)"/>
+      <g class="bob2"><path d="M152 168l10-30 10 30z" fill="var(--carrot)"/><path d="M177 168l10-34 10 34z" fill="var(--carrot)"/><path d="M202 168l10-30 10 30z" fill="var(--carrot)"/>
+      <path d="M162 138l-5-10m5 10l5-10M187 134l-5-10m5 10l5-10M212 138l-5-10m5 10l5-10" stroke="var(--leaf)" stroke-width="3" stroke-linecap="round"/></g>
+      <rect x="240" y="170" width="80" height="50" rx="4" fill="var(--wood)"/><rect x="240" y="186" width="80" height="4" fill="var(--wood-dark)"/>
+      <g class="bob3"><ellipse cx="262" cy="160" rx="16" ry="14" fill="var(--corn)"/><ellipse cx="295" cy="160" rx="16" ry="14" fill="var(--carrot)"/>
+      <path d="M262 146v-6M295 146v-6" stroke="var(--leaf)" stroke-width="3" stroke-linecap="round"/></g>
+    </g>
+    <!-- 値札 -->
+    <g transform="translate(150,96) rotate(-6)"><rect width="74" height="40" rx="6" fill="var(--corn)"/>
+      <text x="37" y="27" text-anchor="middle" font-family="Zen Maru Gothic, sans-serif" font-weight="900" font-size="20" fill="#1E2A1D">138円</text></g>
+    <!-- インターン -->
+    <g transform="translate(270,82)">
+      <circle cx="30" cy="22" r="18" fill="var(--skin)"/><path d="M12 18q18-22 36 0" fill="var(--ink)"/>
+      <circle cx="24" cy="24" r="2" fill="var(--ink)"/><circle cx="36" cy="24" r="2" fill="var(--ink)"/><path d="M25 31q5 4 10 0" stroke="var(--ink)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <rect x="12" y="42" width="36" height="40" rx="10" fill="var(--sky)"/>
+      <rect x="-8" y="44" width="16" height="26" rx="3" fill="var(--ink)"/><rect x="-6" y="47" width="12" height="18" rx="2" fill="var(--sky-soft)"/>
+      <circle class="flash" cx="0" cy="56" r="22" fill="#FFFBE0"/>
+      <path d="M14 52q-10 4-16 6" stroke="var(--skin)" stroke-width="7" stroke-linecap="round"/>
+    </g>
+    <rect x="20" y="236" width="320" height="10" rx="4" fill="var(--wood-dark)"/>
+  </svg>
+</header>
+
+<nav class="toc" aria-label="目次">
+  <a href="#what">DM部ってなに</a><a href="#promise">5つの約束</a><a href="#buttons">押さないボタン</a><a href="#week">1週間</a>
+  <a href="#photo">仕事1 写真えらび</a><a href="#check">仕事2 チラシの点検</a><a href="#sns">仕事3 SNSの画像</a><a href="#words">POPの言葉</a><a href="#help">困ったとき</a><a href="#dict">ことば辞典</a>
+</nav>
+
+<!-- 1 -->
+<section id="what">
+  <div class="ch-head"><div class="crate" style="--c:var(--leaf)">1</div><div><h2>DM部ってなに？</h2><p>畑からお客様まで、「おいしそう」を届けるリレーのアンカー</p></div></div>
+  <p class="lead">ヴェルジェは、関東に8店舗あるやさいと果物の専門店です。多くのお店は魚屋さん「角上（かくじょう）生鮮市場」の中にあります。DM部は、お店の商品を<strong>絵や写真や文字で伝える係</strong>です。矢印が流れる順番に、仕事がつながっています。</p>
+  <div class="flow">
+    <svg viewBox="0 0 760 210" role="img" aria-label="畑から商品部、DM部、お店とスマホを通ってお客様へ届く流れ">
+      <defs><marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--sub)"/></marker></defs>
+      <path class="dash" d="M118 100H170M288 100H340M470 80L540 50M470 120L540 150M650 50L690 90M650 150L690 110" stroke="var(--sub)" stroke-width="3" fill="none" marker-end="url(#ar)"/>
+      <!-- 畑 -->
+      <g><rect x="16" y="50" width="100" height="100" rx="14" fill="var(--leaf-soft)"/>
+        <path d="M26 128h80" stroke="var(--wood)" stroke-width="8" stroke-linecap="round"/>
+        <g class="bob"><path d="M46 122v-22M46 104q-12-8-12-20q12 6 12 20q0-14 12-20q0 12-12 20" fill="var(--leaf)" stroke="var(--leaf)" stroke-width="2"/></g>
+        <g class="bob2"><path d="M86 122v-22M86 104q-12-8-12-20q12 6 12 20q0-14 12-20q0 12-12 20" fill="var(--leaf)" stroke="var(--leaf)" stroke-width="2"/></g>
+        <circle cx="100" cy="66" r="10" fill="var(--corn)"/>
+        <text x="66" y="172" text-anchor="middle" font-size="15" font-weight="800" fill="var(--ink)">畑・産地</text></g>
+      <!-- 商品部 -->
+      <g><rect x="172" y="50" width="114" height="100" rx="14" fill="var(--carrot-soft)"/>
+        <rect x="200" y="68" width="58" height="50" rx="4" fill="var(--paper)" stroke="var(--carrot)" stroke-width="2"/>
+        <path d="M208 82h42M208 94h30M208 106h36" stroke="var(--carrot)" stroke-width="4" stroke-linecap="round"/>
+        <text x="229" y="172" text-anchor="middle" font-size="15" font-weight="800" fill="var(--ink)">商品部</text>
+        <text x="229" y="192" text-anchor="middle" font-size="12" fill="var(--sub)">何をいくらで売るか</text></g>
+      <!-- DM部 -->
+      <g><rect x="342" y="40" width="126" height="120" rx="16" fill="var(--sky-soft)" stroke="var(--sky)" stroke-width="3"/>
+        <rect x="362" y="58" width="56" height="40" rx="4" fill="var(--ink)"/><rect x="366" y="62" width="48" height="30" fill="var(--sky)"/>
+        <rect x="380" y="98" width="20" height="8" fill="var(--ink)"/>
+        <g class="wave"><path d="M430 104l18-30 6 4-18 30z" fill="var(--carrot)"/><path d="M448 74l4-6 6 4-4 6z" fill="var(--ink)"/></g>
+        <text x="405" y="134" text-anchor="middle" font-size="16" font-weight="900" fill="var(--sky)">DM部</text>
+        <text x="405" y="150" text-anchor="middle" font-size="11" fill="var(--sub)">きみはここ</text></g>
+      <!-- お店（チラシ・POP） -->
+      <g><rect x="542" y="14" width="106" height="72" rx="12" fill="var(--tomato-soft)"/>
+        <rect x="560" y="26" width="34" height="44" rx="3" fill="var(--paper)" stroke="var(--tomato)" stroke-width="2"/><path d="M566 38h22M566 48h16" stroke="var(--tomato)" stroke-width="3"/>
+        <rect x="602" y="34" width="30" height="20" rx="3" fill="var(--corn)"/>
+        <text x="595" y="102" text-anchor="middle" font-size="13" font-weight="800" fill="var(--ink)">お店：チラシ・POP</text></g>
+      <!-- スマホ（SNS） -->
+      <g><rect x="542" y="114" width="106" height="72" rx="12" fill="var(--sky-soft)"/>
+        <rect x="580" y="122" width="30" height="54" rx="6" fill="var(--ink)"/><rect x="583" y="128" width="24" height="40" rx="2" fill="var(--carrot)"/>
+        <path d="M624 136q6-8 12 0q6-8 12 0q0 8-12 16q-12-8-12-16z" fill="var(--tomato)" class="bob"/>
+        <text x="595" y="202" text-anchor="middle" font-size="13" font-weight="800" fill="var(--ink)">スマホ：SNS・LINE</text></g>
+      <!-- お客様 -->
+      <g><circle cx="722" cy="80" r="16" fill="var(--skin)"/><rect x="704" y="98" width="36" height="40" rx="12" fill="var(--leaf)"/>
+        <path d="M714 80q8 6 16 0" stroke="var(--ink)" stroke-width="2" fill="none"/>
+        <text x="722" y="160" text-anchor="middle" font-size="15" font-weight="800" fill="var(--ink)">お客様</text></g>
+    </svg>
+  </div>
+</section>
+
+<!-- 2 -->
+<section id="promise">
+  <div class="ch-head"><div class="crate" style="--c:var(--carrot)">2</div><div><h2>ぜったい守る5つの約束</h2><p>これだけは、最初の日に覚えてください</p></div></div>
+  <div class="grid">
+    <div class="card"><svg class="icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="var(--tomato-soft)"/><path d="M22 44V24a4 4 0 018 0v10M30 34V18a4 4 0 018 0v16M38 34V22a4 4 0 018 0v16q0 12-12 14h-4q-8 0-12-8l-6-10a4 4 0 017-4l3 4" fill="var(--skin)" stroke="var(--ink)" stroke-width="2"/></svg>
+      <h3>1. 外に出すのは大人のOKのあと</h3><p>SNS・LINE・ホームページ・メールなど、お客様に見えるものは、きみは<strong>作るところまで</strong>。出すのは知念さん（上司）が「出していい」と言ってから。</p></div>
+    <div class="card"><svg class="icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="var(--carrot-soft)"/><rect x="16" y="20" width="32" height="24" rx="4" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><circle cx="32" cy="32" r="7" fill="var(--sky)"/><path d="M12 52L52 12" stroke="var(--tomato)" stroke-width="5" stroke-linecap="round"/></svg>
+      <h3>2. お客様の顔は使わない</h3><p>写真にお客様が写っていたら使いません。後ろ姿・手・ガラスへの映り込みもお客様と同じあつかい。<strong>店員さんはOK</strong>。</p></div>
+    <div class="card"><svg class="icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="var(--sky-soft)"/><rect x="18" y="28" width="28" height="22" rx="4" fill="var(--sky)"/><path d="M24 28v-6a8 8 0 0116 0v6" stroke="var(--ink)" stroke-width="4" fill="none"/><circle cx="32" cy="39" r="3" fill="var(--paper)"/></svg>
+      <h3>3. 名前・住所・電話は見ない・写さない</h3><p>お客様や応募者の情報は、きみの仕事ではあつかいません。見えてしまったら、メモも写真も取らずに大人へ。</p></div>
+    <div class="card"><svg class="icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="var(--leaf-soft)"/><rect x="18" y="12" width="28" height="40" rx="4" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><rect x="22" y="16" width="20" height="9" rx="2" fill="var(--leaf)"/><g fill="var(--ink)"><circle cx="25" cy="32" r="2.5"/><circle cx="32" cy="32" r="2.5"/><circle cx="39" cy="32" r="2.5"/><circle cx="25" cy="40" r="2.5"/><circle cx="32" cy="40" r="2.5"/><circle cx="39" cy="40" r="2.5"/><circle cx="25" cy="47" r="2.5"/><circle cx="32" cy="47" r="2.5"/><circle cx="39" cy="47" r="2.5"/></g></svg>
+      <h3>4. 数字は「なんとなく」で書かない</h3><p>値段・日付・曜日・産地は、もとの指示の文と1つずつ見くらべる。曜日はカレンダーで確かめる。</p></div>
+    <div class="card"><svg class="icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="var(--carrot-soft)"/><path d="M24 24q0-10 8-10t8 8q0 6-8 10v6" stroke="var(--carrot)" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="32" cy="48" r="3.5" fill="var(--carrot)"/></svg>
+      <h3>5. 迷ったら、押さない・消さない・聞く</h3><p>分からないまま進めるより、聞くほうがずっと早い。一度教わったことはメモして、次から自分でできるようにする。</p></div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section id="buttons">
+  <div class="ch-head"><div class="crate" style="--c:var(--tomato)">3</div><div><h2>きみが押さないボタン</h2><p>押してみてください。何が起きるか分かります</p></div></div>
+  <div class="btns" id="nobtns">
+    <button class="nobtn" data-why="お客様全員のスマホに届きます。一度送ると取り消せません。"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>LINEで配信する<small>お客様のスマホへ一斉に</small></button>
+    <button class="nobtn" data-why="世界中から見えるようになります。出すかどうかは知念さんが決めます。"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>Instagramでシェア<small>投稿・予約投稿・宣伝</small></button>
+    <button class="nobtn" data-why="お金がかかる「確定」です。カートに入れるところまでで止めて、大人に画面を見せます。"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>注文を確定する<small>のぼり・シール・印刷の注文</small></button>
+    <button class="nobtn" data-why="お店の人が使っているデータです。消すと元に戻せないことがあります。"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>削除する<small>写真・POP・共有のデータ</small></button>
+    <button class="nobtn" data-why="押すと、全部のお店がログインできなくなることがあります。ログインで困ったら大人に言います。"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>パスワードを忘れた<small>ログイン画面のリンク</small></button>
+    <button class="nobtn" data-why="ホームページはお客様が毎日見ています。公開は知念さんがOKしてから。"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>ホームページを公開<small>Studioの「公開」</small></button>
+  </div>
+  <div class="say" id="say" aria-live="polite">
+    <svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="20" fill="var(--paper)"/><circle cx="22" cy="18" r="9" fill="var(--skin)"/><rect x="12" y="28" width="20" height="14" rx="6" fill="var(--leaf)"/><circle cx="19" cy="18" r="1.4" fill="var(--ink)"/><circle cx="25" cy="18" r="1.4" fill="var(--ink)"/></svg>
+    <span id="saytext">赤いボタンを押すと、なぜ押さないのかが出ます。</span>
+  </div>
+</section>
+
+<!-- 4 -->
+<section id="week">
+  <div class="ch-head"><div class="crate" style="--c:var(--sky)">4</div><div><h2>DM部の1週間</h2><p>毎週くり返すリズム。オレンジの枠が今日です</p></div></div>
+  <div class="week" id="weekgrid">
+    <div class="day" data-d="1"><b>月</b><span class="tag t-veg">お野菜市の日</span><span class="tag t-sns">朝10時にLINE</span><span class="tag t-veg">夕方に来週の品目が決まる</span></div>
+    <div class="day" data-d="2"><b>火</b><span class="tag t-sns">インスタライブの表紙</span><span class="tag t-fruit">週末の果物が決まり始める</span></div>
+    <div class="day" data-d="3"><b>水</b><span class="tag t-fly">チラシに商品をはめる</span></div>
+    <div class="day" data-d="4"><b>木</b><span class="tag t-fly">お昼12時にチラシ確定</span><span class="tag t-fly">2人で点検</span></div>
+    <div class="day" data-d="5"><b>金</b><span class="tag t-fruit">フルーツの日</span><span class="tag t-fly">チラシの初日</span></div>
+    <div class="day" data-d="6"><b>土</b><span class="tag t-fruit">週末の特売</span><span class="tag t-fruit">果物は土日だけ入る</span></div>
+    <div class="day" data-d="0"><b>日</b><span class="tag t-fruit">週末の特売</span><span class="tag t-sns">夕方に月曜の投稿を準備</span></div>
+  </div>
+  <p class="muted" style="margin-top:12px;font-size:14px">店内のチラシは「金・土・日・月」の4日間で1枚。だから木曜のお昼までに完成させます。インターンの日は、まず仕事1（写真えらび）から始めます。</p>
+</section>
+
+<!-- 5 -->
+<section id="photo">
+  <div class="ch-head"><div class="crate" style="--c:var(--leaf)">5</div><div><h2>仕事1　掲示板から写真をえらぶ</h2><p>インターンのいちばん大事な定番の仕事</p></div></div>
+  <p class="lead">社内の連絡アプリ「LINE WORKS（ラインワークス）」の<strong>掲示板</strong>には、いろいろなお店が売場やイベントの写真をのせています。そこから<strong>SNSに使えそうな写真</strong>をえらんで、会社のGoogleフォトに入れます。</p>
+  <div class="steps">
+    <div class="step" style="--c:var(--leaf)"><svg viewBox="0 0 160 90" aria-hidden="true"><rect x="40" y="6" width="80" height="80" rx="8" fill="var(--paper)" stroke="var(--line)" stroke-width="2"/><rect x="40" y="6" width="80" height="16" rx="8" fill="var(--leaf)"/><rect x="48" y="30" width="64" height="12" rx="3" fill="var(--leaf-soft)"/><rect x="48" y="48" width="64" height="12" rx="3" fill="var(--leaf-soft)"/><rect x="48" y="66" width="64" height="12" rx="3" fill="var(--leaf-soft)"/></svg>
+      <h3>掲示板を開く</h3><p>新しい投稿から順に見る。お店の名前・日付・件名をチェック。</p></div>
+    <div class="step" style="--c:var(--leaf)"><svg viewBox="0 0 160 90" aria-hidden="true"><rect x="30" y="14" width="60" height="46" rx="4" fill="var(--carrot-soft)"/><circle cx="50" cy="40" r="10" fill="var(--tomato)"/><circle cx="70" cy="40" r="10" fill="var(--carrot)"/><circle class="bob" cx="112" cy="40" r="22" fill="none" stroke="var(--sky)" stroke-width="6"/><path d="M128 56l16 16" stroke="var(--sky)" stroke-width="8" stroke-linecap="round"/></svg>
+      <h3>使える写真をえらぶ</h3><p>商品がきれい・売場が整っている・季節やイベントらしい。お客様が写っていない。</p></div>
+    <div class="step" style="--c:var(--leaf)"><svg viewBox="0 0 160 90" aria-hidden="true"><rect x="20" y="20" width="50" height="40" rx="4" fill="var(--carrot-soft)"/><path class="dash" d="M76 40h40" stroke="var(--leaf)" stroke-width="4" fill="none"/><path d="M112 32l10 8-10 8" fill="none" stroke="var(--leaf)" stroke-width="4"/><g transform="translate(126,22)"><circle cx="9" cy="9" r="9" fill="var(--tomato)"/><circle cx="27" cy="9" r="9" fill="var(--corn)"/><circle cx="9" cy="27" r="9" fill="var(--sky)"/><circle cx="27" cy="27" r="9" fill="var(--leaf)"/></g></svg>
+      <h3>Googleフォトへ入れる</h3><p>会社のアカウント<strong>verger.tokyo</strong>だけを使う。お店ごとのアルバム（例：掲示板_大宮店）へ。</p></div>
+    <div class="step" style="--c:var(--leaf)"><svg viewBox="0 0 160 90" aria-hidden="true"><path d="M30 70h100" stroke="var(--line)" stroke-width="4"/><g transform="translate(60,10)"><circle cx="20" cy="16" r="14" fill="var(--skin)"/><rect x="6" y="32" width="28" height="28" rx="8" fill="var(--carrot)"/></g><path d="M100 20h40v24h-24l-8 8v-8h-8z" fill="var(--sky-soft)" stroke="var(--sky)" stroke-width="2"/><text x="120" y="37" text-anchor="middle" font-size="16" font-weight="900" fill="var(--sky)">?</text></svg>
+      <h3>迷ったら聞く</h3><p>えらべない写真は入れずに知念さんへ。掲示板には書き込み・いいね・削除をしない。</p></div>
+  </div>
+
+  <h3 style="margin:28px 0 6px;font-size:20px">練習：この写真、SNSに使える？</h3>
+  <p class="muted" style="font-size:14px">6枚の写真（絵）を見て、使えるならOK、使えないならNGを押してください。</p>
+  <div class="quiz" id="quiz" style="margin-top:12px"></div>
+  <div class="score" id="score" aria-live="polite">0 / 6 問</div>
+</section>
+
+<!-- 6 -->
+<section id="check">
+  <div class="ch-head"><div class="crate" style="--c:var(--carrot)">6</div><div><h2>仕事2　チラシの<ruby>点検<rt>てんけん</rt></ruby>を手伝う</h2><p>お店に貼るチラシは、毎回2人で見てまちがいを探します</p></div></div>
+  <p class="lead">チラシの値段には「<strong><ruby>本体<rt>ほんたい</rt></ruby>価格</strong>（税金をのぞいた値段）」と「<strong><ruby>税込<rt>ぜいこみ</rt></ruby>価格</strong>（8%の消費税をたした値段）」の2つがあります。ヴェルジェの決まりは<strong>本体 × 1.08 をして、小数点より下は切り捨て</strong>。四捨五入ではありません。</p>
+  <div class="calc">
+    <div>
+      <label for="hon">本体価格を入れてみよう</label>
+      <input id="hon" type="number" inputmode="numeric" min="1" max="99999" value="138">
+      <div class="chips" aria-label="よく出る値段">
+        <button data-v="98">98</button><button data-v="128">128</button><button data-v="138">138</button><button data-v="198">198</button><button data-v="398">398</button><button data-v="498">498</button>
+      </div>
+      <p class="muted" style="font-size:13px;margin-top:10px">チラシでは本体価格を大きく、税込は小さく書きます。</p>
+    </div>
+    <div class="machine" aria-live="polite">
+      <div class="row"><span>本体</span><span class="big" id="m1">138</span><span>円 × 1.08 ＝</span></div>
+      <div class="row"><span class="big" id="m2">149.04</span><span>円</span></div>
+      <div class="row"><span>小数点より下を切り捨て → </span><span class="big" id="m3" style="color:var(--leaf)">149</span><span>円</span></div>
+      <div class="pricetag pop" id="tag"><span class="hon" id="t1">138<small>円</small></span><span class="zei" id="t2">（税込149円）</span></div>
+    </div>
+  </div>
+
+  <h3 style="margin:28px 0 6px;font-size:20px">練習：まちがい探し（3つ）</h3>
+  <p class="muted" style="font-size:14px">指示の文：「11/13(金)〜11/16(月)　にんじん 1袋 本体198円／みかん 1袋 本体398円／ほうれん草 1袋 本体158円」。チラシの中のおかしいところを押してください。</p>
+  <div class="flyer" style="margin-top:12px">
+    <div class="fh"><span>週末の特売</span><button class="hot" data-k="date" style="color:#fff">11/13(金)〜11/16(日)</button></div>
+    <div class="items">
+      <button class="hot item" data-k="pic">
+        <svg viewBox="0 0 100 70" aria-hidden="true"><circle cx="50" cy="38" r="24" fill="#DC4636"/><path d="M50 14q4-8 10-8" stroke="#2E8B4F" stroke-width="4" fill="none"/><ellipse cx="42" cy="30" rx="6" ry="4" fill="#fff" opacity=".4"/></svg>
+        <div class="org">千葉県産</div><div class="nm">にんじん 1袋</div><div class="pr">198<small>円</small></div><div class="tx">税込213円</div></button>
+      <button class="hot item" data-k="ok1">
+        <svg viewBox="0 0 100 70" aria-hidden="true"><circle cx="38" cy="40" r="18" fill="#EE8424"/><circle cx="62" cy="40" r="18" fill="#F09A3C"/><path d="M38 22v-5M62 22v-5" stroke="#2E8B4F" stroke-width="4"/></svg>
+        <div class="org">愛媛県産</div><div class="nm">みかん 1袋</div><div class="pr">398<small>円</small></div><div class="tx">税込429円</div></button>
+      <button class="hot item" data-k="tax">
+        <svg viewBox="0 0 100 70" aria-hidden="true"><path d="M50 64V30" stroke="#2E8B4F" stroke-width="4"/><path d="M50 40q-20-4-24-26q20 4 24 26zM50 36q20-4 24-26q-20 4-24 26zM50 30q-4-14 0-26q4 12 0 26z" fill="#2E8B4F"/></svg>
+        <div class="org">群馬県産</div><div class="nm">ほうれん草 1袋</div><div class="pr">170<small>円</small></div><div class="tx">税込170円</div></button>
+    </div>
+  </div>
+  <p class="hint" id="hint" aria-live="polite">見つけた数：0 / 3</p>
+</section>
+
+<!-- 7 -->
+<section id="sns">
+  <div class="ch-head"><div class="crate" style="--c:var(--sky)">7</div><div><h2>仕事3　SNSの画像サイズ</h2><p>Instagramに出す画像は「よこ4：たて5」の少したて長</p></div></div>
+  <div class="crop">
+    <div>
+      <div class="frame" id="frame">
+        <svg viewBox="0 0 400 500" aria-label="お野菜市の告知画像の見本">
+          <rect width="400" height="500" fill="var(--leaf-soft)"/>
+          <rect x="0" y="0" width="400" height="70" fill="var(--leaf)"/>
+          <text x="200" y="47" text-anchor="middle" font-family="Zen Maru Gothic, sans-serif" font-weight="900" font-size="34" fill="#fff">月曜はお野菜市</text>
+          <g class="bob"><circle cx="130" cy="250" r="60" fill="var(--tomato)"/><path d="M130 190l-10-14m10 14l10-14" stroke="var(--leaf)" stroke-width="8" stroke-linecap="round"/></g>
+          <g class="bob2"><path d="M240 320l36-130 36 130z" fill="var(--carrot)"/><path d="M276 190l-12-24m12 24l12-24" stroke="var(--leaf)" stroke-width="8" stroke-linecap="round"/></g>
+          <rect x="0" y="430" width="400" height="70" fill="var(--carrot)"/>
+          <text x="200" y="476" text-anchor="middle" font-family="Zen Maru Gothic, sans-serif" font-weight="900" font-size="30" fill="#fff">11/16(月) 全店で</text>
+        </svg>
+        <div class="mask top">切れる</div><div class="mask bot">切れる</div>
+      </div>
+      <div class="toggle" role="group" aria-label="切り取りの比率">
+        <button id="r45" aria-pressed="true">元の比率（4:5）</button><button id="r11" aria-pressed="false">正方形（1:1）</button>
+      </div>
+    </div>
+    <div>
+      <p><strong>投稿の画像は1080×1350（よこ×たて）</strong>で作ります。パソコンで投稿するとき、最初は正方形（1:1）が選ばれています。そのままだと、<strong>いちばん大事な上と下の文字が切れてしまいます</strong>。左のボタンで比べてみてください。</p>
+      <p style="margin-top:10px">切り取りの画面では、かならず「<strong>元の比率</strong>」を選びます。投稿の文やハッシュタグを考えるのもDM部の仕事ですが、<strong>シェアを押すのは知念さんのOKのあと</strong>です。</p>
+      <p class="muted" style="margin-top:10px;font-size:14px">ハッシュタグの決まり：#verger #ヴェルジェ #角上魚類 さんのお隣 #角上生鮮市場 内 #ファーマーズマルシェ</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8 -->
+<section id="words">
+  <div class="ch-head"><div class="crate" style="--c:var(--tomato)">8</div><div><h2>POPに書いていい言葉？</h2><p>POPは売場に立てる小さな看板。「病気が治る」ような書き方はしません</p></div></div>
+  <p class="lead">やさいや果物は薬ではないので、<strong>病気の名前や「〇〇に効く」は書きません</strong>。伝えたいときは「旬」「甘い」「ビタミンC」のように、おいしさや栄養の名前で書きます。</p>
+  <div class="words" id="wordq"></div>
+</section>
+
+<!-- 9 -->
+<section id="help">
+  <div class="ch-head"><div class="crate" style="--c:var(--carrot)">9</div><div><h2>困ったときの<ruby>道<rt>みち</rt></ruby>しるべ</h2><p>上から順に「はい／いいえ」でたどる</p></div></div>
+  <div class="chart">
+    <svg viewBox="0 0 700 360" role="img" aria-label="困ったときの判断の流れ図">
+      <defs><marker id="ar2" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--sub)"/></marker></defs>
+      <g font-family="M PLUS 2, sans-serif" font-size="15" font-weight="700">
+        <rect x="20" y="20" width="240" height="56" rx="28" fill="var(--sky-soft)" stroke="var(--sky)" stroke-width="2"/>
+        <text x="140" y="54" text-anchor="middle" fill="var(--ink)">お客様や外の人に見える？</text>
+        <rect x="20" y="140" width="240" height="56" rx="28" fill="var(--sky-soft)" stroke="var(--sky)" stroke-width="2"/>
+        <text x="140" y="174" text-anchor="middle" fill="var(--ink)">お金がかかる？消える？</text>
+        <rect x="20" y="260" width="240" height="56" rx="28" fill="var(--sky-soft)" stroke="var(--sky)" stroke-width="2"/>
+        <text x="140" y="294" text-anchor="middle" fill="var(--ink)">やり方が分かる？</text>
+        <path d="M140 76v60M140 196v60" stroke="var(--sub)" stroke-width="3" marker-end="url(#ar2)" class="dash"/>
+        <text x="152" y="112" fill="var(--sub)" font-size="13">いいえ</text><text x="152" y="232" fill="var(--sub)" font-size="13">いいえ</text>
+        <path d="M260 48h150M260 168h150M260 276h150M260 300h150" stroke="var(--sub)" stroke-width="3" marker-end="url(#ar2)" class="dash"/>
+        <text x="296" y="40" fill="var(--sub)" font-size="13">はい</text><text x="296" y="160" fill="var(--sub)" font-size="13">はい</text>
+        <text x="296" y="268" fill="var(--sub)" font-size="13">はい</text><text x="296" y="320" fill="var(--sub)" font-size="13">いいえ</text>
+        <rect x="414" y="20" width="266" height="56" rx="12" fill="var(--carrot-soft)" stroke="var(--carrot)" stroke-width="2"/>
+        <text x="547" y="44" text-anchor="middle" fill="var(--ink)">作って、知念さんに見せる</text>
+        <text x="547" y="64" text-anchor="middle" fill="var(--sub)" font-size="12">「これを・どこへ・いつ出していいですか」</text>
+        <rect x="414" y="140" width="266" height="56" rx="12" fill="var(--tomato-soft)" stroke="var(--tomato)" stroke-width="2"/>
+        <text x="547" y="174" text-anchor="middle" fill="var(--ink)">押さずに止まる。画面を大人に見せる</text>
+        <rect x="414" y="246" width="266" height="40" rx="12" fill="var(--leaf-soft)" stroke="var(--leaf)" stroke-width="2"/>
+        <text x="547" y="272" text-anchor="middle" fill="var(--ink)">進めてOK。終わったら報告</text>
+        <rect x="414" y="292" width="266" height="44" rx="12" fill="var(--carrot-soft)" stroke="var(--carrot)" stroke-width="2"/>
+        <text x="547" y="320" text-anchor="middle" fill="var(--ink)">2〜3択にして聞く。答えはメモ</text>
+      </g>
+    </svg>
+  </div>
+  <div class="grid" style="margin-top:16px">
+    <div class="card"><h3>報告は短く</h3><p>「やったこと1〜3行」と「聞きたいこと1行」。終わっていないことは、かくさず「ここはまだです」と言う。</p></div>
+    <div class="card"><h3>見せるときは本物を</h3><p>「できました」だけでなく、画像やPDFを見せる。置いた場所だけ伝えて終わりにしない。</p></div>
+    <div class="card"><h3>共用のパソコン</h3><p>本社のMac miniは、空いている人が使います。使い終わったら開いたファイルを閉じる。</p></div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section id="dict">
+  <div class="ch-head"><div class="crate" style="--c:var(--leaf)">10</div><div><h2>ことば辞典</h2><p>会社でよく聞く言葉</p></div></div>
+  <dl class="dict">
+    <div><dt>DM部</dt><dd>デジタルマーケティング部。SNS・チラシ・POP・ホームページなどを作る部署。</dd></div>
+    <div><dt>POP（ポップ）</dt><dd>売場に立てる小さな看板。商品名・値段・おすすめの一言を書く。</dd></div>
+    <div><dt>お野菜市</dt><dd>毎週月曜の野菜の特売。果物は土日だけ入る。</dd></div>
+    <div><dt>フルーツの日</dt><dd>毎週金曜。果物のポスターを作る。</dd></div>
+    <div><dt>4日間チラシ</dt><dd>金・土・日・月の特売を1枚にした店内用のチラシ。毎週作り直す。</dd></div>
+    <div><dt>角上（かくじょう）さん</dt><dd>角上魚類。ヴェルジェの多くのお店は「角上生鮮市場」の中にある。</dd></div>
+    <div><dt>掲示板</dt><dd>LINE WORKSの中の、お店からのお知らせや写真が集まる場所。</dd></div>
+    <div><dt>verger.tokyo</dt><dd>会社のGoogleアカウント。写真はここのGoogleフォトにだけ入れる。</dd></div>
+    <div><dt>本体価格／税込価格</dt><dd>税金をのぞいた値段／8%をたした値段。税込は切り捨てで計算。</dd></div>
+  </dl>
+</section>
+
+<footer>
+  <p>このページは練習用です。ボタンやクイズを押しても、本物の投稿・送信・削除は起きません。写真はすべて説明のための絵で、実際のお店やお客様ではありません。</p>
+  <p style="margin-top:6px">株式会社ヴェルジェ デジタルマーケティング部　2026年11月12日(木) 作成</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  // 押さないボタン
+  var say=document.getElementById('saytext');
+  document.querySelectorAll('.nobtn').forEach(function(b){
+    b.addEventListener('click',function(){
+      b.classList.remove('shake');void b.offsetWidth;b.classList.add('shake');
+      say.textContent='このボタンは大人が押します。'+b.dataset.why;
+    });
+  });
+
+  // 今日の曜日
+  var d=new Date().getDay();
+  var cell=document.querySelector('.day[data-d="'+d+'"]'); if(cell) cell.classList.add('today');
+
+  // 写真クイズ
+  var shelf='<rect x="0" y="0" width="160" height="120" fill="#EAF2E3"/><rect x="0" y="86" width="160" height="34" fill="#B98552"/><rect x="0" y="86" width="160" height="5" fill="#8A5C33"/>';
+  var veg=function(y){return '<g><circle cx="22" cy="'+y+'" r="11" fill="#DC4636"/><circle cx="46" cy="'+y+'" r="11" fill="#DC4636"/><circle cx="70" cy="'+y+'" r="11" fill="#EE8424"/><circle cx="94" cy="'+y+'" r="11" fill="#EE8424"/><circle cx="118" cy="'+y+'" r="11" fill="#F2C230"/><circle cx="142" cy="'+y+'" r="11" fill="#F2C230"/></g>';};
+  var person=function(x,col,face){return '<g transform="translate('+x+',22)"><circle cx="18" cy="16" r="14" fill="#F4C9A1"/>'+(face?'<circle cx="13" cy="16" r="1.8" fill="#1E2A1D"/><circle cx="23" cy="16" r="1.8" fill="#1E2A1D"/><path d="M13 22q5 4 10 0" stroke="#1E2A1D" stroke-width="1.6" fill="none"/>':'')+'<path d="M4 12q14-16 28 0" fill="#3A2C22"/><rect x="2" y="30" width="32" height="58" rx="10" fill="'+col+'"/></g>';};
+  var Q=[
+    {svg:shelf+veg(74)+veg(52)+'<rect x="56" y="94" width="48" height="18" rx="3" fill="#F2C230"/><text x="80" y="108" text-anchor="middle" font-size="11" font-weight="800" fill="#1E2A1D">198円</text>',q:'きれいに並んだ売場',ok:true,a:'商品がよく見えて、値札もまっすぐ。こういう写真がいちばん使いやすい。'},
+    {svg:shelf+veg(74)+person(96,'#2F7EC4',true)+'<path d="M96 80h36v24h-36z" fill="none" stroke="#8A5C33" stroke-width="3"/>',q:'カゴを持った人が写っている',ok:false,a:'エプロンをしていないのでお客様。顔が写っている写真は使いません。'},
+    {svg:shelf+veg(74)+person(70,'#2E8B4F',true)+'<rect x="72" y="60" width="32" height="30" rx="4" fill="#2E8B4F" opacity=".9"/><text x="88" y="80" text-anchor="middle" font-size="9" font-weight="800" fill="#fff">Verger</text>',q:'エプロンの店員さんが品出し中',ok:true,a:'店員さんはOK。むしろお店の雰囲気が伝わるので入れたい写真。'},
+    {svg:'<defs><filter id="bl"><feGaussianBlur stdDeviation="4"/></filter></defs><g filter="url(#bl)">'+shelf+veg(74)+veg(52)+'</g>',q:'ぶれてぼやけた売場',ok:false,a:'ピントが合っていないと商品のおいしさが伝わらない。'},
+    {svg:'<rect width="160" height="120" fill="#DCEFF6"/><rect x="10" y="10" width="140" height="100" rx="6" fill="#EEF8FB" stroke="#9CC9DA" stroke-width="3"/>'+'<g opacity=".35">'+person(100,'#555',true)+'</g>'+'<g><circle cx="40" cy="80" r="14" fill="#EE8424"/><circle cx="68" cy="80" r="14" fill="#EE8424"/></g><path d="M20 20l30 60M40 20l30 60" stroke="#fff" stroke-width="4" opacity=".7"/>',q:'ガラスケースの前（よく見ると…）',ok:false,a:'ガラスにお客様がうすく映っている。映り込みもお客様と同じあつかい。'},
+    {svg:'<rect width="160" height="120" fill="#2B2440"/><rect x="0" y="86" width="160" height="34" fill="#B98552"/><g><ellipse cx="44" cy="74" rx="22" ry="16" fill="#EE8424"/><path d="M36 70l4-4 4 4zM48 70l4-4 4 4zM38 80q6 6 12 0" fill="#2B2440" stroke="#2B2440" stroke-width="2"/><ellipse cx="108" cy="76" rx="18" ry="14" fill="#F09A3C"/></g><path d="M10 16q30 20 70 0q40 20 70 0" stroke="#F2C230" stroke-width="3" fill="none"/><circle cx="30" cy="22" r="4" fill="#F2C230"/><circle cx="80" cy="16" r="4" fill="#DC4636"/><circle cx="130" cy="22" r="4" fill="#5CC27F"/>',q:'ハロウィンの飾りとかぼちゃ',ok:true,a:'季節やイベントの感じが伝わる。SNSにぴったり。'}
+  ];
+  var box=document.getElementById('quiz'),score=document.getElementById('score'),n=0,right=0;
+  Q.forEach(function(it,i){
+    var el=document.createElement('div');el.className='photo';
+    el.innerHTML='<div class="pic"><svg viewBox="0 0 160 120" role="img" aria-label="'+it.q+'">'+it.svg+'</svg><span class="stamp '+(it.ok?'ok':'ng')+'">'+(it.ok?'OK':'NG')+'</span></div>'+
+      '<div class="q"><p>'+(i+1)+'. '+it.q+'</p><div class="choice"><button class="ok">OK</button><button class="ng">NG</button></div><p class="ans" hidden></p></div>';
+    el.querySelectorAll('.choice button').forEach(function(b){
+      b.addEventListener('click',function(){
+        if(el.classList.contains('done'))return;
+        var pick=b.classList.contains('ok');el.classList.add('done');n++;
+        var good=pick===it.ok;if(good)right++;
+        var a=el.querySelector('.ans');a.hidden=false;
+        a.innerHTML='<strong style="color:var('+(good?'--leaf':'--tomato')+')">'+(good?'正解。':'ざんねん。')+'</strong>'+it.a;
+        score.textContent=n+' / 6 問　（正解 '+right+'）'+(n===6?(right===6?'　全問正解。もう写真えらびを任せられます。':'　まちがえた写真の説明をもう一度読もう。'):'');
+      });
+    });
+    box.appendChild(el);
+  });
+
+  // 税込計算
+  var hon=document.getElementById('hon');
+  function calc(){
+    var v=Math.max(0,Math.floor(Number(hon.value)||0));
+    var raw=v*108; var dec=(raw/100).toFixed(2); var zei=Math.floor(raw/100);
+    document.getElementById('m1').textContent=v;
+    document.getElementById('m2').textContent=dec;
+    document.getElementById('m3').textContent=zei;
+    document.getElementById('t1').innerHTML=v+'<small>円</small>';
+    document.getElementById('t2').textContent='（税込'+zei+'円）';
+    var t=document.getElementById('tag');t.classList.remove('pop');void t.offsetWidth;t.classList.add('pop');
+  }
+  hon.addEventListener('input',calc);
+  document.querySelectorAll('.chips button').forEach(function(b){b.addEventListener('click',function(){hon.value=b.dataset.v;calc();});});
+  calc();
+
+  // まちがい探し
+  var why={date:'11/16は月曜日。曜日はカレンダーで確かめる。',pic:'「にんじん」なのに、写真がトマト。写真と名前を見くらべる。',tax:'指示は本体158円。それに本体と税込が同じ数字（170円）なのは、本体の欄に税込を入れたまちがい。正しくは本体158円・税込170円。',ok1:'ここは合っています（398×1.08＝429.84 → 429円）。'};
+  var found={},hint=document.getElementById('hint');
+  document.querySelectorAll('.hot').forEach(function(h){
+    h.addEventListener('click',function(){
+      var k=h.dataset.k;
+      if(k==='ok1'){h.classList.add('fine');hint.textContent=why[k];return;}
+      found[k]=1;h.classList.add('found');
+      var c=Object.keys(found).length;
+      hint.textContent='見つけた数：'+c+' / 3　'+why[k]+(c===3?'　全部見つけました。本番では、もう1人が別に同じ点検をします。':'');
+    });
+  });
+
+  // 4:5 / 1:1
+  var fr=document.getElementById('frame'),a=document.getElementById('r45'),b=document.getElementById('r11');
+  a.addEventListener('click',function(){fr.classList.remove('sq');a.setAttribute('aria-pressed','true');b.setAttribute('aria-pressed','false');});
+  b.addEventListener('click',function(){fr.classList.add('sq');b.setAttribute('aria-pressed','true');a.setAttribute('aria-pressed','false');});
+
+  // 言葉クイズ
+  var W=[
+    {w:'今が旬！甘みたっぷり',ok:true,y:'おいしさと季節の言葉なのでOK。'},
+    {w:'花粉症に効く',ok:false,y:'病気の名前と「効く」はNG。'},
+    {w:'ビタミンCたっぷり',ok:true,y:'栄養の名前で伝えるのはOK。'},
+    {w:'風邪予防にどうぞ',ok:false,y:'病気を防ぐ・治すような書き方はNG。'},
+    {w:'産地直送 千葉県産',ok:true,y:'産地は事実なのでOK（指示の文と合っていれば）。'}
+  ];
+  var wq=document.getElementById('wordq');
+  W.forEach(function(it){
+    var el=document.createElement('div');el.className='word';
+    el.innerHTML='<span class="w">「'+it.w+'」</span><span class="choice" style="margin:0"><button class="ok">書ける</button><button class="ng">書かない</button></span><span class="why" hidden></span>';
+    el.querySelectorAll('button').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var good=(btn.classList.contains('ok'))===it.ok;
+        el.classList.remove('right','wrong');el.classList.add(good?'right':'wrong');
+        var y=el.querySelector('.why');y.hidden=false;y.textContent=(good?'正解。':'ちがいます。')+it.y;
+      });
+    });
+    wq.appendChild(el);
+  });
+})();
+</script>
